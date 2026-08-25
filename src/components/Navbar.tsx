@@ -29,11 +29,11 @@ export default function Navbar() {
   }
 
   const navLinks = [
-    { label: 'Home', href: '/' },
-    { label: 'About', href: '/#why-solar' },
-    { label: 'Product', href: '/#services' },
-    { label: 'Services', href: '/proyectos' },
-    { label: 'Benefits', href: '/#why-solar' },
+    { label: 'Residential', href: '/#why-solar' },
+    { label: 'Commercial', href: '/proyectos' },
+    { label: 'Technology', href: '/#services' },
+    { label: 'Impact', href: '/#stats' },
+    { label: 'About', href: '/#about' },
   ];
 
   return (
@@ -47,9 +47,9 @@ export default function Navbar() {
           <Image
             src="/images/electsun-logo-white.svg"
             alt="Electsun - El sol a tu favor"
-            width={185}
-            height={48}
-            style={{ width: 'auto', height: '42px', objectFit: 'contain' }}
+            width={180}
+            height={46}
+            style={{ width: 'auto', height: '40px', objectFit: 'contain' }}
             priority
           />
         </Link>
@@ -70,21 +70,9 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* Action Buttons & Admin Access */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <Link
-            href="/proyectos#lead-form"
-            className="btn-champagne"
-            style={{ padding: '10px 22px', fontSize: '12px' }}
-          >
-            Contact us
-          </Link>
-
-          <Link
-            href="/proyectos#lead-form"
-            className="btn-cyan-outline"
-            style={{ padding: '10px 20px', fontSize: '12px' }}
-          >
+        {/* Action Button & Admin Access */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <Link href="/proyectos#lead-form" className="btn-gold">
             Solicitar Cotización
           </Link>
 
@@ -96,19 +84,19 @@ export default function Navbar() {
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              width: '36px',
-              height: '36px',
-              borderRadius: '9999px',
+              width: '38px',
+              height: '38px',
+              borderRadius: '4px',
               background: 'rgba(255, 255, 255, 0.08)',
-              color: 'var(--champagne)',
+              color: '#FFFFFF',
               transition: 'all 0.2s ease',
               border: '1px solid rgba(255, 255, 255, 0.12)',
             }}
             aria-label="Panel Admin"
           >
             <svg
-              width="16"
-              height="16"
+              width="17"
+              height="17"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -129,12 +117,12 @@ export default function Navbar() {
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              width: '36px',
-              height: '36px',
+              width: '38px',
+              height: '38px',
               background: 'transparent',
               border: 'none',
               cursor: 'pointer',
-              color: 'var(--champagne)',
+              color: '#FFFFFF',
             }}
             className="md:hidden"
             aria-label="Abrir Menú"
@@ -182,7 +170,7 @@ export default function Navbar() {
           <Link
             href="/proyectos#lead-form"
             onClick={() => setMobileMenuOpen(false)}
-            className="btn-champagne"
+            className="btn-gold"
             style={{ marginTop: '12px', width: '100%' }}
           >
             Solicitar Cotización
