@@ -8,7 +8,7 @@ export async function loginAction(formData: FormData) {
   const password = formData.get('password');
 
   if (!username || !password) {
-    return { error: 'Username and password are required.' };
+    return { error: 'El nombre de usuario y la contraseña son obligatorios.' };
   }
 
   try {
@@ -18,29 +18,34 @@ export async function loginAction(formData: FormData) {
       redirectTo: '/admin',
     });
     return { success: true };
-  } catch (error: any) {
+  } catch (error: unknown) {
     // NextAuth handles redirects by throwing a special redirect error.
-    // We must rethrow this error to let Next.js handle the redirection.
     if (
       error &&
-      (error.message === 'NEXT_REDIRECT' ||
-        error.message?.includes('NEXT_REDIRECT') ||
-        error.name === 'RedirectError' ||
-        error.digest?.startsWith('NEXT_REDIRECT'))
+      typeof error === 'object' &&
+      ('message' in error || 'name' in error || 'digest' in error)
     ) {
-      throw error;
+      const err = error as { message?: string; name?: string; digest?: string };
+      if (
+        err.message === 'NEXT_REDIRECT' ||
+        err.message?.includes('NEXT_REDIRECT') ||
+        err.name === 'RedirectError' ||
+        err.digest?.startsWith('NEXT_REDIRECT')
+      ) {
+        throw error;
+      }
     }
 
     if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
-          return { error: 'Invalid username or password.' };
+          return { error: 'Usuario o contraseña incorrectos.' };
         default:
-          return { error: 'Authentication failed. Please try again.' };
+          return { error: 'Error de autenticación. Por favor, inténtelo de nuevo.' };
       }
     }
 
     console.error('Server login action error:', error);
-    return { error: 'Invalid username or password.' };
+    return { error: 'Usuario o contraseña incorrectos.' };
   }
 }

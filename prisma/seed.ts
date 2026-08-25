@@ -1,87 +1,171 @@
 import 'dotenv/config';
 import { PrismaClient } from '../src/generated/prisma/client';
 import { hashSync } from 'bcryptjs';
-import { PrismaPg } from '@prisma/adapter-pg';
-import pg from 'pg';
+import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
 
-const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
-const adapter = new PrismaPg(pool);
+const url = process.env.DATABASE_URL || 'file:./dev.db';
+const adapter = new PrismaBetterSqlite3({ url });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  console.log('🌱 Seeding database...');
+  console.log('🌱 Seeding Electsun SQLite database...');
 
-  // Clear existing social links and placeholder artworks to avoid duplicates
+  // Clear existing data
   await prisma.socialLink.deleteMany({});
-  await prisma.artwork.deleteMany({
-    where: {
-      OR: [
-        { imageUrl: { startsWith: '/uploads/placeholder-' } },
-        { imageUrl: { startsWith: '/uploads/commission-sample-' } },
-      ],
-    },
-  });
+  await prisma.project.deleteMany({});
 
   // Create admin user
   const hashedPassword = hashSync('admin123', 12);
   await prisma.admin.upsert({
-    where: { username: 'ishiro' },
-    update: {},
+    where: { username: 'admin' },
+    update: { password: hashedPassword },
     create: {
-      username: 'ishiro',
+      username: 'admin',
       password: hashedPassword,
     },
   });
-  console.log('✅ Admin user created (username: ishiro, password: admin123)');
+  console.log('✅ Admin user created (username: admin, password: admin123)');
 
-  // Create site config
+  // Create site config for Electsun
   await prisma.siteConfig.upsert({
     where: { id: 'main' },
-    update: {},
+    update: {
+      companyName: 'Electsun',
+      tagline: 'Energía Solar y Soluciones Renovables',
+      email: 'contacto@electsun.es',
+      phone: '+34 910 000 111',
+      address: 'Parque Empresarial Tecnológico, Edificio Solar, Madrid',
+      bio: 'Especialistas en ingeniería, instalación y mantenimiento de sistemas fotovoltaicos y almacenamiento inteligente para hogares y empresas.',
+      aboutText: 'En Electsun lideramos la transición hacia un modelo energético sostenible y eficiente. Con más de una década de experiencia en el sector de las energías renovables, diseñamos soluciones llave en mano con componentes de máxima calidad (Tier 1) y garantías de hasta 25 años.',
+      stat1Value: '50MW+',
+      stat1Label: 'Energía Generada',
+      stat2Value: '10k+',
+      stat2Label: 'Clientes Satisfechos',
+      stat3Value: '85%',
+      stat3Label: 'Ahorro Medio en Factura',
+      stat4Value: '15',
+      stat4Label: 'Años de Experiencia',
+    },
     create: {
       id: 'main',
-      artistName: 'ISHIRO',
-      tagline: 'Cute & Funny Artist',
-      email: 'ishirocrabb@gmail.com',
-      bio: '⭐ 19 | Cute & Funny Artist 😭\nCommissions Open (DMs)\nPixiv: pixiv.net/en/users/61774...',
+      companyName: 'Electsun',
+      tagline: 'Energía Solar y Soluciones Renovables',
+      email: 'contacto@electsun.es',
+      phone: '+34 910 000 111',
+      address: 'Parque Empresarial Tecnológico, Edificio Solar, Madrid',
+      bio: 'Especialistas en ingeniería, instalación y mantenimiento de sistemas fotovoltaicos y almacenamiento inteligente para hogares y empresas.',
+      aboutText: 'En Electsun lideramos la transición hacia un modelo energético sostenible y eficiente. Con más de una década de experiencia en el sector de las energías renovables, diseñamos soluciones llave en mano con componentes de máxima calidad (Tier 1) y garantías de hasta 25 años.',
+      stat1Value: '50MW+',
+      stat1Label: 'Energía Generada',
+      stat2Value: '10k+',
+      stat2Label: 'Clientes Satisfechos',
+      stat3Value: '85%',
+      stat3Label: 'Ahorro Medio en Factura',
+      stat4Value: '15',
+      stat4Label: 'Años de Experiencia',
     },
   });
   console.log('✅ Site config created');
 
-  // Create social links
+  // Create social and contact links
   const socialLinks = [
-    { platform: 'twitter', url: 'https://x.com/ISHIRO_Art', label: 'X / Twitter', handle: '@ISHIRO_Art', icon: 'twitter', order: 1, visible: true },
-    { platform: 'pixiv', url: 'https://pixiv.net/en/users/61774', label: 'Pixiv', handle: 'ISHIRO', icon: 'pixiv', order: 2, visible: true },
-    { platform: 'instagram', url: 'https://instagram.com/ishiro_art', label: 'Instagram', handle: '@ishiro_art', icon: 'instagram', order: 3, visible: true },
-    { platform: 'email', url: 'mailto:ishirocrabb@gmail.com', label: 'Email', handle: 'ishirocrabb@gmail.com', icon: 'email', order: 4, visible: true },
+    { platform: 'whatsapp', url: 'https://wa.me/34910000111', label: 'WhatsApp', handle: '+34 910 000 111', icon: 'whatsapp', order: 1, visible: true },
+    { platform: 'linkedin', url: 'https://linkedin.com/company/electsun', label: 'LinkedIn', handle: 'Electsun Renovables', icon: 'linkedin', order: 2, visible: true },
+    { platform: 'instagram', url: 'https://instagram.com/electsun_solar', label: 'Instagram', handle: '@electsun_solar', icon: 'instagram', order: 3, visible: true },
+    { platform: 'email', url: 'mailto:contacto@electsun.es', label: 'Email Corporativo', handle: 'contacto@electsun.es', icon: 'email', order: 4, visible: true },
+    { platform: 'phone', url: 'tel:+34910000111', label: 'Atención al Cliente', handle: '+34 910 000 111', icon: 'phone', order: 5, visible: true },
   ];
 
   for (const link of socialLinks) {
     await prisma.socialLink.create({ data: link });
   }
-  console.log('✅ Social links created');
+  console.log('✅ Social & contact links created');
 
-  // Create sample artworks
-  const artworks = [
-    { title: 'Sunset Crab', description: 'A cute crab enjoying the sunset at the beach', imageUrl: '/uploads/placeholder-1.png', category: 'Illustrations', tags: JSON.stringify(['Original', 'Beach', 'Cute']), featured: true, order: 1 },
-    { title: 'Cyber Neon', description: 'Cyberpunk character design with neon accents', imageUrl: '/uploads/placeholder-2.png', category: 'Character Design', tags: JSON.stringify(['Cyberpunk', 'Original', 'Neon']), featured: true, order: 2 },
-    { title: 'Forest Spirit', description: 'Mystical forest spirit illustration', imageUrl: '/uploads/placeholder-3.png', category: 'Illustrations', tags: JSON.stringify(['Fantasy', 'Original', 'Nature']), featured: true, order: 3 },
-    { title: 'Mecha Girl', description: 'Mechanical warrior character concept', imageUrl: '/uploads/placeholder-4.png', category: 'Character Design', tags: JSON.stringify(['Mecha', 'Original', 'SciFi']), featured: false, order: 4 },
-    { title: 'Summer Vibes', description: 'Quick sketch of summer mood', imageUrl: '/uploads/placeholder-5.png', category: 'Sketches', tags: JSON.stringify(['Sketch', 'Summer', 'Original']), featured: false, order: 5 },
-    // Commission Samples (based on the user's files)
-    { title: 'Tentacle Girl', description: 'Commission sample: Crimson dress with dark elements', imageUrl: '/uploads/commission-sample-1.png', category: 'Commissions', tags: JSON.stringify(['Commission', 'Anime', 'Crimson']), featured: false, order: 6 },
-    { title: 'Zangshi Girl', description: 'Commission sample: Traditional Chinese-style character design', imageUrl: '/uploads/commission-sample-2.png', category: 'Commissions', tags: JSON.stringify(['Commission', 'Traditional', 'Zombie']), featured: false, order: 7 },
-    { title: 'Thunder Deity', description: 'Commission sample: White haired deity illustration with drums', imageUrl: '/uploads/commission-sample-3.png', category: 'Commissions', tags: JSON.stringify(['Commission', 'Deity', 'WhiteHair']), featured: false, order: 8 },
-    { title: 'Dragon Girl', description: 'Commission sample: Green haired character illustration with dragon elements', imageUrl: '/uploads/commission-sample-4.png', category: 'Commissions', tags: JSON.stringify(['Commission', 'Dragon', 'GreenHair']), featured: false, order: 9 },
-    { title: 'Goldfish Kimono', description: 'Commission sample: Black haired girl with goldfish in kimono', imageUrl: '/uploads/commission-sample-5.png', category: 'Commissions', tags: JSON.stringify(['Commission', 'Goldfish', 'Kimono']), featured: false, order: 10 },
+  // Create sample solar projects
+  const sampleProjects = [
+    {
+      title: 'Instalación Residencial Unifamiliar 6.4 kWp',
+      description: 'Sistema fotovoltaico sobre cubierta inclinada de teja con 14 paneles monocristalinos de 460W e inversor híbrido Huawei con optimizadores de potencia.',
+      client: 'Vivienda Particular',
+      location: 'Pozuelo de Alarcón, Madrid',
+      powerKw: '6.4 kWp',
+      systemType: 'Residencial',
+      savingsPercent: '78% de ahorro anual',
+      imageUrl: '/uploads/project-solar-1.svg',
+      category: 'Residencial',
+      tags: JSON.stringify(['Residencial', 'Autoconsumo', 'Huawei', 'Tier 1']),
+      featured: true,
+      order: 1,
+      completedYear: '2024',
+    },
+    {
+      title: 'Planta de Autoconsumo Industrial 120 kWp',
+      description: 'Instalación sobre cubierta de nave industrial logística. 260 paneles solares bifaciales de alta eficiencia con sistema de inyección cero y monitorización continua SCADA.',
+      client: 'Logística TransIberia S.L.',
+      location: 'Polígono Industrial Las Mercedes, Toledo',
+      powerKw: '120 kWp',
+      systemType: 'Industrial',
+      savingsPercent: '65% de reducción energética',
+      imageUrl: '/uploads/project-solar-2.svg',
+      category: 'Industrial',
+      tags: JSON.stringify(['Industrial', 'Alta Potencia', 'Inversor Central', 'SCADA']),
+      featured: true,
+      order: 2,
+      completedYear: '2024',
+    },
+    {
+      title: 'Sistema Híbrido con Batería de Litio 10 kWh',
+      description: 'Autoconsumo residencial con acumulación electroquímica inteligente y función de respaldo (backup) anti-apagones ante cortes de red.',
+      client: 'Familia Gómez',
+      location: 'Las Rozas, Madrid',
+      powerKw: '8.2 kWp + 10 kWh',
+      systemType: 'Baterías',
+      savingsPercent: '92% de independencia',
+      imageUrl: '/uploads/project-solar-3.svg',
+      category: 'Baterías',
+      tags: JSON.stringify(['Baterías', 'Backup', 'Independencia', 'Litio']),
+      featured: true,
+      order: 3,
+      completedYear: '2023',
+    },
+    {
+      title: 'Electrolinera y Marquesina Solar 45 kWp',
+      description: 'Estructura tipo marquesina para parking corporativo con 4 puntos de recarga rápida para vehículos eléctricos y gestión de carga dinámica.',
+      client: 'Centro Empresarial Norte',
+      location: 'Alcobendas, Madrid',
+      powerKw: '45 kWp (4x22kW VE)',
+      systemType: 'Puntos de Recarga',
+      savingsPercent: '100% Recarga Verde',
+      imageUrl: '/uploads/project-solar-4.svg',
+      category: 'Puntos de Recarga',
+      tags: JSON.stringify(['Movilidad Eléctrica', 'Marquesina', 'Recarga VE']),
+      featured: true,
+      order: 4,
+      completedYear: '2024',
+    },
+    {
+      title: 'Bombeo Solar Directo Agrícola 30 kWp',
+      description: 'Solución aislada sin baterías para bombeo y riego por goteo de explotación agrícola de olivar y viñedos, eliminando costes de generadores diésel.',
+      client: 'AgroExplotaciones del Tajo',
+      location: 'Talavera de la Reina',
+      powerKw: '30 kWp',
+      systemType: 'Aislada / Agrícola',
+      savingsPercent: '100% Cero Emisiones',
+      imageUrl: '/uploads/project-solar-5.svg',
+      category: 'Agrícola',
+      tags: JSON.stringify(['Bombeo Solar', 'Agricultura', 'Aislada']),
+      featured: false,
+      order: 5,
+      completedYear: '2023',
+    },
   ];
 
-  for (const artwork of artworks) {
-    await prisma.artwork.create({ data: artwork });
+  for (const project of sampleProjects) {
+    await prisma.project.create({ data: project });
   }
-  console.log('✅ Sample artworks created');
+  console.log('✅ Sample Electsun projects created');
 
-  console.log('🎉 Seeding complete!');
+  console.log('🎉 SQLite Seeding complete for Electsun!');
 }
 
 main()

@@ -4,37 +4,37 @@ import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 import sharp from 'sharp';
 
-/** Maximum longest dimension for the generated thumbnail */
+/** Maximum longest dimension for generated project thumbnails */
 const THUMB_MAX_PX = 1280;
 /** WebP compression quality for thumbnails (0–100) */
-const THUMB_QUALITY = 82;
+const THUMB_QUALITY = 85;
 
 export async function POST(request: NextRequest) {
   try {
     const session = await auth();
     if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
     }
 
     const formData = await request.formData();
     const file = formData.get('file') as File | null;
-    // type: 'artwork' | 'hero' | 'avatar' — controls whether a thumbnail is generated
-    const uploadType = (formData.get('type') as string | null) ?? 'artwork';
+    // type: 'project' | 'hero' | 'logo'
+    const uploadType = (formData.get('type') as string | null) ?? 'project';
 
     if (!file) {
-      return NextResponse.json({ error: 'No file provided' }, { status: 400 });
+      return NextResponse.json({ error: 'No se ha proporcionado ningún archivo' }, { status: 400 });
     }
 
-    // Validate file type
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/avif'];
+    // Validate file type (image or svg)
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/avif', 'image/svg+xml'];
     if (!allowedTypes.includes(file.type)) {
       return NextResponse.json(
-        { error: 'Invalid file type. Allowed: JPEG, PNG, GIF, WebP, AVIF' },
+        { error: 'Tipo de archivo no válido. Permitidos: JPEG, PNG, WebP, AVIF, SVG' },
         { status: 400 }
       );
     }
 
-    // Generate unique base filename (always store original as-is)
+    // Generate unique base filename
     const ext = file.name.split('.').pop()?.toLowerCase() || 'png';
     const timestamp = Date.now();
     const randomStr = Math.random().toString(36).substring(2, 8);
@@ -52,15 +52,20 @@ export async function POST(request: NextRequest) {
 
     const originalUrl = `/uploads/${filename}`;
 
-    // Only generate thumbnail for artwork uploads (not hero/avatar)
-    if (uploadType === 'artwork') {
+    // If SVG, return as-is
+    if (file.type === 'image/svg+xml') {
+      return NextResponse.json({ url: originalUrl, thumbnailUrl: originalUrl }, { status: 201 });
+    }
+
+    // Generate thumbnail for project photos
+    if (uploadType === 'project') {
       try {
         const thumbFilename = `thumb-${timestamp}-${randomStr}.webp`;
         const thumbFilepath = path.join(uploadsDir, thumbFilename);
 
         await sharp(buffer)
           .resize(THUMB_MAX_PX, THUMB_MAX_PX, {
-            fit: 'inside',       // Preserve aspect ratio; never upscale
+            fit: 'inside',
             withoutEnlargement: true,
           })
           .webp({ quality: THUMB_QUALITY })
@@ -69,16 +74,14 @@ export async function POST(request: NextRequest) {
         const thumbnailUrl = `/uploads/${thumbFilename}`;
         return NextResponse.json({ url: originalUrl, thumbnailUrl }, { status: 201 });
       } catch (thumbError) {
-        // If thumbnail generation fails for any reason, still return the original
-        console.error('Thumbnail generation failed, falling back to original:', thumbError);
-        return NextResponse.json({ url: originalUrl }, { status: 201 });
+        console.error('Error al generar miniatura, usando original:', thumbError);
+        return NextResponse.json({ url: originalUrl, thumbnailUrl: originalUrl }, { status: 201 });
       }
     }
 
-    // Hero / avatar: return original only
     return NextResponse.json({ url: originalUrl }, { status: 201 });
   } catch (error) {
-    console.error('Failed to upload file:', error);
-    return NextResponse.json({ error: 'Failed to upload file' }, { status: 500 });
+    console.error('Error al subir archivo:', error);
+    return NextResponse.json({ error: 'Error al procesar la subida' }, { status: 500 });
   }
 }

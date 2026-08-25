@@ -19,7 +19,7 @@ export async function GET() {
     return NextResponse.json(config);
   } catch (error) {
     console.error('Failed to fetch config:', error);
-    return NextResponse.json({ error: 'Failed to fetch config' }, { status: 500 });
+    return NextResponse.json({ error: 'Error al obtener la configuración' }, { status: 500 });
   }
 }
 
@@ -27,14 +27,16 @@ export async function PUT(request: NextRequest) {
   try {
     const session = await auth();
     if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
     }
 
     const body = await request.json();
     const {
-      artistName,
+      companyName,
       tagline,
       email,
+      phone,
+      address,
       bio,
       aboutText,
       stat1Value,
@@ -43,16 +45,20 @@ export async function PUT(request: NextRequest) {
       stat2Label,
       stat3Value,
       stat3Label,
+      stat4Value,
+      stat4Label,
       heroImageUrl,
-      avatarUrl,
+      logoUrl,
     } = body;
 
     const config = await prisma.siteConfig.upsert({
       where: { id: 'main' },
       update: {
-        ...(artistName !== undefined && { artistName }),
+        ...(companyName !== undefined && { companyName }),
         ...(tagline !== undefined && { tagline }),
         ...(email !== undefined && { email }),
+        ...(phone !== undefined && { phone }),
+        ...(address !== undefined && { address }),
         ...(bio !== undefined && { bio }),
         ...(aboutText !== undefined && { aboutText }),
         ...(stat1Value !== undefined && { stat1Value }),
@@ -61,28 +67,36 @@ export async function PUT(request: NextRequest) {
         ...(stat2Label !== undefined && { stat2Label }),
         ...(stat3Value !== undefined && { stat3Value }),
         ...(stat3Label !== undefined && { stat3Label }),
+        ...(stat4Value !== undefined && { stat4Value }),
+        ...(stat4Label !== undefined && { stat4Label }),
         ...(heroImageUrl !== undefined && { heroImageUrl }),
-        ...(avatarUrl !== undefined && { avatarUrl }),
+        ...(logoUrl !== undefined && { logoUrl }),
       },
       create: {
         id: 'main',
-        artistName: artistName || 'ISHIRO',
-        tagline: tagline || 'Cute & Funny Artist',
-        email: email || null,
+        companyName: companyName || 'Electsun',
+        tagline: tagline || 'Energía Solar y Soluciones Renovables',
+        email: email || 'contacto@electsun.es',
+        phone: phone || '+34 910 000 111',
+        address: address || 'Parque Empresarial Tecnológico, Madrid',
         bio: bio || null,
         aboutText: aboutText || null,
-        stat1Value: stat1Value || '1.2K+',
-        stat1Label: stat1Label || 'Followers',
-        stat2Value: stat2Value || '',
-        stat2Label: stat2Label || 'Artworks',
-        stat3Value: stat3Value || '∞',
-        stat3Label: stat3Label || 'Passion',
+        stat1Value: stat1Value || '650+',
+        stat1Label: stat1Label || 'Instalaciones Realizadas',
+        stat2Value: stat2Value || '18.5 MWp',
+        stat2Label: stat2Label || 'Potencia Total Instalada',
+        stat3Value: stat3Value || '85%',
+        stat3Label: stat3Label || 'Ahorro Medio en Factura',
+        stat4Value: stat4Value || '25 Años',
+        stat4Label: stat4Label || 'Garantía de Rendimiento',
+        heroImageUrl: heroImageUrl || null,
+        logoUrl: logoUrl || null,
       },
     });
 
     return NextResponse.json(config);
   } catch (error) {
     console.error('Failed to update config:', error);
-    return NextResponse.json({ error: 'Failed to update config' }, { status: 500 });
+    return NextResponse.json({ error: 'Error al actualizar la configuración' }, { status: 500 });
   }
 }

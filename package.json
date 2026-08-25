@@ -1,12 +1,14 @@
 {
-  "name": "ishiro-art",
-  "version": "0.1.0",
+  "name": "electsun-web",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "pack": "repomix",
+    "repomix": "repomix"
   },
   "dependencies": {
     "@prisma/adapter-better-sqlite3": "^7.8.0",

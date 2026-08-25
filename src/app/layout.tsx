@@ -1,54 +1,31 @@
 import type { Metadata, Viewport } from 'next';
-import { Archivo_Black, Space_Grotesk, Inter } from 'next/font/google';
-import Sidebar from '@/components/Sidebar';
-import MobileNav from '@/components/MobileNav';
-import Script from 'next/script';
+import Navbar from '@/components/Navbar';
 import './globals.css';
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   minimumScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  maximumScale: 5,
 };
 
-const archivoBlack = Archivo_Black({
-  weight: '400',
-  subsets: ['latin'],
-  variable: '--font-display',
-  display: 'swap',
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  variable: '--font-heading',
-  display: 'swap',
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-body',
-  display: 'swap',
-});
-
 export const metadata: Metadata = {
-  title: 'ISHIRO_Art | Portfolio',
+  title: 'Electsun - Energía Solar Inteligente',
   description:
-    'ISHIRO_Art — Cute & Funny Artist. Explore original illustrations, character designs, and digital art. Commissions open.',
+    'Diseñamos la infraestructura del mañana con soluciones fotovoltaicas de alta eficiencia, adaptadas a empresas visionarias y hogares modernos.',
   openGraph: {
-    title: 'ISHIRO_Art | Portfolio',
+    title: 'Electsun - Energía Solar Inteligente',
     description:
-      'Cute & Funny Artist — Original illustrations, character designs, and digital art.',
-    siteName: 'ISHIRO_Art',
+      'Soluciones fotovoltaicas de alta eficiencia, autoconsumo, baterías y recarga de vehículos eléctricos.',
+    siteName: 'Electsun',
     type: 'website',
-    locale: 'en_US',
+    locale: 'es_ES',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ISHIRO_Art | Portfolio',
+    title: 'Electsun - Energía Solar Inteligente',
     description:
-      'Cute & Funny Artist — Original illustrations, character designs, and digital art.',
+      'Soluciones fotovoltaicas de alta eficiencia para empresas y hogares.',
   },
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
@@ -61,29 +38,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${archivoBlack.variable} ${spaceGrotesk.variable} ${inter.variable}`}
-      suppressHydrationWarning
-    >
-      <body className="noise-overlay">
-        <Script
-          id="theme-initializer"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                var savedColor = localStorage.getItem('theme-primary-color');
-                if (savedColor) {
-                  document.documentElement.style.setProperty('--primary', savedColor);
-                }
-              } catch (e) {}
-            `,
-          }}
-        />
-        <Sidebar />
-        <MobileNav />
-        <main className="page-wrapper">{children}</main>
+    <html lang="es" className="scroll-smooth" data-scroll-behavior="smooth">
+      <body>
+        <Navbar />
+        <main>{children}</main>
       </body>
     </html>
   );

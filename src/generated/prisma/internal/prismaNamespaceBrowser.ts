@@ -51,7 +51,7 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Artwork: 'Artwork',
+  Project: 'Project',
   SocialLink: 'SocialLink',
   SiteConfig: 'SiteConfig',
   Admin: 'Admin'
@@ -64,32 +64,35 @@ export type ModelName = (typeof ModelName)[keyof typeof ModelName]
  */
 
 export const TransactionIsolationLevel = runtime.makeStrictEnum({
-  ReadUncommitted: 'ReadUncommitted',
-  ReadCommitted: 'ReadCommitted',
-  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const ArtworkScalarFieldEnum = {
+export const ProjectScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
+  client: 'client',
+  location: 'location',
+  powerKw: 'powerKw',
+  systemType: 'systemType',
+  savingsPercent: 'savingsPercent',
   imageUrl: 'imageUrl',
   thumbnailUrl: 'thumbnailUrl',
   category: 'category',
   tags: 'tags',
   featured: 'featured',
   order: 'order',
+  completedYear: 'completedYear',
   width: 'width',
   height: 'height',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type ArtworkScalarFieldEnum = (typeof ArtworkScalarFieldEnum)[keyof typeof ArtworkScalarFieldEnum]
+export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
 
 
 export const SocialLinkScalarFieldEnum = {
@@ -108,9 +111,11 @@ export type SocialLinkScalarFieldEnum = (typeof SocialLinkScalarFieldEnum)[keyof
 
 export const SiteConfigScalarFieldEnum = {
   id: 'id',
-  artistName: 'artistName',
+  companyName: 'companyName',
   tagline: 'tagline',
   email: 'email',
+  phone: 'phone',
+  address: 'address',
   bio: 'bio',
   aboutText: 'aboutText',
   stat1Value: 'stat1Value',
@@ -119,8 +124,10 @@ export const SiteConfigScalarFieldEnum = {
   stat2Label: 'stat2Label',
   stat3Value: 'stat3Value',
   stat3Label: 'stat3Label',
+  stat4Value: 'stat4Value',
+  stat4Label: 'stat4Label',
   heroImageUrl: 'heroImageUrl',
-  avatarUrl: 'avatarUrl'
+  logoUrl: 'logoUrl'
 } as const
 
 export type SiteConfigScalarFieldEnum = (typeof SiteConfigScalarFieldEnum)[keyof typeof SiteConfigScalarFieldEnum]
@@ -141,14 +148,6 @@ export const SortOrder = {
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
-
-
-export const QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
-} as const
-
-export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
 export const NullsOrder = {

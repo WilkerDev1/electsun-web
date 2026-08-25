@@ -1,0 +1,45 @@
+{
+  "$schema": "https://raw.githubusercontent.com/yamadashy/repomix/main/repomix.config.schema.json",
+  "output": {
+    "filePath": "repomix-output.xml",
+    "style": "xml",
+    "headerText": "ELECTSUN Web Application - Full Project Context",
+    "instructionFilePath": "",
+    "fileSummary": true,
+    "directoryStructure": true,
+    "removeComments": false,
+    "removeEmptyLines": true,
+    "topFilesLength": 10,
+    "showLineNumbers": true,
+    "copyToClipboard": false,
+    "compress": false
+  },
+  "include": [
+    "src/**/*.{ts,tsx,css}",
+    "prisma/**/*.{prisma,ts}",
+    "public/**/*.svg",
+    "package.json",
+    "tsconfig.json",
+    "next.config.ts",
+    "eslint.config.mjs",
+    "README.md",
+    "AGENTS.md"
+  ],
+  "ignore": {
+    "useGitignore": true,
+    "useDefaultPatterns": true,
+    "customPatterns": [
+      ".next/**",
+      "node_modules/**",
+      "public/uploads/**",
+      "*.db",
+      "*.db-*",
+      "*.tsbuildinfo",
+      "repomix-output.*",
+      ".agents/**"
+    ]
+  },
+  "security": {
+    "enableSecurityCheck": true
+  }
+}

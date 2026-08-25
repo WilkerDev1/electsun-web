@@ -26,9 +26,11 @@ export type AggregateSiteConfig = {
 
 export type SiteConfigMinAggregateOutputType = {
   id: string | null
-  artistName: string | null
+  companyName: string | null
   tagline: string | null
   email: string | null
+  phone: string | null
+  address: string | null
   bio: string | null
   aboutText: string | null
   stat1Value: string | null
@@ -37,15 +39,19 @@ export type SiteConfigMinAggregateOutputType = {
   stat2Label: string | null
   stat3Value: string | null
   stat3Label: string | null
+  stat4Value: string | null
+  stat4Label: string | null
   heroImageUrl: string | null
-  avatarUrl: string | null
+  logoUrl: string | null
 }
 
 export type SiteConfigMaxAggregateOutputType = {
   id: string | null
-  artistName: string | null
+  companyName: string | null
   tagline: string | null
   email: string | null
+  phone: string | null
+  address: string | null
   bio: string | null
   aboutText: string | null
   stat1Value: string | null
@@ -54,15 +60,19 @@ export type SiteConfigMaxAggregateOutputType = {
   stat2Label: string | null
   stat3Value: string | null
   stat3Label: string | null
+  stat4Value: string | null
+  stat4Label: string | null
   heroImageUrl: string | null
-  avatarUrl: string | null
+  logoUrl: string | null
 }
 
 export type SiteConfigCountAggregateOutputType = {
   id: number
-  artistName: number
+  companyName: number
   tagline: number
   email: number
+  phone: number
+  address: number
   bio: number
   aboutText: number
   stat1Value: number
@@ -71,17 +81,21 @@ export type SiteConfigCountAggregateOutputType = {
   stat2Label: number
   stat3Value: number
   stat3Label: number
+  stat4Value: number
+  stat4Label: number
   heroImageUrl: number
-  avatarUrl: number
+  logoUrl: number
   _all: number
 }
 
 
 export type SiteConfigMinAggregateInputType = {
   id?: true
-  artistName?: true
+  companyName?: true
   tagline?: true
   email?: true
+  phone?: true
+  address?: true
   bio?: true
   aboutText?: true
   stat1Value?: true
@@ -90,15 +104,19 @@ export type SiteConfigMinAggregateInputType = {
   stat2Label?: true
   stat3Value?: true
   stat3Label?: true
+  stat4Value?: true
+  stat4Label?: true
   heroImageUrl?: true
-  avatarUrl?: true
+  logoUrl?: true
 }
 
 export type SiteConfigMaxAggregateInputType = {
   id?: true
-  artistName?: true
+  companyName?: true
   tagline?: true
   email?: true
+  phone?: true
+  address?: true
   bio?: true
   aboutText?: true
   stat1Value?: true
@@ -107,15 +125,19 @@ export type SiteConfigMaxAggregateInputType = {
   stat2Label?: true
   stat3Value?: true
   stat3Label?: true
+  stat4Value?: true
+  stat4Label?: true
   heroImageUrl?: true
-  avatarUrl?: true
+  logoUrl?: true
 }
 
 export type SiteConfigCountAggregateInputType = {
   id?: true
-  artistName?: true
+  companyName?: true
   tagline?: true
   email?: true
+  phone?: true
+  address?: true
   bio?: true
   aboutText?: true
   stat1Value?: true
@@ -124,8 +146,10 @@ export type SiteConfigCountAggregateInputType = {
   stat2Label?: true
   stat3Value?: true
   stat3Label?: true
+  stat4Value?: true
+  stat4Label?: true
   heroImageUrl?: true
-  avatarUrl?: true
+  logoUrl?: true
   _all?: true
 }
 
@@ -203,9 +227,11 @@ export type SiteConfigGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 
 export type SiteConfigGroupByOutputType = {
   id: string
-  artistName: string
+  companyName: string
   tagline: string
   email: string | null
+  phone: string | null
+  address: string | null
   bio: string | null
   aboutText: string | null
   stat1Value: string | null
@@ -214,8 +240,10 @@ export type SiteConfigGroupByOutputType = {
   stat2Label: string | null
   stat3Value: string | null
   stat3Label: string | null
+  stat4Value: string | null
+  stat4Label: string | null
   heroImageUrl: string | null
-  avatarUrl: string | null
+  logoUrl: string | null
   _count: SiteConfigCountAggregateOutputType | null
   _min: SiteConfigMinAggregateOutputType | null
   _max: SiteConfigMaxAggregateOutputType | null
@@ -241,9 +269,11 @@ export type SiteConfigWhereInput = {
   OR?: Prisma.SiteConfigWhereInput[]
   NOT?: Prisma.SiteConfigWhereInput | Prisma.SiteConfigWhereInput[]
   id?: Prisma.StringFilter<"SiteConfig"> | string
-  artistName?: Prisma.StringFilter<"SiteConfig"> | string
+  companyName?: Prisma.StringFilter<"SiteConfig"> | string
   tagline?: Prisma.StringFilter<"SiteConfig"> | string
   email?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  phone?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  address?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   bio?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   aboutText?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   stat1Value?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
@@ -252,15 +282,19 @@ export type SiteConfigWhereInput = {
   stat2Label?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   stat3Value?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   stat3Label?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  stat4Value?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  stat4Label?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   heroImageUrl?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
-  avatarUrl?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  logoUrl?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
 }
 
 export type SiteConfigOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  artistName?: Prisma.SortOrder
+  companyName?: Prisma.SortOrder
   tagline?: Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
   aboutText?: Prisma.SortOrderInput | Prisma.SortOrder
   stat1Value?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -269,8 +303,10 @@ export type SiteConfigOrderByWithRelationInput = {
   stat2Label?: Prisma.SortOrderInput | Prisma.SortOrder
   stat3Value?: Prisma.SortOrderInput | Prisma.SortOrder
   stat3Label?: Prisma.SortOrderInput | Prisma.SortOrder
+  stat4Value?: Prisma.SortOrderInput | Prisma.SortOrder
+  stat4Label?: Prisma.SortOrderInput | Prisma.SortOrder
   heroImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
 export type SiteConfigWhereUniqueInput = Prisma.AtLeast<{
@@ -278,9 +314,11 @@ export type SiteConfigWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.SiteConfigWhereInput | Prisma.SiteConfigWhereInput[]
   OR?: Prisma.SiteConfigWhereInput[]
   NOT?: Prisma.SiteConfigWhereInput | Prisma.SiteConfigWhereInput[]
-  artistName?: Prisma.StringFilter<"SiteConfig"> | string
+  companyName?: Prisma.StringFilter<"SiteConfig"> | string
   tagline?: Prisma.StringFilter<"SiteConfig"> | string
   email?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  phone?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  address?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   bio?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   aboutText?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   stat1Value?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
@@ -289,15 +327,19 @@ export type SiteConfigWhereUniqueInput = Prisma.AtLeast<{
   stat2Label?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   stat3Value?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   stat3Label?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  stat4Value?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  stat4Label?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   heroImageUrl?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
-  avatarUrl?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  logoUrl?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
 }, "id">
 
 export type SiteConfigOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  artistName?: Prisma.SortOrder
+  companyName?: Prisma.SortOrder
   tagline?: Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
   aboutText?: Prisma.SortOrderInput | Prisma.SortOrder
   stat1Value?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -306,8 +348,10 @@ export type SiteConfigOrderByWithAggregationInput = {
   stat2Label?: Prisma.SortOrderInput | Prisma.SortOrder
   stat3Value?: Prisma.SortOrderInput | Prisma.SortOrder
   stat3Label?: Prisma.SortOrderInput | Prisma.SortOrder
+  stat4Value?: Prisma.SortOrderInput | Prisma.SortOrder
+  stat4Label?: Prisma.SortOrderInput | Prisma.SortOrder
   heroImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SiteConfigCountOrderByAggregateInput
   _max?: Prisma.SiteConfigMaxOrderByAggregateInput
   _min?: Prisma.SiteConfigMinOrderByAggregateInput
@@ -318,9 +362,11 @@ export type SiteConfigScalarWhereWithAggregatesInput = {
   OR?: Prisma.SiteConfigScalarWhereWithAggregatesInput[]
   NOT?: Prisma.SiteConfigScalarWhereWithAggregatesInput | Prisma.SiteConfigScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"SiteConfig"> | string
-  artistName?: Prisma.StringWithAggregatesFilter<"SiteConfig"> | string
+  companyName?: Prisma.StringWithAggregatesFilter<"SiteConfig"> | string
   tagline?: Prisma.StringWithAggregatesFilter<"SiteConfig"> | string
   email?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
+  phone?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
+  address?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
   bio?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
   aboutText?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
   stat1Value?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
@@ -329,15 +375,19 @@ export type SiteConfigScalarWhereWithAggregatesInput = {
   stat2Label?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
   stat3Value?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
   stat3Label?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
+  stat4Value?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
+  stat4Label?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
   heroImageUrl?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
-  avatarUrl?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
+  logoUrl?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
 }
 
 export type SiteConfigCreateInput = {
   id?: string
-  artistName?: string
+  companyName?: string
   tagline?: string
   email?: string | null
+  phone?: string | null
+  address?: string | null
   bio?: string | null
   aboutText?: string | null
   stat1Value?: string | null
@@ -346,15 +396,19 @@ export type SiteConfigCreateInput = {
   stat2Label?: string | null
   stat3Value?: string | null
   stat3Label?: string | null
+  stat4Value?: string | null
+  stat4Label?: string | null
   heroImageUrl?: string | null
-  avatarUrl?: string | null
+  logoUrl?: string | null
 }
 
 export type SiteConfigUncheckedCreateInput = {
   id?: string
-  artistName?: string
+  companyName?: string
   tagline?: string
   email?: string | null
+  phone?: string | null
+  address?: string | null
   bio?: string | null
   aboutText?: string | null
   stat1Value?: string | null
@@ -363,15 +417,19 @@ export type SiteConfigUncheckedCreateInput = {
   stat2Label?: string | null
   stat3Value?: string | null
   stat3Label?: string | null
+  stat4Value?: string | null
+  stat4Label?: string | null
   heroImageUrl?: string | null
-  avatarUrl?: string | null
+  logoUrl?: string | null
 }
 
 export type SiteConfigUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  artistName?: Prisma.StringFieldUpdateOperationsInput | string
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
   tagline?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aboutText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stat1Value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -380,15 +438,19 @@ export type SiteConfigUpdateInput = {
   stat2Label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stat3Value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stat3Label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stat4Value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stat4Label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heroImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SiteConfigUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  artistName?: Prisma.StringFieldUpdateOperationsInput | string
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
   tagline?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aboutText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stat1Value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -397,15 +459,19 @@ export type SiteConfigUncheckedUpdateInput = {
   stat2Label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stat3Value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stat3Label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stat4Value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stat4Label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heroImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SiteConfigCreateManyInput = {
   id?: string
-  artistName?: string
+  companyName?: string
   tagline?: string
   email?: string | null
+  phone?: string | null
+  address?: string | null
   bio?: string | null
   aboutText?: string | null
   stat1Value?: string | null
@@ -414,15 +480,19 @@ export type SiteConfigCreateManyInput = {
   stat2Label?: string | null
   stat3Value?: string | null
   stat3Label?: string | null
+  stat4Value?: string | null
+  stat4Label?: string | null
   heroImageUrl?: string | null
-  avatarUrl?: string | null
+  logoUrl?: string | null
 }
 
 export type SiteConfigUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  artistName?: Prisma.StringFieldUpdateOperationsInput | string
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
   tagline?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aboutText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stat1Value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -431,15 +501,19 @@ export type SiteConfigUpdateManyMutationInput = {
   stat2Label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stat3Value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stat3Label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stat4Value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stat4Label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heroImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SiteConfigUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  artistName?: Prisma.StringFieldUpdateOperationsInput | string
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
   tagline?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aboutText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stat1Value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -448,15 +522,19 @@ export type SiteConfigUncheckedUpdateManyInput = {
   stat2Label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stat3Value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stat3Label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stat4Value?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stat4Label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heroImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SiteConfigCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  artistName?: Prisma.SortOrder
+  companyName?: Prisma.SortOrder
   tagline?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  address?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   aboutText?: Prisma.SortOrder
   stat1Value?: Prisma.SortOrder
@@ -465,15 +543,19 @@ export type SiteConfigCountOrderByAggregateInput = {
   stat2Label?: Prisma.SortOrder
   stat3Value?: Prisma.SortOrder
   stat3Label?: Prisma.SortOrder
+  stat4Value?: Prisma.SortOrder
+  stat4Label?: Prisma.SortOrder
   heroImageUrl?: Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrder
+  logoUrl?: Prisma.SortOrder
 }
 
 export type SiteConfigMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  artistName?: Prisma.SortOrder
+  companyName?: Prisma.SortOrder
   tagline?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  address?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   aboutText?: Prisma.SortOrder
   stat1Value?: Prisma.SortOrder
@@ -482,15 +564,19 @@ export type SiteConfigMaxOrderByAggregateInput = {
   stat2Label?: Prisma.SortOrder
   stat3Value?: Prisma.SortOrder
   stat3Label?: Prisma.SortOrder
+  stat4Value?: Prisma.SortOrder
+  stat4Label?: Prisma.SortOrder
   heroImageUrl?: Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrder
+  logoUrl?: Prisma.SortOrder
 }
 
 export type SiteConfigMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  artistName?: Prisma.SortOrder
+  companyName?: Prisma.SortOrder
   tagline?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  address?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   aboutText?: Prisma.SortOrder
   stat1Value?: Prisma.SortOrder
@@ -499,17 +585,21 @@ export type SiteConfigMinOrderByAggregateInput = {
   stat2Label?: Prisma.SortOrder
   stat3Value?: Prisma.SortOrder
   stat3Label?: Prisma.SortOrder
+  stat4Value?: Prisma.SortOrder
+  stat4Label?: Prisma.SortOrder
   heroImageUrl?: Prisma.SortOrder
-  avatarUrl?: Prisma.SortOrder
+  logoUrl?: Prisma.SortOrder
 }
 
 
 
 export type SiteConfigSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  artistName?: boolean
+  companyName?: boolean
   tagline?: boolean
   email?: boolean
+  phone?: boolean
+  address?: boolean
   bio?: boolean
   aboutText?: boolean
   stat1Value?: boolean
@@ -518,15 +608,19 @@ export type SiteConfigSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   stat2Label?: boolean
   stat3Value?: boolean
   stat3Label?: boolean
+  stat4Value?: boolean
+  stat4Label?: boolean
   heroImageUrl?: boolean
-  avatarUrl?: boolean
+  logoUrl?: boolean
 }, ExtArgs["result"]["siteConfig"]>
 
 export type SiteConfigSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  artistName?: boolean
+  companyName?: boolean
   tagline?: boolean
   email?: boolean
+  phone?: boolean
+  address?: boolean
   bio?: boolean
   aboutText?: boolean
   stat1Value?: boolean
@@ -535,15 +629,19 @@ export type SiteConfigSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   stat2Label?: boolean
   stat3Value?: boolean
   stat3Label?: boolean
+  stat4Value?: boolean
+  stat4Label?: boolean
   heroImageUrl?: boolean
-  avatarUrl?: boolean
+  logoUrl?: boolean
 }, ExtArgs["result"]["siteConfig"]>
 
 export type SiteConfigSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  artistName?: boolean
+  companyName?: boolean
   tagline?: boolean
   email?: boolean
+  phone?: boolean
+  address?: boolean
   bio?: boolean
   aboutText?: boolean
   stat1Value?: boolean
@@ -552,15 +650,19 @@ export type SiteConfigSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   stat2Label?: boolean
   stat3Value?: boolean
   stat3Label?: boolean
+  stat4Value?: boolean
+  stat4Label?: boolean
   heroImageUrl?: boolean
-  avatarUrl?: boolean
+  logoUrl?: boolean
 }, ExtArgs["result"]["siteConfig"]>
 
 export type SiteConfigSelectScalar = {
   id?: boolean
-  artistName?: boolean
+  companyName?: boolean
   tagline?: boolean
   email?: boolean
+  phone?: boolean
+  address?: boolean
   bio?: boolean
   aboutText?: boolean
   stat1Value?: boolean
@@ -569,20 +671,24 @@ export type SiteConfigSelectScalar = {
   stat2Label?: boolean
   stat3Value?: boolean
   stat3Label?: boolean
+  stat4Value?: boolean
+  stat4Label?: boolean
   heroImageUrl?: boolean
-  avatarUrl?: boolean
+  logoUrl?: boolean
 }
 
-export type SiteConfigOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "artistName" | "tagline" | "email" | "bio" | "aboutText" | "stat1Value" | "stat1Label" | "stat2Value" | "stat2Label" | "stat3Value" | "stat3Label" | "heroImageUrl" | "avatarUrl", ExtArgs["result"]["siteConfig"]>
+export type SiteConfigOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "companyName" | "tagline" | "email" | "phone" | "address" | "bio" | "aboutText" | "stat1Value" | "stat1Label" | "stat2Value" | "stat2Label" | "stat3Value" | "stat3Label" | "stat4Value" | "stat4Label" | "heroImageUrl" | "logoUrl", ExtArgs["result"]["siteConfig"]>
 
 export type $SiteConfigPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SiteConfig"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    artistName: string
+    companyName: string
     tagline: string
     email: string | null
+    phone: string | null
+    address: string | null
     bio: string | null
     aboutText: string | null
     stat1Value: string | null
@@ -591,8 +697,10 @@ export type $SiteConfigPayload<ExtArgs extends runtime.Types.Extensions.Internal
     stat2Label: string | null
     stat3Value: string | null
     stat3Label: string | null
+    stat4Value: string | null
+    stat4Label: string | null
     heroImageUrl: string | null
-    avatarUrl: string | null
+    logoUrl: string | null
   }, ExtArgs["result"]["siteConfig"]>
   composites: {}
 }
@@ -1017,9 +1125,11 @@ export interface Prisma__SiteConfigClient<T, Null = never, ExtArgs extends runti
  */
 export interface SiteConfigFieldRefs {
   readonly id: Prisma.FieldRef<"SiteConfig", 'String'>
-  readonly artistName: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly companyName: Prisma.FieldRef<"SiteConfig", 'String'>
   readonly tagline: Prisma.FieldRef<"SiteConfig", 'String'>
   readonly email: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly phone: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly address: Prisma.FieldRef<"SiteConfig", 'String'>
   readonly bio: Prisma.FieldRef<"SiteConfig", 'String'>
   readonly aboutText: Prisma.FieldRef<"SiteConfig", 'String'>
   readonly stat1Value: Prisma.FieldRef<"SiteConfig", 'String'>
@@ -1028,8 +1138,10 @@ export interface SiteConfigFieldRefs {
   readonly stat2Label: Prisma.FieldRef<"SiteConfig", 'String'>
   readonly stat3Value: Prisma.FieldRef<"SiteConfig", 'String'>
   readonly stat3Label: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly stat4Value: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly stat4Label: Prisma.FieldRef<"SiteConfig", 'String'>
   readonly heroImageUrl: Prisma.FieldRef<"SiteConfig", 'String'>
-  readonly avatarUrl: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly logoUrl: Prisma.FieldRef<"SiteConfig", 'String'>
 }
     
 
@@ -1240,7 +1352,6 @@ export type SiteConfigCreateManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * The data used to create many SiteConfigs.
    */
   data: Prisma.SiteConfigCreateManyInput | Prisma.SiteConfigCreateManyInput[]
-  skipDuplicates?: boolean
 }
 
 /**
@@ -1259,7 +1370,6 @@ export type SiteConfigCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exte
    * The data used to create many SiteConfigs.
    */
   data: Prisma.SiteConfigCreateManyInput | Prisma.SiteConfigCreateManyInput[]
-  skipDuplicates?: boolean
 }
 
 /**

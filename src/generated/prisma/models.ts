@@ -8,7 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/Artwork'
+export type * from './models/Project'
 export type * from './models/SocialLink'
 export type * from './models/SiteConfig'
 export type * from './models/Admin'

@@ -4,23 +4,29 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
 }
 
-model Artwork {
-  id          String   @id @default(cuid())
-  title       String
-  description String?
-  imageUrl    String
-  thumbnailUrl String?
-  category    String   @default("Illustrations")
-  tags        String   @default("[]")
-  featured    Boolean  @default(false)
-  order       Int      @default(0)
-  width       Int?
-  height      Int?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+model Project {
+  id             String   @id @default(cuid())
+  title          String
+  description    String?
+  client         String?
+  location       String?
+  powerKw        String?
+  systemType     String   @default("Residencial")
+  savingsPercent String?
+  imageUrl       String
+  thumbnailUrl   String?
+  category       String   @default("Residencial")
+  tags           String   @default("[]")
+  featured       Boolean  @default(false)
+  order          Int      @default(0)
+  completedYear  String?
+  width          Int?
+  height         Int?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 
 model SocialLink {
@@ -36,19 +42,23 @@ model SocialLink {
 
 model SiteConfig {
   id           String  @id @default("main")
-  artistName   String  @default("ISHIRO")
-  tagline      String  @default("Cute & Funny Artist")
-  email        String? @default("ishiro@example.com")
-  bio          String? @default("19 | Cute & Funny Artist | Commissions Open (DMs)")
-  aboutText    String? @default("Drawing since childhood, now creating art full-time. Every piece tells a story—whether it's an original character, a vibrant illustration, or a love letter to my favourite anime.")
-  stat1Value   String? @default("1.2K+")
-  stat1Label   String? @default("Followers")
-  stat2Value   String? @default("")
-  stat2Label   String? @default("Artworks")
-  stat3Value   String? @default("∞")
-  stat3Label   String? @default("Passion")
+  companyName  String  @default("Electsun")
+  tagline      String  @default("Energía Solar y Soluciones Renovables")
+  email        String? @default("contacto@electsun.es")
+  phone        String? @default("+34 910 000 111")
+  address      String? @default("Parque Empresarial Tecnológico, Edificio Solar, Madrid")
+  bio          String? @default("Especialistas en ingeniería, instalación y mantenimiento de sistemas fotovoltaicos y almacenamiento inteligente para hogares y empresas.")
+  aboutText    String? @default("En Electsun lideramos la transición hacia un modelo energético sostenible y eficiente. Con más de 10 años de experiencia en el sector de las energías renovables, diseñamos soluciones llave en mano con componentes de máxima calidad (Tier 1) y garantías de hasta 25 años.")
+  stat1Value   String? @default("650+")
+  stat1Label   String? @default("Instalaciones Realizadas")
+  stat2Value   String? @default("18.5 MWp")
+  stat2Label   String? @default("Potencia Total Instalada")
+  stat3Value   String? @default("85%")
+  stat3Label   String? @default("Ahorro Medio en Factura")
+  stat4Value   String? @default("25 Años")
+  stat4Label   String? @default("Garantía de Rendimiento")
   heroImageUrl String?
-  avatarUrl    String?
+  logoUrl      String?
 }
 
 model Admin {

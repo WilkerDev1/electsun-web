@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Electsun — Web Corporativa & Plataforma de Gestión Solar
 
-## Getting Started
+Plataforma web empresarial para **Electsun**, empresa líder en diseño, instalación y mantenimiento de sistemas de energía solar fotovoltaica, almacenamiento inteligente con baterías de litio, bombeo solar y soluciones de recarga de vehículos eléctricos.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Tecnologías
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Framework**: [Next.js](https://nextjs.org/) (App Router, Server Components & Server Actions)
+- **Base de Datos & ORM**: PostgreSQL con [Prisma](https://www.prisma.io/)
+- **Autenticación**: [Auth.js / NextAuth v5](https://authjs.dev/)
+- **Estilos**: Vanilla CSS con Custom Properties, efectos de cristal (Glassmorphism) y paleta de alta eficiencia energética.
+- **Tipografía**: Outfit, Space Grotesk e Inter.
+- **Procesamiento de Imágenes**: [Sharp](https://sharp.pixelplumbing.com/)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Panel de Administración (`/admin`)
 
-## Learn More
+El panel de administración cuenta con arquitectura modular desacoplada en `src/components/admin/`:
+- **Instalaciones y Proyectos**: Gestión integral de proyectos ejecutados, filtrado por categorías, especificaciones técnicas (potencia kWp, porcentaje de ahorro, ubicación) y selección de destacados.
+- **Nueva Instalación**: Subida y optimización de imágenes con Drag & Drop y campos de ingeniería solar.
+- **Datos de Empresa & Métricas**: Personalización de nombre comercial, textos de presentación corporativa, datos de contacto oficial y contadores de rendimiento.
+- **Canales de Contacto**: Gestión de accesos directos (WhatsApp, LinkedIn, teléfono directo y correo).
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 💻 Puesta en Marcha en Local
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Instalar dependencias:
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+2. Generar el cliente de Prisma:
+   ```bash
+   npx prisma generate
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Aplicar migraciones y ejecutar seed:
+   ```bash
+   npx prisma db push
+   npx tsx prisma/seed.ts
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. Iniciar el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
+
+5. Abrir [http://localhost:3000](http://localhost:3000) en el navegador.

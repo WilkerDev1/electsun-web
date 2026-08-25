@@ -1,0 +1,15 @@
+# Repomix ignore patterns
+node_modules/
+.next/
+out/
+build/
+.git/
+.agents/
+public/uploads/
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+*.tsbuildinfo
+repomix-output.*
+.env*
