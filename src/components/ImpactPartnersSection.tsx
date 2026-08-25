@@ -82,12 +82,12 @@ export default function ImpactPartnersSection() {
           <div className="impact-header-grid">
             <div>
               <h2 className="impact-title">
-                Integración Tecnológica<br />Ecológica
+                Nuestros Hitos<br />y Experiencia
               </h2>
             </div>
             <div>
               <p className="impact-subtitle">
-                Integramos soluciones solares inteligentes con tecnología ecológica avanzada para maximizar la eficiencia, reducir costos operativos y proteger el medio ambiente a largo plazo.
+                Respaldamos a organizaciones líderes y hogares con soluciones solares de alto impacto, reduciendo costos operativos y asegurando máxima sostenibilidad y rendimiento a largo plazo.
               </p>
             </div>
           </div>
