@@ -5,9 +5,6 @@ import Image from 'next/image';
 
 export default function TechnologyClient() {
   const [activeSlide, setActiveSlide] = useState(0);
-  const [showSimModal, setShowSimModal] = useState(false);
-  const [simBill, setSimBill] = useState(15000);
-  const [simProperty, setSimProperty] = useState('Residencial');
   const [inquirySubmitted, setInquirySubmitted] = useState(false);
   const [inquiryData, setInquiryData] = useState({
     name: '',
@@ -21,34 +18,34 @@ export default function TechnologyClient() {
     {
       id: 'solarsim',
       name: 'SolarSim AI',
-      subtitle: 'Simulador Solar y Generador de Cotizaciones Personalizadas',
-      desc: 'Herramienta integral de simulación fotovoltaica que modela el potencial solar en 3D sobre cualquier techo en República Dominicana. Calcula irradiación solar, consumo histórico, producción estimada y genera cotizaciones técnico-financieras personalizadas al instante.',
-      image: '/images/solarsim-software.jpg',
+      subtitle: 'Simulador Solar & Generador de Cotizaciones Inteligentes',
+      desc: 'Software especializado que ayuda a generar cotizaciones técnico-financieras de forma automática e inteligente. Cuenta con un avanzado sistema de IA y simulaciones realistas de producción y consumo energético, basadas en datos fiables de radiación solar del lugar y en las curvas reales de eficiencia del sistema.',
+      image: '/images/solarsim-logo.svg',
       badge: 'Software Destacado',
       highlights: [
-        'Modelado 3D de techos y sombreados',
-        'Generación instantánea de presupuestos en PDF',
-        'Cálculo de retorno de inversión (ROI y TIR)',
-        'Integración con tarifas eléctricas de RD (Edeeste, Edenorte, Edesur)',
+        'Generación inteligente y 100% automatizada de cotizaciones',
+        'Simulaciones realistas de producción y consumo con IA',
+        'Datos fiables de radiación solar geográfica y meteorología',
+        'Dimensionamiento exacto basado en la eficiencia del sistema',
       ],
-      actionText: 'Probar Simulador SolarSim',
-      isPrimary: true,
+      actionText: 'Solicitar Demo de SolarSim',
+      isComingSoon: false,
     },
     {
-      id: 'monitor-pro',
-      name: 'Electsun Monitor Pro',
-      subtitle: 'Control Absoluto y Analítica Predictiva 24/7',
-      desc: 'Plataforma avanzada de telemetría y supervisión de plantas solares en tiempo real. Visualice flujos de energía instantáneos, estado de almacenamiento en baterías, rendimiento de inversores y detección predictiva de anomalías.',
-      image: '/images/monitor-pro-software.jpg',
-      badge: 'Plataforma SCADA',
+      id: 'coming-soon',
+      name: 'Nuevas Soluciones Digitales',
+      subtitle: 'Próximamente más soluciones innovadoras',
+      desc: 'Estamos desarrollando nuevas herramientas avanzadas de software, analítica e inteligencia artificial para la gestión, optimización y monitorización de sistemas fotovoltaicos. Muy pronto disponibles para potenciar sus proyectos energéticos.',
+      image: '/images/coming-soon-software.svg',
+      badge: 'Próximamente',
       highlights: [
-        'Telemetría en tiempo real por cada panel/inversor',
-        'Alertas inteligentes por caídas de producción',
-        'Acceso móvil multiplataforma (iOS, Android y Web)',
-        'Reportes automáticos de ahorro y compensación de CO₂',
+        'Telemetría y analítica avanzada en desarrollo',
+        'Algoritmos de mantenimiento predictivo con IA',
+        'Integración de nuevos módulos inteligentes',
+        'Lanzamiento programado próximamente',
       ],
-      actionText: 'Solicitar Demo de Monitoreo',
-      isPrimary: false,
+      actionText: 'Próximamente Disponible',
+      isComingSoon: true,
     },
   ];
 
@@ -92,12 +89,6 @@ export default function TechnologyClient() {
     },
   ];
 
-  // Quick Simulation Calculations
-  const estimatedSavings = Math.round(simBill * 0.88);
-  const estimatedPanels = Math.max(6, Math.round(simBill / 1800));
-  const estimatedSystemKw = (estimatedPanels * 0.55).toFixed(1);
-  const estimatedAnnualKwh = Math.round(Number(estimatedSystemKw) * 1550);
-
   const handleInquirySubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setInquirySubmitted(true);
@@ -129,11 +120,11 @@ export default function TechnologyClient() {
             <div className="tech-badges-bar">
               <div className="tech-badge-item">
                 <span className="tech-badge-dot green" />
-                <span>MONITOREO TELEMÉTRICO 24/7</span>
+                <span>SOFTWARE INTELIGENTE SOLARSIM</span>
               </div>
               <div className="tech-badge-item">
                 <span className="tech-badge-dot gold" />
-                <span>SIMULADOR 3D SOLARSIM</span>
+                <span>COTIZACIONES AUTOMATIZADAS</span>
               </div>
               <div className="tech-badge-item">
                 <span className="tech-badge-dot cyan" />
@@ -155,7 +146,7 @@ export default function TechnologyClient() {
               Software Solar de Alta Precisión
             </h2>
             <p className="font-body-md" style={{ color: 'rgba(255, 255, 255, 0.75)', maxWidth: '680px', margin: '0 auto' }}>
-              Desarrollamos e integramos plataformas inteligentes para modelar proyectos, automatizar cotizaciones y gestionar activos solares en tiempo real.
+              Desarrollamos e integramos plataformas inteligentes para modelar proyectos fotovoltaicos, automatizar cotizaciones y optimizar el rendimiento energético.
             </p>
           </div>
 
@@ -171,18 +162,28 @@ export default function TechnologyClient() {
                     style={{ objectFit: 'cover' }}
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
-                  <div className="software-badge-pill">{sw.badge}</div>
+                  <div
+                    className="software-badge-pill"
+                    style={sw.isComingSoon ? { borderColor: '#00E599', color: '#00E599' } : {}}
+                  >
+                    {sw.badge}
+                  </div>
                 </div>
 
                 <div className="software-body">
                   <h3 className="software-title">{sw.name}</h3>
-                  <h4 className="software-subtitle">{sw.subtitle}</h4>
+                  <h4
+                    className="software-subtitle"
+                    style={sw.isComingSoon ? { color: '#00E599' } : {}}
+                  >
+                    {sw.subtitle}
+                  </h4>
                   <p className="software-desc">{sw.desc}</p>
 
                   <ul className="software-highlights">
                     {sw.highlights.map((h, i) => (
                       <li key={i}>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00E599" strokeWidth="2.5">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={sw.isComingSoon ? '#00D4FF' : '#00E599'} strokeWidth="2.5">
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
                         <span>{h}</span>
@@ -190,23 +191,33 @@ export default function TechnologyClient() {
                     ))}
                   </ul>
 
-                  {sw.id === 'solarsim' ? (
-                    <button
-                      type="button"
-                      onClick={() => setShowSimModal(true)}
-                      className="btn-gold"
-                      style={{ width: '100%', marginTop: '20px', padding: '14px', borderRadius: '8px' }}
-                    >
-                      ⚡ {sw.actionText}
-                    </button>
-                  ) : (
+                  {!sw.isComingSoon ? (
                     <a
                       href="#contacto-tech"
-                      className="btn-cyan-outline"
-                      style={{ width: '100%', marginTop: '20px', padding: '13px', borderRadius: '8px', textAlign: 'center', display: 'block' }}
+                      className="btn-gold"
+                      style={{ width: '100%', marginTop: '20px', padding: '14px', borderRadius: '8px', textAlign: 'center', display: 'block' }}
                     >
-                      {sw.actionText} →
+                      ⚡ {sw.actionText}
                     </a>
+                  ) : (
+                    <div
+                      style={{
+                        width: '100%',
+                        marginTop: '20px',
+                        padding: '13px',
+                        borderRadius: '8px',
+                        textAlign: 'center',
+                        border: '1px solid rgba(255, 255, 255, 0.15)',
+                        color: 'rgba(255, 255, 255, 0.6)',
+                        fontSize: '13px',
+                        fontWeight: '700',
+                        letterSpacing: '0.06em',
+                        textTransform: 'uppercase',
+                        background: 'rgba(255, 255, 255, 0.04)',
+                      }}
+                    >
+                      ⏳ {sw.actionText}
+                    </div>
                   )}
                 </div>
               </div>
@@ -277,186 +288,7 @@ export default function TechnologyClient() {
         </div>
       </section>
 
-      {/* 4. SolarSim Interactive Live Simulator Modal */}
-      {showSimModal && (
-        <div
-          style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 999,
-            background: 'rgba(10, 25, 47, 0.88)',
-            backdropFilter: 'blur(12px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '20px',
-          }}
-          onClick={() => setShowSimModal(false)}
-        >
-          <div
-            style={{
-              background: '#FFFFFF',
-              borderRadius: '20px',
-              maxWidth: '750px',
-              width: '100%',
-              overflow: 'hidden',
-              boxShadow: '0 25px 70px rgba(0,0,0,0.5)',
-              border: '1px solid rgba(255, 184, 0, 0.3)',
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header */}
-            <div
-              style={{
-                background: 'var(--deep-navy)',
-                color: '#FFFFFF',
-                padding: '24px 32px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}
-            >
-              <div>
-                <span style={{ fontSize: '11px', color: 'var(--energy-gold)', fontWeight: '700', letterSpacing: '0.14em', textTransform: 'uppercase' }}>
-                  SIMULADOR DIGITAL
-                </span>
-                <h3 style={{ fontSize: '22px', fontWeight: '800', marginTop: '2px' }}>
-                  SolarSim AI — Cotizador Personalizado
-                </h3>
-              </div>
-              <button
-                onClick={() => setShowSimModal(false)}
-                style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  border: 'none',
-                  color: '#FFFFFF',
-                  width: '36px',
-                  height: '36px',
-                  borderRadius: '50%',
-                  cursor: 'pointer',
-                  fontSize: '16px',
-                }}
-              >
-                ✕
-              </button>
-            </div>
-
-            {/* Modal Body */}
-            <div style={{ padding: '32px' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '28px' }}>
-                <div>
-                  <label style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: 'var(--deep-navy)', marginBottom: '8px' }}>
-                    Factura Eléctrica Mensual Actual (RD$)
-                  </label>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <input
-                      type="range"
-                      min="3000"
-                      max="150000"
-                      step="1000"
-                      value={simBill}
-                      onChange={(e) => setSimBill(Number(e.target.value))}
-                      style={{ width: '100%', accentColor: 'var(--energy-gold)' }}
-                    />
-                  </div>
-                  <span style={{ fontSize: '20px', fontWeight: '800', color: 'var(--energy-gold)', display: 'block', marginTop: '6px' }}>
-                    RD$ {simBill.toLocaleString('es-DO')} / mes
-                  </span>
-                </div>
-
-                <div>
-                  <label style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: 'var(--deep-navy)', marginBottom: '8px' }}>
-                    Tipo de Inmueble
-                  </label>
-                  <select
-                    value={simProperty}
-                    onChange={(e) => setSimProperty(e.target.value)}
-                    style={{
-                      width: '100%',
-                      padding: '10px 14px',
-                      borderRadius: '8px',
-                      border: '1px solid var(--outline-variant)',
-                      fontSize: '14px',
-                      fontWeight: '600',
-                    }}
-                  >
-                    <option value="Residencial">Residencial (Hogar / Villa)</option>
-                    <option value="Comercial">Comercial (Local / Oficinas)</option>
-                    <option value="Industrial">Industrial (Nave / Fábrica)</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Simulation Output Cards */}
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(3, 1fr)',
-                  gap: '16px',
-                  background: '#F8FAFC',
-                  padding: '20px',
-                  borderRadius: '12px',
-                  border: '1px solid var(--glass-border)',
-                  marginBottom: '24px',
-                }}
-              >
-                <div style={{ textAlign: 'center' }}>
-                  <span style={{ fontSize: '12px', color: 'var(--secondary)', display: 'block' }}>Ahorro Mensual Estimado</span>
-                  <strong style={{ fontSize: '20px', color: '#00B87A', fontWeight: '800' }}>
-                    RD$ {estimatedSavings.toLocaleString('es-DO')}
-                  </strong>
-                </div>
-
-                <div style={{ textAlign: 'center' }}>
-                  <span style={{ fontSize: '12px', color: 'var(--secondary)', display: 'block' }}>Potencia Recomendada</span>
-                  <strong style={{ fontSize: '20px', color: 'var(--deep-navy)', fontWeight: '800' }}>
-                    {estimatedSystemKw} kWp ({estimatedPanels} Paneles)
-                  </strong>
-                </div>
-
-                <div style={{ textAlign: 'center' }}>
-                  <span style={{ fontSize: '12px', color: 'var(--secondary)', display: 'block' }}>Generación Anual</span>
-                  <strong style={{ fontSize: '20px', color: 'var(--cyan)', fontWeight: '800' }}>
-                    {estimatedAnnualKwh.toLocaleString('es-DO')} kWh/año
-                  </strong>
-                </div>
-              </div>
-
-              <div style={{ textAlign: 'center' }}>
-                <p style={{ fontSize: '13px', color: 'var(--secondary)', marginBottom: '16px' }}>
-                  ¿Desea adquirir la licencia de <strong>SolarSim</strong> para su empresa o solicitar una cotización formal basada en este cálculo?
-                </p>
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '14px' }}>
-                  <a
-                    href="https://wa.me/18093786590?text=Hola,%20utilicé%20el%20simulador%20SolarSim%20y%20deseo%20una%20cotización%20formal"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-gold"
-                    style={{ padding: '12px 28px' }}
-                  >
-                    Recibir Cotización por WhatsApp
-                  </a>
-                  <button
-                    onClick={() => setShowSimModal(false)}
-                    style={{
-                      background: 'transparent',
-                      border: '1px solid var(--outline-variant)',
-                      padding: '12px 20px',
-                      borderRadius: '6px',
-                      fontWeight: '600',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    Cerrar
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* 5. Software & Hardware Inquiry Form */}
+      {/* 4. Software & Hardware Inquiry Form */}
       <section id="contacto-tech" className="tech-contact-section">
         <div className="container-max">
           <div className="maintenance-form-grid">
@@ -601,7 +433,7 @@ export default function TechnologyClient() {
                         <option value="Paneles Solares Tier 1">Paneles Solares Tier 1 (Mayorista)</option>
                         <option value="Inversores Inteligentes">Inversores Híbridos / Centrales</option>
                         <option value="Baterías de Litio">Baterías de Litio LiFePO4</option>
-                        <option value="Plataforma Monitor Pro">Plataforma Electsun Monitor Pro</option>
+                        <option value="Nuevas Soluciones">Nuevas Soluciones en Desarrollo</option>
                       </select>
                     </div>
                   </div>
