@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Artwork {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  imageUrl    String
+  thumbnailUrl String?
+  category    String   @default("Illustrations")
+  tags        String   @default("[]")
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  width       Int?
+  height      Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model SocialLink {
+  id       String  @id @default(cuid())
+  platform String
+  url      String
+  label    String?
+  handle   String?
+  icon     String?
+  order    Int     @default(0)
+  visible  Boolean @default(true)
+}
+
+model SiteConfig {
+  id           String  @id @default("main")
+  artistName   String  @default("ISHIRO")
+  tagline      String  @default("Cute & Funny Artist")
+  email        String? @default("ishiro@example.com")
+  bio          String? @default("19 | Cute & Funny Artist | Commissions Open (DMs)")
+  aboutText    String? @default("Drawing since childhood, now creating art full-time. Every piece tells a story—whether it's an original character, a vibrant illustration, or a love letter to my favourite anime.")
+  stat1Value   String? @default("1.2K+")
+  stat1Label   String? @default("Followers")
+  stat2Value   String? @default("")
+  stat2Label   String? @default("Artworks")
+  stat3Value   String? @default("∞")
+  stat3Label   String? @default("Passion")
+  heroImageUrl String?
+  avatarUrl    String?
+}
+
+model Admin {
+  id       String @id @default(cuid())
+  username String @unique
+  password String
+}
