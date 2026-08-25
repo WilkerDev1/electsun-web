@@ -54,7 +54,16 @@ export default function ServicesSection() {
 
   return (
     <section id="services" className="navy-services-section">
-      <div className="container-max">
+      {/* High-Resolution Cinematic Solar Background Image */}
+      <div
+        className="services-bg"
+        style={{
+          backgroundImage: "url('/images/services-solar-bg.jpg')",
+        }}
+      />
+      <div className="services-overlay" />
+
+      <div className="container-max" style={{ position: 'relative', zIndex: 10 }}>
         {/* Header */}
         <div className="navy-services-header">
           <h2 className="font-headline-lg">Nuestros Servicios</h2>

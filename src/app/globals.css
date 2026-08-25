@@ -582,13 +582,37 @@ button, input, textarea, select {
 /* ---------- Deep Navy Services Section (Full Viewport) ---------- */
 .navy-services-section {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
-  padding: 80px 0;
+  padding: 100px 0;
   background-color: var(--deep-navy);
   color: #FFFFFF;
   position: relative;
   overflow: hidden;
+}
+
+.services-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.6) contrast(1.15);
+}
+
+.services-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 25, 47, 0.88) 0%,
+    rgba(10, 25, 47, 0.65) 50%,
+    rgba(10, 25, 47, 0.92) 100%
+  );
+  mix-blend-mode: normal;
 }
 
 .navy-services-header {
