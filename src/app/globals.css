@@ -342,20 +342,45 @@ button, input, textarea, select {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #FFFFFF;
-  opacity: 0.9;
   transition: all var(--transition-fast);
 }
 
-.nav-link:hover {
+.nav-link-dark {
+  color: #FFFFFF;
+  opacity: 0.9;
+}
+
+.nav-link-dark:hover {
   color: var(--energy-gold);
   opacity: 1;
 }
 
-.nav-link.active {
+.nav-link-dark.active {
   color: var(--energy-gold);
   border-bottom: 2px solid var(--energy-gold);
   opacity: 1;
+}
+
+.nav-link-light {
+  color: var(--deep-navy);
+  opacity: 0.9;
+}
+
+.nav-link-light:hover {
+  color: var(--energy-gold-hover);
+  opacity: 1;
+}
+
+.nav-link-light.active {
+  color: var(--deep-navy);
+  border-bottom: 2px solid var(--energy-gold);
+  opacity: 1;
+}
+
+.nav-light {
+  background: rgba(247, 249, 251, 0.6) !important;
+  backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(10, 25, 47, 0.08) !important;
 }
 
 /* ---------- Hero Header (Left Aligned & Full Screen) ---------- */
@@ -811,14 +836,14 @@ button, input, textarea, select {
 /* ---------- Commercial Consulting Page Layout ---------- */
 .consulting-banner {
   position: relative;
-  height: 400px;
+  min-height: 480px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #0D2C5E;
+  background-color: var(--deep-navy);
   color: #FFFFFF;
   overflow: hidden;
-  margin-top: 72px;
+  padding: 140px 0 70px;
 }
 
 .consulting-banner-bg {
@@ -826,7 +851,8 @@ button, input, textarea, select {
   inset: 0;
   background-size: cover;
   background-position: center;
-  opacity: 0.28;
+  opacity: 0.38;
+  filter: brightness(0.85);
 }
 
 .consulting-banner-content {

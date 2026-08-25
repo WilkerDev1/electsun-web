@@ -28,24 +28,29 @@ export default function Navbar() {
     return null;
   }
 
+  // Pages with a light top banner when not scrolled
+  const isLightPage = pathname === '/mantenimiento';
+  // When scrolled, we always use the dark frosted glass theme with white text/logo
+  const isLightNav = isLightPage && !isScrolled;
+
   const navLinks = [
     { label: 'Residential', href: '/#why-solar' },
     { label: 'Commercial', href: '/proyectos' },
     { label: 'Technology', href: '/#services' },
-    { label: 'Impact', href: '/#stats' },
-    { label: 'About', href: '/#about' },
+    { label: 'Impact', href: '/#impact' },
+    { label: 'About', href: '/#why-solar' },
   ];
 
   return (
     <nav
       id="main-nav"
-      className={`main-nav ${isScrolled ? 'nav-scrolled' : ''}`}
+      className={`main-nav ${isScrolled ? 'nav-scrolled' : ''} ${isLightNav ? 'nav-light' : 'nav-dark'}`}
     >
       <div className="nav-container">
-        {/* Official White Electsun Logo */}
+        {/* Dynamic Logo (Color on light banner, White on dark banner / scrolled) */}
         <Link href="/" className="nav-logo" aria-label="Electsun Inicio">
           <Image
-            src="/images/electsun-logo-white.svg"
+            src={isLightNav ? '/images/electsun-logo-color.svg' : '/images/electsun-logo-white.svg'}
             alt="Electsun - El sol a tu favor"
             width={180}
             height={46}
@@ -62,7 +67,7 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className={`nav-link ${isActive ? 'active' : ''}`}
+                className={`nav-link ${isLightNav ? 'nav-link-light' : 'nav-link-dark'} ${isActive ? 'active' : ''}`}
               >
                 {link.label}
               </Link>
@@ -76,7 +81,7 @@ export default function Navbar() {
             Solicitar Cotización
           </Link>
 
-          {/* Admin Lock Icon (Reliable SVG) */}
+          {/* Admin Lock Icon */}
           <Link
             href="/admin"
             title="Panel de Administración"
@@ -87,10 +92,10 @@ export default function Navbar() {
               width: '38px',
               height: '38px',
               borderRadius: '4px',
-              background: 'rgba(255, 255, 255, 0.08)',
-              color: '#FFFFFF',
+              background: isLightNav ? 'rgba(10, 25, 47, 0.06)' : 'rgba(255, 255, 255, 0.08)',
+              color: isLightNav ? 'var(--deep-navy)' : '#FFFFFF',
               transition: 'all 0.2s ease',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
+              border: isLightNav ? '1px solid rgba(10, 25, 47, 0.15)' : '1px solid rgba(255, 255, 255, 0.12)',
             }}
             aria-label="Panel Admin"
           >
@@ -122,7 +127,7 @@ export default function Navbar() {
               background: 'transparent',
               border: 'none',
               cursor: 'pointer',
-              color: '#FFFFFF',
+              color: isLightNav ? 'var(--deep-navy)' : '#FFFFFF',
             }}
             className="md:hidden"
             aria-label="Abrir Menú"
