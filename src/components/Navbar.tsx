@@ -34,11 +34,11 @@ export default function Navbar() {
   const isLightNav = isLightPage && !isScrolled;
 
   const navLinks = [
-    { label: 'Residential', href: '/#why-solar' },
-    { label: 'Commercial', href: '/comercial' },
-    { label: 'Technology', href: '/#services' },
-    { label: 'Impact', href: '/#impact' },
-    { label: 'About', href: '/#why-solar' },
+    { label: 'Residencial', href: '/#why-solar' },
+    { label: 'Comercial', href: '/comercial' },
+    { label: 'Tecnología', href: '/#services' },
+    { label: 'Impacto', href: '/#impact' },
+    { label: 'Nosotros', href: '/#why-solar' },
   ];
 
   return (

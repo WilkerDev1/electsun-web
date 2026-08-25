@@ -82,7 +82,7 @@ export default function ImpactPartnersSection() {
           <div className="impact-header-grid">
             <div>
               <h2 className="impact-title">
-                Eco Technology<br />Integration
+                Integración Tecnológica<br />Ecológica
               </h2>
             </div>
             <div>

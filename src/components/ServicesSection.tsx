@@ -82,7 +82,7 @@ export default function ServicesSection() {
               <h3>{service.title}</h3>
               <p>{service.desc}</p>
               <Link href={service.link} className="btn-white-outline">
-                Explore Now
+                Explorar Servicio
               </Link>
             </div>
           ))}

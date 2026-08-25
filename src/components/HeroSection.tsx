@@ -39,7 +39,7 @@ export default function HeroSection({ tagline, bio }: HeroSectionProps) {
 
           <div className="hero-actions">
             <Link href="/proyectos" className="btn-gold">
-              Explore Solutions
+              Explorar Soluciones
             </Link>
 
             <Link href="/#services" className="btn-cyan-outline">
@@ -56,7 +56,7 @@ export default function HeroSection({ tagline, bio }: HeroSectionProps) {
                 <circle cx="12" cy="12" r="10" />
                 <polygon points="10 8 16 12 10 16 10 8" fill="currentColor" />
               </svg>
-              View Technology
+              Ver Tecnología
             </Link>
           </div>
         </div>
