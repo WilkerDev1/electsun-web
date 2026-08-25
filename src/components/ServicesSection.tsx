@@ -34,7 +34,7 @@ export default function ServicesSection() {
           <path d="M6 12l3-3 3 3 5-5" strokeWidth="2" />
         </svg>
       ),
-      link: '/proyectos',
+      link: '/mantenimiento',
     },
     {
       title: 'Consultoría Energética',
