@@ -107,8 +107,9 @@ export default function MaintenanceClient() {
       </section>
 
       {/* 2. Cuidado Integral de su Sistema (3 Cards Grid) */}
-      <section className="maintenance-cards-section">
-        <div className="container-max">
+      <section className="maintenance-cards-section watermark-section">
+        <div className="watermark-emblem-right" aria-hidden="true" />
+        <div className="container-max" style={{ position: 'relative', zIndex: 1 }}>
           {/* Section Heading */}
           <div className="maintenance-section-header">
             <h2 className="font-headline-lg" style={{ color: 'var(--deep-navy)', marginBottom: '14px' }}>
@@ -152,8 +153,9 @@ export default function MaintenanceClient() {
       </section>
 
       {/* 3. Revision Booking Form & Direct Contact */}
-      <section id="solicitar-revision" className="maintenance-form-section">
-        <div className="container-max">
+      <section id="solicitar-revision" className="maintenance-form-section watermark-section">
+        <div className="watermark-emblem-left" aria-hidden="true" />
+        <div className="container-max" style={{ position: 'relative', zIndex: 1 }}>
           <div className="maintenance-form-grid">
             {/* Left text */}
             <div>

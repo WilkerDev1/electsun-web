@@ -75,8 +75,11 @@ export default function ImpactPartnersSection() {
   return (
     <section id="impact" className="impact-partners-section">
       {/* Top Half: Eco Technology Integration & Huge KPIs (Warm Sand Surface) */}
-      <div className="impact-top-container">
-        <div className="container-max" style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <div className="impact-top-container watermark-section">
+        {/* Brand Emblem Watermark */}
+        <div className="watermark-emblem-right" aria-hidden="true" />
+
+        <div className="container-max" style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', zIndex: 1 }}>
           
           {/* Section Header: 2 Columns */}
           <div className="impact-header-grid">

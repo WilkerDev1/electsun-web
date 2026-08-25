@@ -34,8 +34,7 @@ export default function Navbar() {
   const isLightNav = isLightPage && !isScrolled;
 
   const navLinks = [
-    { label: 'Residencial', href: '/#why-solar' },
-    { label: 'Comercial', href: '/comercial' },
+    { label: 'Proyectos', href: '/comercial' },
     { label: 'Tecnología', href: '/tecnologia' },
     { label: 'Impacto', href: '/#impact' },
     { label: 'Nosotros', href: '/#why-solar' },

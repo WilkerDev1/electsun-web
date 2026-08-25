@@ -99,8 +99,9 @@ export default function CommercialClient({ projects }: CommercialClientProps) {
       </section>
 
       {/* 2. Nuestro Proceso Técnico (3 Cards Grid) */}
-      <section className="commercial-process-section">
-        <div className="container-max">
+      <section className="commercial-process-section watermark-section">
+        <div className="watermark-emblem-right" aria-hidden="true" />
+        <div className="container-max" style={{ position: 'relative', zIndex: 1 }}>
           <div className="commercial-section-header">
             <h2 className="font-headline-lg" style={{ color: 'var(--deep-navy)', marginBottom: '14px' }}>
               Nuestro Proceso Técnico
@@ -125,8 +126,9 @@ export default function CommercialClient({ projects }: CommercialClientProps) {
       </section>
 
       {/* 3. Proyectos Realizados (Galería de Proyectos Destacados) */}
-      <section className="commercial-projects-section">
-        <div className="container-max">
+      <section className="commercial-projects-section watermark-section">
+        <div className="watermark-emblem-left" aria-hidden="true" />
+        <div className="container-max" style={{ position: 'relative', zIndex: 1 }}>
           <div style={{ marginBottom: '40px' }}>
             <h2 className="font-headline-lg" style={{ color: 'var(--deep-navy)' }}>
               Proyectos Realizados
@@ -310,8 +312,9 @@ export default function CommercialClient({ projects }: CommercialClientProps) {
       </section>
 
       {/* 5. Agendamiento de Visita Técnica */}
-      <section id="agendar-visita" className="commercial-booking-section">
-        <div className="container-max">
+      <section id="agendar-visita" className="commercial-booking-section watermark-section">
+        <div className="watermark-emblem-right" aria-hidden="true" />
+        <div className="container-max" style={{ position: 'relative', zIndex: 1 }}>
           <div className="maintenance-form-grid">
             <div>
               <span className="hero-eyebrow" style={{ color: 'var(--energy-gold)' }}>

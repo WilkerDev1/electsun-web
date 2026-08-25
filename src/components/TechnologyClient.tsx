@@ -121,12 +121,9 @@ export default function TechnologyClient() {
             <span className="hero-eyebrow" style={{ color: 'var(--energy-gold)' }}>
               SOLUCIONES DIGITALES & SOFTWARE
             </span>
-            <h2 className="font-headline-lg" style={{ color: '#FFFFFF', marginBottom: '14px' }}>
-              Software Solar de Alta Precisión
+            <h2 className="font-headline-lg" style={{ color: '#FFFFFF', marginBottom: '0' }}>
+              Nuestras Soluciones de Software
             </h2>
-            <p className="font-body-md" style={{ color: 'rgba(255, 255, 255, 0.75)', maxWidth: '680px', margin: '0 auto' }}>
-              Plataforma especializada para modelar proyectos fotovoltaicos, automatizar cotizaciones y optimizar el rendimiento energético.
-            </p>
           </div>
 
           {/* Centered SolarSim Main Card (White Body with Dark Logo Header) */}
@@ -138,7 +135,7 @@ export default function TechnologyClient() {
                   alt={solarsim.name}
                   fill
                   style={{ objectFit: 'cover' }}
-                  sizes="(max-width: 768px) 100vw, 680px"
+                  sizes="(max-width: 768px) 100vw, 580px"
                   priority
                 />
                 <div className="software-badge-pill">
@@ -165,30 +162,20 @@ export default function TechnologyClient() {
                 <a
                   href="#contacto-tech"
                   className="btn-gold"
-                  style={{ width: '100%', marginTop: '24px', padding: '15px', borderRadius: '8px', textAlign: 'center', display: 'block' }}
+                  style={{ width: '100%', marginTop: '20px', padding: '13px', borderRadius: '8px', textAlign: 'center', display: 'block' }}
                 >
                   ⚡ {solarsim.actionText}
                 </a>
               </div>
-            </div>
-
-            {/* Letrero Minimalista: Próximamente */}
-            <div className="coming-soon-sign">
-              <div className="coming-soon-sign-badge">
-                <span className="coming-soon-dot" />
-                <span>PRÓXIMAMENTE</span>
-              </div>
-              <p className="coming-soon-sign-text">
-                Nuevas soluciones digitales y herramientas de analítica con Inteligencia Artificial en desarrollo.
-              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* 3. Hardware de Vanguardia (Paneles, Inversores, Baterías) */}
-      <section className="tech-hardware-section">
-        <div className="container-max">
+      <section className="tech-hardware-section watermark-section">
+        <div className="watermark-emblem-right" aria-hidden="true" />
+        <div className="container-max" style={{ position: 'relative', zIndex: 1 }}>
           <div className="commercial-section-header">
             <span className="hero-eyebrow" style={{ color: 'var(--deep-navy)' }}>
               SUMINISTRO & DISTRIBUCIÓN
@@ -237,8 +224,9 @@ export default function TechnologyClient() {
       </section>
 
       {/* 4. Software & Hardware Inquiry Form */}
-      <section id="contacto-tech" className="tech-contact-section">
-        <div className="container-max">
+      <section id="contacto-tech" className="tech-contact-section watermark-section">
+        <div className="watermark-emblem-left" aria-hidden="true" />
+        <div className="container-max" style={{ position: 'relative', zIndex: 1 }}>
           <div className="maintenance-form-grid">
             <div>
               <span className="hero-eyebrow" style={{ color: 'var(--energy-gold)' }}>

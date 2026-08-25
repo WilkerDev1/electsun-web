@@ -57,7 +57,8 @@ export default function ConsultingClient() {
   ];
 
   return (
-    <div style={{ background: 'var(--background)', minHeight: '100vh' }}>
+    <div className="watermark-section" style={{ background: 'var(--background)', minHeight: '100vh' }}>
+      <div className="watermark-emblem-right" style={{ top: '60%' }} aria-hidden="true" />
       {/* Top Banner with Local High-Resolution Image */}
       <section className="consulting-banner">
         <div

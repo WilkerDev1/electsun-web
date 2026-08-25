@@ -29,8 +29,11 @@ export default function WhySolarSection() {
   ];
 
   return (
-    <section id="why-solar" className="why-solar-section">
-      <div className="container-max">
+    <section id="why-solar" className="why-solar-section watermark-section">
+      {/* Brand Emblem Watermark */}
+      <div className="watermark-emblem-right" aria-hidden="true" />
+
+      <div className="container-max" style={{ position: 'relative', zIndex: 1 }}>
         {/* Asymmetric Header */}
         <div className="why-solar-header">
           <div>

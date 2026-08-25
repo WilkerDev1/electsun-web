@@ -2140,22 +2140,27 @@ button, input, textarea, select {
 
 /* Software Section (Dark Navy) */
 .tech-software-section {
-  padding: 100px 0 90px;
+  padding: 70px 0 80px;
   background-color: var(--deep-navy);
+}
+
+.tech-section-header-dark {
+  text-align: center;
+  margin-bottom: 28px;
 }
 
 /* Centered SolarSim Main Card (White Theme with Dark Header) */
 .solarsim-centered-wrap {
-  max-width: 700px;
+  max-width: 520px;
   margin: 0 auto;
 }
 
 .solarsim-white-card {
   background: #FFFFFF;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 184, 0, 0.35);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 184, 0, 0.3);
   display: flex;
   flex-direction: column;
   transition: all 0.35s ease;
@@ -2163,35 +2168,35 @@ button, input, textarea, select {
 
 .solarsim-white-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.5);
 }
 
 .solarsim-img-wrap {
   position: relative;
   width: 100%;
-  height: 250px;
+  height: 180px;
   background: #06101E;
 }
 
 .software-badge-pill {
   position: absolute;
-  top: 16px;
-  left: 16px;
+  top: 14px;
+  left: 14px;
   background: rgba(10, 25, 47, 0.88);
   backdrop-filter: blur(8px);
   border: 1px solid var(--energy-gold);
   color: var(--energy-gold);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  padding: 5px 14px;
+  padding: 4px 11px;
   border-radius: 9999px;
   z-index: 2;
 }
 
 .solarsim-body {
-  padding: 34px 32px 30px;
+  padding: 24px 24px 20px;
   background: #FFFFFF;
   display: flex;
   flex-direction: column;
@@ -2199,88 +2204,42 @@ button, input, textarea, select {
 
 .solarsim-title {
   font-family: var(--font-heading);
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 800;
   color: var(--deep-navy);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .solarsim-subtitle {
-  font-size: 14.5px;
+  font-size: 12.5px;
   font-weight: 700;
   color: #D97706;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .solarsim-desc {
-  font-size: 14.5px;
+  font-size: 13px;
   color: var(--secondary);
-  line-height: 1.62;
-  margin-bottom: 20px;
+  line-height: 1.5;
+  margin-bottom: 16px;
 }
 
 .solarsim-highlights {
   list-style: none;
   padding: 0;
-  margin: 0 0 8px;
+  margin: 0 0 4px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .solarsim-highlights li {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 14px;
+  gap: 10px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--deep-navy);
-}
-
-/* Minimalist Coming Soon Sign / Letrero */
-.coming-soon-sign {
-  max-width: 640px;
-  margin: 32px auto 0;
-  padding: 14px 22px;
-  border-radius: 12px;
-  background: rgba(255, 184, 0, 0.08);
-  border: 1px dashed rgba(255, 184, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  text-align: center;
-  flex-wrap: wrap;
-}
-
-.coming-soon-sign-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(255, 184, 0, 0.18);
-  border: 1px solid rgba(255, 184, 0, 0.5);
-  padding: 4px 12px;
-  border-radius: 9999px;
-  font-size: 11px;
-  font-weight: 800;
-  color: var(--energy-gold);
-  letter-spacing: 0.1em;
-  white-space: nowrap;
-}
-
-.coming-soon-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--energy-gold);
-  box-shadow: 0 0 6px var(--energy-gold);
-}
-
-.coming-soon-sign-text {
-  font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.85);
-  line-height: 1.4;
-  margin: 0;
 }
 
 .software-dots {
@@ -2420,3 +2379,86 @@ button, input, textarea, select {
 
 
 
+
+/* ============================================================
+   ELECTSUN BRAND EMBLEM WATERMARK (Subtle Luxury Background Mark)
+   ============================================================ */
+.watermark-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.watermark-emblem-right {
+  position: absolute;
+  right: -220px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 720px;
+  height: 720px;
+  background-image: url('/images/electsun-emblem-black.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.042;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.watermark-emblem-left {
+  position: absolute;
+  left: -220px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 720px;
+  height: 720px;
+  background-image: url('/images/electsun-emblem-black.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.042;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.watermark-emblem-corner {
+  position: absolute;
+  right: -180px;
+  bottom: -180px;
+  width: 680px;
+  height: 680px;
+  background-image: url('/images/electsun-emblem-black.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.042;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+@media (max-width: 1024px) {
+  .watermark-emblem-right,
+  .watermark-emblem-left,
+  .watermark-emblem-corner {
+    width: 520px;
+    height: 520px;
+    opacity: 0.035;
+  }
+}
+
+@media (max-width: 768px) {
+  .watermark-emblem-right {
+    right: -130px;
+    width: 380px;
+    height: 380px;
+    opacity: 0.03;
+  }
+  .watermark-emblem-left {
+    left: -130px;
+    width: 380px;
+    height: 380px;
+    opacity: 0.03;
+  }
+}
