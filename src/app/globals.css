@@ -4,7 +4,7 @@
    ============================================ */
 
 /* ---------- Google Fonts & Material Symbols ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&family=Montserrat:wght@800;900&family=Outfit:wght@800;900&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
 /* ---------- CSS Custom Properties & Color Tokens ---------- */
@@ -454,13 +454,13 @@ button, input, textarea, select {
 .hero-title {
   color: #FFFFFF;
   margin-bottom: 24px;
-  font-family: 'Syne', 'Montserrat', 'Outfit', sans-serif;
-  font-weight: 800;
-  font-size: clamp(38px, 5.2vw + 1rem, 74px);
-  letter-spacing: -0.025em;
-  line-height: 1.05;
+  font-family: 'Archivo Black', 'Montserrat', 'Plus Jakarta Sans', sans-serif;
+  font-weight: 900;
+  font-size: clamp(32px, 4.2vw + 1rem, 60px);
+  letter-spacing: -0.015em;
+  line-height: 1.12;
   text-transform: uppercase;
-  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 4px 25px rgba(0, 0, 0, 0.7);
 }
 
 .hero-desc {
