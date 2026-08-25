@@ -35,7 +35,7 @@ export default function Navbar() {
 
   const navLinks = [
     { label: 'Residential', href: '/#why-solar' },
-    { label: 'Commercial', href: '/proyectos' },
+    { label: 'Commercial', href: '/comercial' },
     { label: 'Technology', href: '/#services' },
     { label: 'Impact', href: '/#impact' },
     { label: 'About', href: '/#why-solar' },

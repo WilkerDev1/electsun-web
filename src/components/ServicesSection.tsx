@@ -21,7 +21,7 @@ export default function ServicesSection() {
           <path d="M7 16l2.5-6h5l2.5 6H7z" strokeWidth="2" />
         </svg>
       ),
-      link: '/proyectos',
+      link: '/comercial',
     },
     {
       title: 'Mantenimiento y Monitoreo',
