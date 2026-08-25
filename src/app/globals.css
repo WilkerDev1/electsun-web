@@ -2144,44 +2144,33 @@ button, input, textarea, select {
   background-color: var(--deep-navy);
 }
 
-.tech-section-header-dark {
-  text-align: center;
-  margin-bottom: 56px;
+/* Centered SolarSim Main Card (White Theme with Dark Header) */
+.solarsim-centered-wrap {
+  max-width: 700px;
+  margin: 0 auto;
 }
 
-.software-cards-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 32px;
-}
-
-@media (min-width: 900px) {
-  .software-cards-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.software-card {
-  background: #0E2038;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+.solarsim-white-card {
+  background: #FFFFFF;
   border-radius: 20px;
   overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 184, 0, 0.35);
   display: flex;
   flex-direction: column;
   transition: all 0.35s ease;
 }
 
-.software-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(255, 184, 0, 0.4);
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45);
+.solarsim-white-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.55);
 }
 
-.software-img-wrap {
+.solarsim-img-wrap {
   position: relative;
   width: 100%;
-  height: 260px;
-  background: #050E1B;
+  height: 250px;
+  background: #06101E;
 }
 
 .software-badge-pill {
@@ -2201,51 +2190,97 @@ button, input, textarea, select {
   z-index: 2;
 }
 
-.software-body {
-  padding: 32px;
+.solarsim-body {
+  padding: 34px 32px 30px;
+  background: #FFFFFF;
   display: flex;
   flex-direction: column;
-  flex: 1;
 }
 
-.software-title {
+.solarsim-title {
   font-family: var(--font-heading);
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 800;
-  color: #FFFFFF;
+  color: var(--deep-navy);
   margin-bottom: 4px;
 }
 
-.software-subtitle {
-  font-size: 14px;
+.solarsim-subtitle {
+  font-size: 14.5px;
   font-weight: 700;
-  color: var(--energy-gold);
+  color: #D97706;
   margin-bottom: 14px;
 }
 
-.software-desc {
+.solarsim-desc {
   font-size: 14.5px;
-  color: rgba(255, 255, 255, 0.78);
-  line-height: 1.6;
+  color: var(--secondary);
+  line-height: 1.62;
   margin-bottom: 20px;
-  flex: 1;
 }
 
-.software-highlights {
+.solarsim-highlights {
   list-style: none;
   padding: 0;
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
-.software-highlights li {
+.solarsim-highlights li {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--deep-navy);
+}
+
+/* Minimalist Coming Soon Sign / Letrero */
+.coming-soon-sign {
+  max-width: 640px;
+  margin: 32px auto 0;
+  padding: 14px 22px;
+  border-radius: 12px;
+  background: rgba(255, 184, 0, 0.08);
+  border: 1px dashed rgba(255, 184, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.coming-soon-sign-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 184, 0, 0.18);
+  border: 1px solid rgba(255, 184, 0, 0.5);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--energy-gold);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.coming-soon-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--energy-gold);
+  box-shadow: 0 0 6px var(--energy-gold);
+}
+
+.coming-soon-sign-text {
   font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.4;
+  margin: 0;
 }
 
 .software-dots {

@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 export default function TechnologyClient() {
-  const [activeSlide, setActiveSlide] = useState(0);
   const [inquirySubmitted, setInquirySubmitted] = useState(false);
   const [inquiryData, setInquiryData] = useState({
     name: '',
@@ -14,40 +13,20 @@ export default function TechnologyClient() {
     message: '',
   });
 
-  const softwares = [
-    {
-      id: 'solarsim',
-      name: 'SolarSim AI',
-      subtitle: 'Simulador Solar & Generador de Cotizaciones Inteligentes',
-      desc: 'Software especializado que ayuda a generar cotizaciones técnico-financieras de forma automática e inteligente. Cuenta con un avanzado sistema de IA y simulaciones realistas de producción y consumo energético, basadas en datos fiables de radiación solar del lugar y en las curvas reales de eficiencia del sistema.',
-      image: '/images/solarsim-logo.svg',
-      badge: 'Software Destacado',
-      highlights: [
-        'Generación inteligente y 100% automatizada de cotizaciones',
-        'Simulaciones realistas de producción y consumo con IA',
-        'Datos fiables de radiación solar geográfica y meteorología',
-        'Dimensionamiento exacto basado en la eficiencia del sistema',
-      ],
-      actionText: 'Solicitar Demo de SolarSim',
-      isComingSoon: false,
-    },
-    {
-      id: 'coming-soon',
-      name: 'Nuevas Soluciones Digitales',
-      subtitle: 'Próximamente más soluciones innovadoras',
-      desc: 'Estamos desarrollando nuevas herramientas avanzadas de software, analítica e inteligencia artificial para la gestión, optimización y monitorización de sistemas fotovoltaicos. Muy pronto disponibles para potenciar sus proyectos energéticos.',
-      image: '/images/coming-soon-software.svg',
-      badge: 'Próximamente',
-      highlights: [
-        'Telemetría y analítica avanzada en desarrollo',
-        'Algoritmos de mantenimiento predictivo con IA',
-        'Integración de nuevos módulos inteligentes',
-        'Lanzamiento programado próximamente',
-      ],
-      actionText: 'Próximamente Disponible',
-      isComingSoon: true,
-    },
-  ];
+  const solarsim = {
+    name: 'SolarSim AI',
+    subtitle: 'Simulador Solar & Generador de Cotizaciones Inteligentes',
+    desc: 'Software especializado que ayuda a generar cotizaciones técnico-financieras de forma automática e inteligente. Cuenta con un avanzado sistema de IA y simulaciones realistas de producción y consumo energético, basadas en datos fiables de radiación solar del lugar y en las curvas reales de eficiencia del sistema.',
+    image: '/images/solarsim-logo.svg',
+    badge: 'Software Destacado',
+    highlights: [
+      'Generación inteligente y 100% automatizada de cotizaciones',
+      'Simulaciones realistas de producción y consumo con IA',
+      'Datos fiables de radiación solar geográfica y meteorología',
+      'Dimensionamiento exacto basado en la eficiencia del sistema',
+    ],
+    actionText: 'Solicitar Demo de SolarSim',
+  };
 
   const hardwareList = [
     {
@@ -146,94 +125,63 @@ export default function TechnologyClient() {
               Software Solar de Alta Precisión
             </h2>
             <p className="font-body-md" style={{ color: 'rgba(255, 255, 255, 0.75)', maxWidth: '680px', margin: '0 auto' }}>
-              Desarrollamos e integramos plataformas inteligentes para modelar proyectos fotovoltaicos, automatizar cotizaciones y optimizar el rendimiento energético.
+              Plataforma especializada para modelar proyectos fotovoltaicos, automatizar cotizaciones y optimizar el rendimiento energético.
             </p>
           </div>
 
-          {/* Software Cards Grid */}
-          <div className="software-cards-grid">
-            {softwares.map((sw, idx) => (
-              <div key={sw.id} className={`software-card ${idx === activeSlide ? 'active-glow' : ''}`}>
-                <div className="software-img-wrap">
-                  <Image
-                    src={sw.image}
-                    alt={sw.name}
-                    fill
-                    style={{ objectFit: 'cover' }}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                  <div
-                    className="software-badge-pill"
-                    style={sw.isComingSoon ? { borderColor: '#00E599', color: '#00E599' } : {}}
-                  >
-                    {sw.badge}
-                  </div>
-                </div>
-
-                <div className="software-body">
-                  <h3 className="software-title">{sw.name}</h3>
-                  <h4
-                    className="software-subtitle"
-                    style={sw.isComingSoon ? { color: '#00E599' } : {}}
-                  >
-                    {sw.subtitle}
-                  </h4>
-                  <p className="software-desc">{sw.desc}</p>
-
-                  <ul className="software-highlights">
-                    {sw.highlights.map((h, i) => (
-                      <li key={i}>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={sw.isComingSoon ? '#00D4FF' : '#00E599'} strokeWidth="2.5">
-                          <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                        <span>{h}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {!sw.isComingSoon ? (
-                    <a
-                      href="#contacto-tech"
-                      className="btn-gold"
-                      style={{ width: '100%', marginTop: '20px', padding: '14px', borderRadius: '8px', textAlign: 'center', display: 'block' }}
-                    >
-                      ⚡ {sw.actionText}
-                    </a>
-                  ) : (
-                    <div
-                      style={{
-                        width: '100%',
-                        marginTop: '20px',
-                        padding: '13px',
-                        borderRadius: '8px',
-                        textAlign: 'center',
-                        border: '1px solid rgba(255, 255, 255, 0.15)',
-                        color: 'rgba(255, 255, 255, 0.6)',
-                        fontSize: '13px',
-                        fontWeight: '700',
-                        letterSpacing: '0.06em',
-                        textTransform: 'uppercase',
-                        background: 'rgba(255, 255, 255, 0.04)',
-                      }}
-                    >
-                      ⏳ {sw.actionText}
-                    </div>
-                  )}
+          {/* Centered SolarSim Main Card (White Body with Dark Logo Header) */}
+          <div className="solarsim-centered-wrap">
+            <div className="solarsim-white-card">
+              <div className="solarsim-img-wrap">
+                <Image
+                  src={solarsim.image}
+                  alt={solarsim.name}
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  sizes="(max-width: 768px) 100vw, 680px"
+                  priority
+                />
+                <div className="software-badge-pill">
+                  {solarsim.badge}
                 </div>
               </div>
-            ))}
-          </div>
 
-          {/* Navigation Dots for Mobile */}
-          <div className="software-dots">
-            {softwares.map((_, i) => (
-              <button
-                key={i}
-                className={`software-dot ${activeSlide === i ? 'active' : ''}`}
-                onClick={() => setActiveSlide(i)}
-                aria-label={`Slide ${i + 1}`}
-              />
-            ))}
+              <div className="solarsim-body">
+                <h3 className="solarsim-title">{solarsim.name}</h3>
+                <h4 className="solarsim-subtitle">{solarsim.subtitle}</h4>
+                <p className="solarsim-desc">{solarsim.desc}</p>
+
+                <ul className="solarsim-highlights">
+                  {solarsim.highlights.map((h, i) => (
+                    <li key={i}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00B87A" strokeWidth="2.5">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <a
+                  href="#contacto-tech"
+                  className="btn-gold"
+                  style={{ width: '100%', marginTop: '24px', padding: '15px', borderRadius: '8px', textAlign: 'center', display: 'block' }}
+                >
+                  ⚡ {solarsim.actionText}
+                </a>
+              </div>
+            </div>
+
+            {/* Letrero Minimalista: Próximamente */}
+            <div className="coming-soon-sign">
+              <div className="coming-soon-sign-badge">
+                <span className="coming-soon-dot" />
+                <span>PRÓXIMAMENTE</span>
+              </div>
+              <p className="coming-soon-sign-text">
+                Nuevas soluciones digitales y herramientas de analítica con Inteligencia Artificial en desarrollo.
+              </p>
+            </div>
           </div>
         </div>
       </section>
