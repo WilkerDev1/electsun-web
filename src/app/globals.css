@@ -2033,6 +2033,353 @@ button, input, textarea, select {
   border-top: 1px solid var(--glass-border);
 }
 
+/* ===================================================
+   TECHNOLOGY & SOLARSIM ECOSYSTEM STYLES
+   =================================================== */
+.tech-hero {
+  position: relative;
+  min-height: 65vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 150px 0 80px;
+  overflow: hidden;
+  background-color: var(--deep-navy);
+}
+
+.tech-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.9);
+}
+
+.tech-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 25, 47, 0.70) 0%,
+    rgba(10, 25, 47, 0.45) 50%,
+    rgba(10, 25, 47, 0.88) 100%
+  );
+  mix-blend-mode: normal;
+}
+
+.tech-hero-content {
+  max-width: 840px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tech-title {
+  color: #FFFFFF;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 18px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.tech-desc {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.tech-badges-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.tech-badge-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 8px 18px;
+  border-radius: 9999px;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.08em;
+}
+
+.tech-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.tech-badge-dot.green {
+  background-color: #00E599;
+  box-shadow: 0 0 8px #00E599;
+}
+
+.tech-badge-dot.gold {
+  background-color: #FFB800;
+  box-shadow: 0 0 8px #FFB800;
+}
+
+.tech-badge-dot.cyan {
+  background-color: #00D4FF;
+  box-shadow: 0 0 8px #00D4FF;
+}
+
+/* Software Section (Dark Navy) */
+.tech-software-section {
+  padding: 100px 0 90px;
+  background-color: var(--deep-navy);
+}
+
+.tech-section-header-dark {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.software-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 900px) {
+  .software-cards-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.software-card {
+  background: #0E2038;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.35s ease;
+}
+
+.software-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 184, 0, 0.4);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45);
+}
+
+.software-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  background: #050E1B;
+}
+
+.software-badge-pill {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(10, 25, 47, 0.88);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--energy-gold);
+  color: var(--energy-gold);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  z-index: 2;
+}
+
+.software-body {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.software-title {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+}
+
+.software-subtitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--energy-gold);
+  margin-bottom: 14px;
+}
+
+.software-desc {
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.software-highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.software-highlights li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.software-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.software-dot {
+  width: 24px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.software-dot.active {
+  width: 48px;
+  background: var(--cyan);
+}
+
+/* Hardware Section */
+.tech-hardware-section {
+  padding: 100px 0 90px;
+  background: #FFFFFF;
+}
+
+.hardware-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 900px) {
+  .hardware-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.hardware-card {
+  background: #FFFFFF;
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(10, 25, 47, 0.04);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.hardware-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 35px rgba(10, 25, 47, 0.09);
+}
+
+.hardware-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: #0A192F;
+}
+
+.hardware-icon-float {
+  position: absolute;
+  bottom: -20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #0A192F;
+  border: 2px solid #FFFFFF;
+  color: var(--cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+
+.hardware-body {
+  padding: 32px 24px 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.hardware-title {
+  font-family: var(--font-heading);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--deep-navy);
+  margin-bottom: 10px;
+}
+
+.hardware-desc {
+  font-size: 14px;
+  color: var(--secondary);
+  line-height: 1.6;
+  margin-bottom: 18px;
+  flex: 1;
+}
+
+.hardware-specs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 14px;
+  border-top: 1px solid var(--glass-border);
+}
+
+.hardware-spec-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--deep-navy);
+}
+
+.spec-bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--energy-gold);
+}
+
+.tech-contact-section {
+  padding: 90px 0 110px;
+  background: #F8FAFC;
+  border-top: 1px solid var(--glass-border);
+}
+
+
 
 
 
