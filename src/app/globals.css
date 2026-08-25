@@ -4,7 +4,7 @@
    ============================================ */
 
 /* ---------- Google Fonts & Material Symbols ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&family=Sora:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
 /* ---------- CSS Custom Properties & Color Tokens ---------- */
@@ -17,6 +17,8 @@
   --energy-gold-soft: rgba(255, 184, 0, 0.15);
   --solar-cyan: #00D4FF;
   --solar-cyan-soft: rgba(0, 212, 255, 0.12);
+  --champagne: #F5E6D3;
+  --champagne-light: #FFF6EB;
 
   /* Light Theme Surfaces (Corporate Standard) */
   --background: #F7F9FB;
@@ -38,11 +40,11 @@
   --outline: #837560;
   --outline-variant: #D5C4AB;
   --glass-border: rgba(10, 25, 47, 0.08);
-  --glass-border-dark: rgba(255, 255, 255, 0.08);
+  --glass-border-dark: rgba(255, 255, 255, 0.12);
 
   /* Typography */
-  --font-display: 'Syne', sans-serif;
-  --font-heading: 'Syne', sans-serif;
+  --font-display: 'Sora', 'Plus Jakarta Sans', sans-serif;
+  --font-heading: 'Sora', 'Plus Jakarta Sans', sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
   --font-inter: 'Inter', sans-serif;
 
@@ -107,25 +109,9 @@ button, input, textarea, select {
   color: var(--deep-navy);
 }
 
-/* ---------- Material Icons Helper ---------- */
-.material-symbols-outlined {
-  font-family: 'Material Symbols Outlined';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  -webkit-font-smoothing: antialiased;
-}
-
 /* ---------- Glassmorphism & Shadow Utilities ---------- */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
@@ -141,11 +127,11 @@ button, input, textarea, select {
 
 /* Top Navbar Transition Class */
 .nav-scrolled {
-  background: rgba(255, 255, 255, 0.92) !important;
+  background: rgba(10, 25, 47, 0.88) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
-  border-bottom: 1px solid var(--glass-border) !important;
-  box-shadow: 0 4px 20px rgba(10, 25, 47, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* ---------- Layout Containers ---------- */
@@ -171,10 +157,10 @@ button, input, textarea, select {
 /* ---------- Typography Utility Classes ---------- */
 .font-display-xl {
   font-family: var(--font-display);
-  font-size: clamp(38px, 4vw + 1rem, 76px);
-  line-height: 1.1;
-  letter-spacing: -0.04em;
-  font-weight: 800;
+  font-size: clamp(38px, 4.5vw + 1rem, 74px);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  font-weight: 700;
 }
 
 .font-headline-lg {
@@ -217,6 +203,31 @@ button, input, textarea, select {
 }
 
 /* ---------- Buttons ---------- */
+.btn-champagne {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--champagne);
+  color: var(--deep-navy);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 14px 34px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: all var(--transition-base);
+}
+
+.btn-champagne:hover {
+  background-color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(245, 230, 211, 0.4);
+}
+
 .btn-gold {
   display: inline-flex;
   align-items: center;
@@ -227,10 +238,10 @@ button, input, textarea, select {
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 14px 28px;
-  border-radius: 4px;
+  padding: 12px 24px;
+  border-radius: 9999px;
   border: none;
   cursor: pointer;
   box-shadow: 0 2px 10px rgba(255, 184, 0, 0.3);
@@ -239,10 +250,8 @@ button, input, textarea, select {
 
 .btn-gold:hover {
   background-color: var(--energy-gold-hover);
-  padding-left: 32px;
-  padding-right: 32px;
-  box-shadow: 0 4px 18px rgba(255, 184, 0, 0.45);
   transform: translateY(-1px);
+  box-shadow: 0 4px 18px rgba(255, 184, 0, 0.45);
 }
 
 .btn-cyan-outline {
@@ -250,24 +259,25 @@ button, input, textarea, select {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: transparent;
-  color: #3CD7FF;
-  border: 1px solid var(--solar-cyan);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  color: var(--champagne);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  padding: 14px 28px;
-  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 14px 30px;
+  border-radius: 9999px;
   cursor: pointer;
   transition: all var(--transition-base);
 }
 
 .btn-cyan-outline:hover {
-  background-color: rgba(0, 212, 255, 0.08);
-  border-color: #3CD7FF;
-  transform: translateY(-1px);
+  background-color: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #FFFFFF;
+  transform: translateY(-2px);
 }
 
 .btn-white-outline {
@@ -284,7 +294,7 @@ button, input, textarea, select {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   padding: 12px 24px;
-  border-radius: 4px;
+  border-radius: 9999px;
   cursor: pointer;
   transition: all var(--transition-base);
 }
@@ -302,10 +312,10 @@ button, input, textarea, select {
   right: 0;
   width: 100%;
   z-index: 100;
-  background: transparent;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--glass-border);
+  background: rgba(10, 20, 35, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   transition: all var(--transition-smooth);
 }
 
@@ -316,30 +326,30 @@ button, input, textarea, select {
   width: 100%;
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 20px var(--section-x-sm);
+  padding: 18px var(--section-x-sm);
 }
 
 @media (min-width: 1024px) {
   .nav-container {
-    padding: 24px 80px;
+    padding: 20px 80px;
   }
 }
 
 .nav-logo {
-  font-family: var(--font-heading);
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: var(--deep-navy);
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  transition: opacity var(--transition-fast);
+}
+
+.nav-logo:hover {
+  opacity: 0.9;
 }
 
 .nav-links {
   display: none;
   align-items: center;
-  gap: 36px;
+  gap: 32px;
 }
 
 @media (min-width: 868px) {
@@ -350,34 +360,36 @@ button, input, textarea, select {
 
 .nav-link {
   font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--deep-navy);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.85);
   transition: color var(--transition-fast);
 }
 
 .nav-link:hover {
-  color: var(--energy-gold);
+  color: var(--champagne);
 }
 
 .nav-link.active {
-  color: var(--energy-gold);
-  border-bottom: 2px solid var(--energy-gold);
+  color: var(--champagne);
+  font-weight: 700;
 }
 
-/* ---------- Hero Header ---------- */
+/* ---------- Hero Header (Windore Inspired Aesthetic) ---------- */
 .hero-header {
   position: relative;
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 100px;
-  padding-bottom: 80px;
+  padding-top: 110px;
+  padding-bottom: 60px;
   overflow: hidden;
+  text-align: center;
+  background-color: var(--deep-navy);
 }
 
 .hero-bg {
@@ -387,67 +399,111 @@ button, input, textarea, select {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  filter: brightness(0.85) contrast(1.05);
 }
 
+/* Darkening Cinematic Overlay */
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(10, 25, 47, 0.45) 0%, rgba(10, 25, 47, 0.25) 50%, rgba(247, 249, 251, 0.95) 100%);
-  mix-blend-mode: multiply;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 20, 32, 0.65) 0%,
+    rgba(7, 14, 24, 0.60) 45%,
+    rgba(10, 25, 47, 0.88) 85%,
+    rgba(247, 249, 251, 1) 100%
+  );
+  mix-blend-mode: normal;
 }
 
 .hero-content {
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: var(--container-max);
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 var(--section-x-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-@media (min-width: 1024px) {
-  .hero-content {
-    padding: 0 80px;
-  }
-}
-
-.hero-eyebrow {
-  display: inline-block;
+/* Frosted Pill Badge */
+.hero-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--champagne);
   font-family: var(--font-body);
   font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--energy-gold);
-  margin-bottom: 20px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin-bottom: 28px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero-pill-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--energy-gold);
+  box-shadow: 0 0 8px var(--energy-gold);
 }
 
 .hero-title {
-  color: #FFFFFF;
+  color: var(--champagne);
   margin-bottom: 24px;
-  max-width: 860px;
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+  max-width: 900px;
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
 .hero-desc {
-  color: rgba(255, 255, 255, 0.92);
-  max-width: 660px;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 680px;
   margin-bottom: 40px;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+  font-size: 17.5px;
+  line-height: 1.65;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 }
 
 .hero-actions {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
 }
 
-@media (min-width: 640px) {
-  .hero-actions {
-    flex-direction: row;
-    gap: 20px;
-  }
+/* Majestic Background Watermark */
+.hero-watermark {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(70px, 15vw, 210px);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.75;
+  color: var(--champagne);
+  opacity: 0.12;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
 }
+
 
 /* ---------- Stats Floating Section ---------- */
 .stats-section {

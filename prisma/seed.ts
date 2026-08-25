@@ -32,9 +32,9 @@ async function main() {
     update: {
       companyName: 'Electsun',
       tagline: 'Energía Solar y Soluciones Renovables',
-      email: 'contacto@electsun.es',
-      phone: '+34 910 000 111',
-      address: 'Parque Empresarial Tecnológico, Edificio Solar, Madrid',
+      email: 'servicioalcliente@electsun.do',
+      phone: '809-378-6590',
+      address: 'Santo Domingo, República Dominicana',
       bio: 'Especialistas en ingeniería, instalación y mantenimiento de sistemas fotovoltaicos y almacenamiento inteligente para hogares y empresas.',
       aboutText: 'En Electsun lideramos la transición hacia un modelo energético sostenible y eficiente. Con más de una década de experiencia en el sector de las energías renovables, diseñamos soluciones llave en mano con componentes de máxima calidad (Tier 1) y garantías de hasta 25 años.',
       stat1Value: '50MW+',
@@ -50,9 +50,9 @@ async function main() {
       id: 'main',
       companyName: 'Electsun',
       tagline: 'Energía Solar y Soluciones Renovables',
-      email: 'contacto@electsun.es',
-      phone: '+34 910 000 111',
-      address: 'Parque Empresarial Tecnológico, Edificio Solar, Madrid',
+      email: 'servicioalcliente@electsun.do',
+      phone: '809-378-6590',
+      address: 'Santo Domingo, República Dominicana',
       bio: 'Especialistas en ingeniería, instalación y mantenimiento de sistemas fotovoltaicos y almacenamiento inteligente para hogares y empresas.',
       aboutText: 'En Electsun lideramos la transición hacia un modelo energético sostenible y eficiente. Con más de una década de experiencia en el sector de las energías renovables, diseñamos soluciones llave en mano con componentes de máxima calidad (Tier 1) y garantías de hasta 25 años.',
       stat1Value: '50MW+',
@@ -69,11 +69,11 @@ async function main() {
 
   // Create social and contact links
   const socialLinks = [
-    { platform: 'whatsapp', url: 'https://wa.me/34910000111', label: 'WhatsApp', handle: '+34 910 000 111', icon: 'whatsapp', order: 1, visible: true },
+    { platform: 'whatsapp', url: 'https://wa.me/18093786590', label: 'WhatsApp', handle: '809-378-6590', icon: 'whatsapp', order: 1, visible: true },
     { platform: 'linkedin', url: 'https://linkedin.com/company/electsun', label: 'LinkedIn', handle: 'Electsun Renovables', icon: 'linkedin', order: 2, visible: true },
     { platform: 'instagram', url: 'https://instagram.com/electsun_solar', label: 'Instagram', handle: '@electsun_solar', icon: 'instagram', order: 3, visible: true },
-    { platform: 'email', url: 'mailto:contacto@electsun.es', label: 'Email Corporativo', handle: 'contacto@electsun.es', icon: 'email', order: 4, visible: true },
-    { platform: 'phone', url: 'tel:+34910000111', label: 'Atención al Cliente', handle: '+34 910 000 111', icon: 'phone', order: 5, visible: true },
+    { platform: 'email', url: 'mailto:servicioalcliente@electsun.do', label: 'Email Corporativo', handle: 'servicioalcliente@electsun.do', icon: 'email', order: 4, visible: true },
+    { platform: 'phone', url: 'tel:+18093786590', label: 'Atención al Cliente', handle: '809-378-6590', icon: 'phone', order: 5, visible: true },
   ];
 
   for (const link of socialLinks) {
