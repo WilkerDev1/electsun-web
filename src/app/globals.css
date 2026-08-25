@@ -406,13 +406,16 @@ button, input, textarea, select {
   background-repeat: no-repeat;
 }
 
-/* Darkening Gradient Overlay focused on Left Text & Dark Bottom */
+/* Clean Dark Gradient Overlay */
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: 
-    linear-gradient(90deg, rgba(10, 25, 47, 0.78) 0%, rgba(10, 25, 47, 0.52) 45%, rgba(10, 25, 47, 0.15) 85%),
-    linear-gradient(180deg, rgba(10, 25, 47, 0.45) 0%, rgba(10, 25, 47, 0.15) 50%, rgba(10, 25, 47, 0.85) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(10, 25, 47, 0.88) 0%,
+    rgba(10, 25, 47, 0.70) 42%,
+    rgba(10, 25, 47, 0.30) 100%
+  );
   mix-blend-mode: normal;
 }
 
