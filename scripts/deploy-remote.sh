@@ -14,8 +14,26 @@ echo "║   Electsun Web — Despliegue en Servidor CT 100 (PostgreSQL)  ║"
 echo "╚══════════════════════════════════════════════════════════════╝"
 echo ""
 
-echo "── 1. Asegurando base de datos PostgreSQL electsun_prod en solarsim-db..."
-ssh $SERVER "docker exec solarsim-db psql -U solarsim_user -d postgres -c \"SELECT 1 FROM pg_database WHERE datname = 'electsun_prod'\" | grep -q 1 || docker exec solarsim-db psql -U solarsim_user -d postgres -c \"CREATE DATABASE electsun_prod OWNER solarsim_user;\""
+echo "── 1. Asegurando base de datos PostgreSQL electsun_prod y usuario aislado en solarsim-db..."
+ssh $SERVER "docker exec solarsim-db psql -U solarsim_user -d postgres -c \"
+DO \\\$\$
+BEGIN
+   IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'electsun_user') THEN
+      CREATE USER electsun_user WITH ENCRYPTED PASSWORD 'electsun_pg_secure_2026';
+   END IF;
+   IF NOT EXISTS (SELECT FROM pg_database WHERE datname = 'electsun_prod') THEN
+      CREATE DATABASE electsun_prod OWNER electsun_user;
+   END IF;
+END
+\\\$\$;
+ALTER DATABASE electsun_prod OWNER TO electsun_user;
+\" && docker exec solarsim-db psql -U solarsim_user -d electsun_prod -c \"
+GRANT ALL ON SCHEMA public TO electsun_user;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO electsun_user;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO electsun_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO electsun_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO electsun_user;
+\""
 
 echo "── 2. Preparando estructura de directorios en $SERVER..."
 ssh $SERVER "mkdir -p $REMOTE_DIR/uploads"
