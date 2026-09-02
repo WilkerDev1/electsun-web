@@ -10,12 +10,11 @@ services:
       - NODE_ENV=production
       - PORT=3000
       - HOSTNAME=0.0.0.0
-      - DATABASE_URL=file:/app/data/dev.db
+      - DATABASE_URL=postgresql://solarsim_user:solarsim_secret_2026@solarsim-db:5432/electsun_prod
       - NEXTAUTH_URL=https://electsun.net
       - NEXTAUTH_SECRET=${NEXTAUTH_SECRET:-electsun-super-secure-production-key-2026}
       - AUTH_SECRET=${AUTH_SECRET:-electsun-super-secure-production-key-2026}
     volumes:
-      - ./data:/app/data
       - ./uploads:/app/public/uploads
     networks:
       - solarsim_net
