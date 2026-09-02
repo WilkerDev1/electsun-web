@@ -1,0 +1,11 @@
+node_modules
+.next
+.git
+.agents
+.vscode
+.idea
+*.log
+repomix-output.xml
+Dockerfile*
+docker-compose*
+.dockerignore
