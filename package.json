@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "pack": "repomix",
-    "repomix": "repomix"
+    "repomix": "repomix",
+    "db:dev": "docker compose -f docker-compose.dev.yml up -d",
+    "db:seed": "prisma db push && tsx prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",

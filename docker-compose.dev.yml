@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: electsun-dev-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: electsun_user
+      POSTGRES_PASSWORD: electsun_pg_secure_2026
+      POSTGRES_DB: electsun_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - electsun_dev_data:/var/lib/postgresql/data
+
+volumes:
+  electsun_dev_data:
