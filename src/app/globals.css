@@ -6,6 +6,7 @@
 /* ---------- Google Fonts & Material Symbols ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+@import './admin.css';
 
 /* ---------- CSS Custom Properties & Color Tokens ---------- */
 :root {

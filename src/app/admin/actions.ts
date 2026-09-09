@@ -4,8 +4,8 @@ import { signIn } from '@/lib/auth';
 import { AuthError } from 'next-auth';
 
 export async function loginAction(formData: FormData) {
-  const username = formData.get('username');
-  const password = formData.get('password');
+  const username = formData.get('username') as string;
+  const password = formData.get('password') as string;
 
   if (!username || !password) {
     return { error: 'El nombre de usuario y la contraseña son obligatorios.' };
@@ -13,13 +13,22 @@ export async function loginAction(formData: FormData) {
 
   try {
     await signIn('credentials', {
-      username,
+      username: username.trim(),
       password,
-      redirectTo: '/admin',
+      redirect: false,
     });
     return { success: true };
   } catch (error: unknown) {
-    // NextAuth handles redirects by throwing a special redirect error.
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return { error: 'Usuario o contraseña incorrectos.' };
+        default:
+          return { error: 'Error de autenticación. Por favor, inténtelo de nuevo.' };
+      }
+    }
+
+    // Catch next redirect if any
     if (
       error &&
       typeof error === 'object' &&
@@ -32,16 +41,7 @@ export async function loginAction(formData: FormData) {
         err.name === 'RedirectError' ||
         err.digest?.startsWith('NEXT_REDIRECT')
       ) {
-        throw error;
-      }
-    }
-
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case 'CredentialsSignin':
-          return { error: 'Usuario o contraseña incorrectos.' };
-        default:
-          return { error: 'Error de autenticación. Por favor, inténtelo de nuevo.' };
+        return { success: true };
       }
     }
 

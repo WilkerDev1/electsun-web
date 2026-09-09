@@ -19,16 +19,20 @@ export default async function AdminPage() {
   }
 
   // Fetch initial data on the server for instant loading
-  const [projects, socialLinks, siteConfig] = await Promise.all([
+  const [projects, socialLinks, siteConfig, testimonials, partners] = await Promise.all([
     prisma.project.findMany({ orderBy: { order: 'asc' } }),
     prisma.socialLink.findMany({ orderBy: { order: 'asc' } }),
     prisma.siteConfig.findUnique({ where: { id: 'main' } }),
+    prisma.testimonial.findMany({ orderBy: { order: 'asc' } }),
+    prisma.partner.findMany({ orderBy: { order: 'asc' } }),
   ]);
 
   return (
     <AdminDashboard
       initialProjects={projects}
       initialSocialLinks={socialLinks}
+      initialTestimonials={testimonials}
+      initialPartners={partners}
       initialSiteConfig={
         siteConfig || {
           id: 'main',
@@ -50,6 +54,17 @@ export default async function AdminPage() {
           stat4Label: 'Garantía de Rendimiento',
           heroImageUrl: null,
           logoUrl: null,
+          heroTitle: 'Future of Energy',
+          heroSubtitle: 'Sustainable solutions designed for modern infrastructure.',
+          heroCtaText: 'EXPLORE SOLUTIONS',
+          heroCtaUrl: '/servicios',
+          heroBadge: 'INNOVACIÓN FOTOVOLTAICA 2026',
+          commercialEmail: 'commercial.contracts@solaradmin-studio.com',
+          commercialPhone: '+1(800) 542-SOLAR [Ext. 402]',
+          commercialAddress: 'SolarAdmin Center, Suite 1400, 450 Lexington Avenue, New York, NY 10017',
+          commercialDirector: 'Dr. Elena Vance, PE',
+          commercialReceiptMsg: 'Thank you for submitting your commercial facility parameters. Our senior grid engineer will analyze local feeder capacities and provide preliminary feasibility analysis within 48 business hours.',
+          commercialMapUrl: null,
         }
       }
     />

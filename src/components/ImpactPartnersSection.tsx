@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import type { SiteConfig, Partner } from '@/generated/prisma/client';
 
 interface AnimatedCounterProps {
   end: number;
@@ -24,7 +25,6 @@ function AnimatedCounter({ end, suffix = '', prefix = '', duration = 2000 }: Ani
           const animate = (currentTime: number) => {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            // Ease out cubic
             const easeProgress = 1 - Math.pow(1 - progress, 3);
             const currentVal = Math.floor(easeProgress * end);
             setCount(currentVal);
@@ -58,30 +58,33 @@ function AnimatedCounter({ end, suffix = '', prefix = '', duration = 2000 }: Ani
   );
 }
 
-export default function ImpactPartnersSection() {
-  const partners = [
-    { name: 'g.print', tag: 'Gráfica & Impresión' },
-    { name: 'AOL MUSIC', tag: 'Entretenimiento' },
-    { name: 'TRU-TEST', tag: 'Sistemas Industriales' },
-    { name: 'PSEG', tag: 'Infraestructura' },
-    { name: 'Western Digital', tag: 'Almacenamiento Tech' },
-    { name: 'Master-G', tag: 'Electrónica' },
-    { name: 'Huawei Solar', tag: 'Inversores Smart' },
-    { name: 'Canadian Solar', tag: 'Módulos Tier 1' },
-    { name: 'SMA Energy', tag: 'Sistemas Híbridos' },
-    { name: 'Longi Solar', tag: 'Células Fotovoltaicas' },
+interface ImpactPartnersSectionProps {
+  config?: SiteConfig | null;
+  partners?: Partner[];
+}
+
+export default function ImpactPartnersSection({ config, partners: initialPartners }: ImpactPartnersSectionProps) {
+  const defaultPartners = [
+    { name: 'Huawei Solar', category: 'Inversores Smart' },
+    { name: 'Canadian Solar', category: 'Módulos Tier 1' },
+    { name: 'SMA Energy', category: 'Sistemas Híbridos' },
+    { name: 'Longi Solar', category: 'Células Fotovoltaicas' },
+    { name: 'Western Digital', category: 'Almacenamiento Tech' },
+    { name: 'TRU-TEST', category: 'Sistemas Industriales' },
+    { name: 'PSEG', category: 'Infraestructura' },
   ];
+
+  const partnersList = (initialPartners && initialPartners.length > 0)
+    ? initialPartners.map((p) => ({ name: p.name, category: p.category || 'Tier 1 Partner' }))
+    : defaultPartners;
 
   return (
     <section id="impact" className="impact-partners-section">
-      {/* Top Half: Eco Technology Integration & Huge KPIs (Warm Sand Surface) */}
+      {/* Top Half: Eco Technology Integration & Huge KPIs */}
       <div className="impact-top-container watermark-section">
-        {/* Brand Emblem Watermark */}
         <div className="watermark-emblem-right" aria-hidden="true" />
 
         <div className="container-max" style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', zIndex: 1 }}>
-          
-          {/* Section Header: 2 Columns */}
           <div className="impact-header-grid">
             <div>
               <h2 className="impact-title">
@@ -90,27 +93,31 @@ export default function ImpactPartnersSection() {
             </div>
             <div>
               <p className="impact-subtitle">
-                Respaldamos a organizaciones líderes y hogares con soluciones solares de alto impacto, reduciendo costos operativos y asegurando máxima sostenibilidad y rendimiento a largo plazo.
+                {config?.bio ||
+                  'Respaldamos a organizaciones líderes y hogares con soluciones solares de alto impacto, reduciendo costos operativos y asegurando máxima sostenibilidad y rendimiento a largo plazo.'}
               </p>
             </div>
           </div>
 
-          {/* Huge KPI Metrics Grid with Central Divider Badge */}
           <div className="impact-kpi-grid">
-            {/* Left Metric: 390MW+ */}
+            {/* Left Metric */}
             <div className="impact-kpi-col">
               <div className="impact-kpi-number">
-                <AnimatedCounter end={390} suffix="MW+" />
+                {config?.stat2Value ? (
+                  <span>{config.stat2Value}</span>
+                ) : (
+                  <AnimatedCounter end={390} suffix="MW+" />
+                )}
               </div>
               <h3 className="impact-kpi-label">
-                Energía Limpia Generada
+                {config?.stat2Label || 'Energía Limpia Generada'}
               </h3>
               <p className="impact-kpi-desc">
                 Producción masiva de energía renovable continua suministrada a miles de empresas y hogares.
               </p>
             </div>
 
-            {/* Central Vertical Divider with Leaf / Sun Monogram */}
+            {/* Central Vertical Divider */}
             <div className="impact-divider-wrapper">
               <div className="impact-divider-line" />
               <div className="impact-divider-badge">
@@ -127,24 +134,27 @@ export default function ImpactPartnersSection() {
               <div className="impact-divider-line" />
             </div>
 
-            {/* Right Metric: 1,050+ */}
+            {/* Right Metric */}
             <div className="impact-kpi-col">
               <div className="impact-kpi-number">
-                <AnimatedCounter end={1050} prefix="" suffix="+" />
+                {config?.stat1Value ? (
+                  <span>{config.stat1Value}</span>
+                ) : (
+                  <AnimatedCounter end={1050} prefix="" suffix="+" />
+                )}
               </div>
               <h3 className="impact-kpi-label">
-                Empresas & Clientes Impulsados
+                {config?.stat1Label || 'Empresas & Clientes Impulsados'}
               </h3>
               <p className="impact-kpi-desc">
                 Respaldamos a organizaciones líderes en la reducción de costos y el cumplimiento de metas de sostenibilidad.
               </p>
             </div>
           </div>
-
         </div>
       </div>
 
-      {/* Bottom Half: Trusted for Quality & Infinite Horizontal Marquee (Deep Dark Bar) */}
+      {/* Bottom Half: Infinite Horizontal Marquee */}
       <div className="partners-marquee-container">
         <div className="container-max" style={{ textAlign: 'center', marginBottom: '24px' }}>
           <h3 className="partners-marquee-title">
@@ -152,24 +162,20 @@ export default function ImpactPartnersSection() {
           </h3>
         </div>
 
-        {/* Infinite Moving Carousel */}
         <div className="marquee-wrapper">
           <div className="marquee-track">
-            {/* First Set of Logos */}
-            {partners.map((partner, idx) => (
+            {partnersList.map((partner, idx) => (
               <div key={`partner-1-${idx}`} className="partner-logo-pill">
                 <span className="partner-name">{partner.name}</span>
                 <span className="partner-dot">•</span>
-                <span className="partner-tag">{partner.tag}</span>
+                <span className="partner-tag">{partner.category}</span>
               </div>
             ))}
-
-            {/* Duplicate Set for Seamless Loop */}
-            {partners.map((partner, idx) => (
+            {partnersList.map((partner, idx) => (
               <div key={`partner-2-${idx}`} className="partner-logo-pill">
                 <span className="partner-name">{partner.name}</span>
                 <span className="partner-dot">•</span>
-                <span className="partner-tag">{partner.tag}</span>
+                <span className="partner-tag">{partner.category}</span>
               </div>
             ))}
           </div>

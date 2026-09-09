@@ -54,6 +54,8 @@ export const ModelName = {
   Project: 'Project',
   SocialLink: 'SocialLink',
   SiteConfig: 'SiteConfig',
+  Testimonial: 'Testimonial',
+  Partner: 'Partner',
   Admin: 'Admin'
 } as const
 
@@ -130,10 +132,51 @@ export const SiteConfigScalarFieldEnum = {
   stat4Value: 'stat4Value',
   stat4Label: 'stat4Label',
   heroImageUrl: 'heroImageUrl',
-  logoUrl: 'logoUrl'
+  logoUrl: 'logoUrl',
+  heroTitle: 'heroTitle',
+  heroSubtitle: 'heroSubtitle',
+  heroCtaText: 'heroCtaText',
+  heroCtaUrl: 'heroCtaUrl',
+  heroBadge: 'heroBadge',
+  commercialEmail: 'commercialEmail',
+  commercialPhone: 'commercialPhone',
+  commercialAddress: 'commercialAddress',
+  commercialDirector: 'commercialDirector',
+  commercialReceiptMsg: 'commercialReceiptMsg',
+  commercialMapUrl: 'commercialMapUrl'
 } as const
 
 export type SiteConfigScalarFieldEnum = (typeof SiteConfigScalarFieldEnum)[keyof typeof SiteConfigScalarFieldEnum]
+
+
+export const TestimonialScalarFieldEnum = {
+  id: 'id',
+  clientName: 'clientName',
+  role: 'role',
+  company: 'company',
+  content: 'content',
+  rating: 'rating',
+  approved: 'approved',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TestimonialScalarFieldEnum = (typeof TestimonialScalarFieldEnum)[keyof typeof TestimonialScalarFieldEnum]
+
+
+export const PartnerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  logoUrl: 'logoUrl',
+  category: 'category',
+  visible: 'visible',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PartnerScalarFieldEnum = (typeof PartnerScalarFieldEnum)[keyof typeof PartnerScalarFieldEnum]
 
 
 export const AdminScalarFieldEnum = {

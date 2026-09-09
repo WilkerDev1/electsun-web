@@ -41,24 +41,60 @@ model SocialLink {
 }
 
 model SiteConfig {
-  id           String  @id @default("main")
-  companyName  String  @default("Electsun")
-  tagline      String  @default("Energía Solar y Soluciones Renovables")
-  email        String? @default("contacto@electsun.es")
-  phone        String? @default("+34 910 000 111")
-  address      String? @default("Parque Empresarial Tecnológico, Edificio Solar, Madrid")
-  bio          String? @default("Especialistas en ingeniería, instalación y mantenimiento de sistemas fotovoltaicos y almacenamiento inteligente para hogares y empresas.")
-  aboutText    String? @default("En Electsun lideramos la transición hacia un modelo energético sostenible y eficiente. Con más de 10 años de experiencia en el sector de las energías renovables, diseñamos soluciones llave en mano con componentes de máxima calidad (Tier 1) y garantías de hasta 25 años.")
-  stat1Value   String? @default("650+")
-  stat1Label   String? @default("Instalaciones Realizadas")
-  stat2Value   String? @default("18.5 MWp")
-  stat2Label   String? @default("Potencia Total Instalada")
-  stat3Value   String? @default("85%")
-  stat3Label   String? @default("Ahorro Medio en Factura")
-  stat4Value   String? @default("25 Años")
-  stat4Label   String? @default("Garantía de Rendimiento")
-  heroImageUrl String?
-  logoUrl      String?
+  id                  String  @id @default("main")
+  companyName         String  @default("Electsun")
+  tagline             String  @default("Energía Solar y Soluciones Renovables")
+  email               String? @default("contacto@electsun.es")
+  phone               String? @default("+34 910 000 111")
+  address             String? @default("Parque Empresarial Tecnológico, Edificio Solar, Madrid")
+  bio                 String? @default("Especialistas en ingeniería, instalación y mantenimiento de sistemas fotovoltaicos y almacenamiento inteligente para hogares y empresas.")
+  aboutText           String? @default("En Electsun lideramos la transición hacia un modelo energético sostenible y eficiente. Con más de 10 años de experiencia en el sector de las energías renovables, diseñamos soluciones llave en mano con componentes de máxima calidad (Tier 1) y garantías de hasta 25 años.")
+  stat1Value          String? @default("650+")
+  stat1Label          String? @default("Instalaciones Realizadas")
+  stat2Value          String? @default("18.5 MWp")
+  stat2Label          String? @default("Potencia Total Instalada")
+  stat3Value          String? @default("85%")
+  stat3Label          String? @default("Ahorro Medio en Factura")
+  stat4Value          String? @default("25 Años")
+  stat4Label          String? @default("Garantía de Rendimiento")
+  heroImageUrl        String?
+  logoUrl             String?
+  // Nuevos campos para personalización completa de vistas
+  heroTitle           String? @default("Future of Energy")
+  heroSubtitle        String? @default("Sustainable solutions designed for modern infrastructure.")
+  heroCtaText         String? @default("EXPLORE SOLUTIONS")
+  heroCtaUrl          String? @default("/comercial")
+  heroBadge           String? @default("Tecnología Tier 1 Certificada")
+  commercialEmail     String? @default("commercial.contracts@electsun.net")
+  commercialPhone     String? @default("+1 (809) 378-6590")
+  commercialAddress   String? @default("Electsun Center, Suite 1400, Santo Domingo, RD")
+  commercialDirector  String? @default("Dr. Elena Vance, PE")
+  commercialReceiptMsg String? @default("Thank you for submitting your commercial facility parameters. Our senior grid engineer will analyze local feeder capacities and provide preliminary feasibility analysis within 48 business hours.")
+  commercialMapUrl    String? @default("Santo Domingo, República Dominicana")
+}
+
+model Testimonial {
+  id         String   @id @default(cuid())
+  clientName String
+  role       String?
+  company    String?
+  content    String
+  rating     Int      @default(5)
+  approved   Boolean  @default(true)
+  order      Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Partner {
+  id        String   @id @default(cuid())
+  name      String
+  logoUrl   String
+  category  String   @default("Tier 1 Manufacturer")
+  visible   Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Admin {

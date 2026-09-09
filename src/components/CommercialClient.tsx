@@ -18,9 +18,19 @@ interface ProjectItem {
 
 interface CommercialClientProps {
   projects: ProjectItem[];
+  config?: {
+    commercialEmail?: string | null;
+    commercialPhone?: string | null;
+    commercialAddress?: string | null;
+    commercialDirector?: string | null;
+    commercialReceiptMsg?: string | null;
+    email?: string | null;
+    phone?: string | null;
+    address?: string | null;
+  } | null;
 }
 
-export default function CommercialClient({ projects }: CommercialClientProps) {
+export default function CommercialClient({ projects, config }: CommercialClientProps) {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const [formData, setFormData] = useState({
@@ -329,7 +339,7 @@ export default function CommercialClient({ projects }: CommercialClientProps) {
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <a
-                  href="tel:8093786590"
+                  href={`tel:${config?.commercialPhone || config?.phone || '8093786590'}`}
                   style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--deep-navy)', fontWeight: '700', fontSize: '15px' }}
                 >
                   <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255, 184, 0, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFB800' }}>
@@ -337,11 +347,11 @@ export default function CommercialClient({ projects }: CommercialClientProps) {
                       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                     </svg>
                   </div>
-                  <span>809-378-6590</span>
+                  <span>{config?.commercialPhone || config?.phone || '809-378-6590'}</span>
                 </a>
 
                 <a
-                  href="mailto:servicioalcliente@electsun.do"
+                  href={`mailto:${config?.commercialEmail || config?.email || 'servicioalcliente@electsun.do'}`}
                   style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--secondary)', fontSize: '15px' }}
                 >
                   <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(0, 212, 255, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#00D4FF' }}>
@@ -350,7 +360,7 @@ export default function CommercialClient({ projects }: CommercialClientProps) {
                       <polyline points="22,6 12,13 2,6" />
                     </svg>
                   </div>
-                  <span>servicioalcliente@electsun.do</span>
+                  <span>{config?.commercialEmail || config?.email || 'servicioalcliente@electsun.do'}</span>
                 </a>
               </div>
             </div>
@@ -390,7 +400,7 @@ export default function CommercialClient({ projects }: CommercialClientProps) {
                   </svg>
                   <h4 style={{ fontWeight: '700', marginBottom: '8px' }}>¡Visita Solicitada!</h4>
                   <p style={{ fontSize: '14px', color: 'var(--secondary)' }}>
-                    Nos pondremos en contacto para confirmar día y hora de su cita.
+                    {config?.commercialReceiptMsg || 'Nos pondremos en contacto para confirmar día y hora de su cita.'}
                   </p>
                 </div>
               ) : (

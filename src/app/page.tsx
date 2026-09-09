@@ -7,30 +7,36 @@ import Footer from '@/components/Footer';
 
 export const dynamic = 'force-dynamic';
 
-async function getSiteConfig() {
+async function getData() {
   try {
-    const config = await prisma.siteConfig.findUnique({
-      where: { id: 'main' },
-    });
-    return config;
+    const [config, partners] = await Promise.all([
+      prisma.siteConfig.findUnique({ where: { id: 'main' } }),
+      prisma.partner.findMany({ orderBy: { order: 'asc' } }),
+    ]);
+    return { config, partners };
   } catch (error) {
-    console.error('Error loading site config:', error);
-    return null;
+    console.error('Error loading page data:', error);
+    return { config: null, partners: [] };
   }
 }
 
 export default async function HomePage() {
-  const config = await getSiteConfig();
+  const { config, partners } = await getData();
 
   return (
     <>
       {/* 1. Hero Section (100vh) */}
       <HeroSection
-        tagline={config?.tagline || 'Energía Solar para tu Futuro'}
+        tagline={config?.heroTitle || config?.tagline || 'Energía Solar para tu Futuro'}
         bio={
+          config?.heroSubtitle ||
           config?.bio ||
           'Diseñamos la infraestructura del mañana con soluciones fotovoltaicas de alta eficiencia, adaptadas a empresas visionarias y hogares modernos.'
         }
+        badge={config?.heroBadge || 'EL SOL A TU FAVOR'}
+        ctaText={config?.heroCtaText || 'Explorar Soluciones'}
+        ctaUrl={config?.heroCtaUrl || '/proyectos'}
+        bgImage={config?.heroImageUrl || '/images/hero-solar.jpg'}
       />
 
       {/* 2. Asymmetric Why Choose Solar Panels (100vh) */}
@@ -39,8 +45,8 @@ export default async function HomePage() {
       {/* 3. Deep Navy Services Section (100vh) */}
       <ServicesSection />
 
-      {/* 4. Eco Technology Integration & Partners Marquee (100vh - Directamente debajo de Servicios) */}
-      <ImpactPartnersSection />
+      {/* 4. Eco Technology Integration & Partners Marquee */}
+      <ImpactPartnersSection config={config} partners={partners} />
 
       {/* 5. Corporate Footer */}
       <Footer />

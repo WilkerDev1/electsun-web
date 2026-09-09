@@ -33,6 +33,16 @@ export type SocialLink = Prisma.SocialLinkModel
  */
 export type SiteConfig = Prisma.SiteConfigModel
 /**
+ * Model Testimonial
+ * 
+ */
+export type Testimonial = Prisma.TestimonialModel
+/**
+ * Model Partner
+ * 
+ */
+export type Partner = Prisma.PartnerModel
+/**
  * Model Admin
  * 
  */

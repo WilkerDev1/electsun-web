@@ -17,19 +17,22 @@ export default function LoginPage() {
 
     try {
       const formData = new FormData();
-      formData.append('username', username);
+      formData.append('username', username.trim());
       formData.append('password', password);
 
       const res = await loginAction(formData);
 
       if (res?.error) {
         setError(res.error);
+        setLoading(false);
+      } else {
+        // Redirigir de forma completa para asegurar que la cookie de sesión se aplique
+        window.location.href = '/admin';
       }
     } catch (err) {
       console.error('Login submit error:', err);
-      setError('Ha ocurrido un error inesperado. Por favor, inténtelo de nuevo.');
-    } finally {
-      setLoading(false);
+      // Si la redirección ocurrió durante la acción
+      window.location.href = '/admin';
     }
   };
 
@@ -113,7 +116,7 @@ export default function LoginPage() {
               transition: 'color 0.2s',
             }}
           >
-            ← Volver a Electsun.es
+            ← Volver a Electsun
           </Link>
         </div>
       </div>

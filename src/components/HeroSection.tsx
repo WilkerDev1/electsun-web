@@ -5,27 +5,40 @@ import Link from 'next/link';
 interface HeroSectionProps {
   tagline?: string;
   bio?: string;
+  badge?: string;
+  ctaText?: string;
+  ctaUrl?: string;
+  bgImage?: string;
 }
 
-export default function HeroSection({ tagline, bio }: HeroSectionProps) {
+export default function HeroSection({
+  tagline,
+  bio,
+  badge,
+  ctaText,
+  ctaUrl,
+  bgImage,
+}: HeroSectionProps) {
+  const backgroundUrl = bgImage || '/images/hero-solar.jpg';
+
   return (
     <header className="hero-header">
-      {/* Background Image (Local High-Resolution Solar Farm) */}
+      {/* Background Image */}
       <div
         className="hero-bg"
         style={{
-          backgroundImage: "url('/images/hero-solar.jpg')",
+          backgroundImage: `url('${backgroundUrl}')`,
         }}
       />
 
-      {/* Darkened Gradient Layer focused on Left Text Area */}
+      {/* Darkened Gradient Layer */}
       <div className="hero-overlay" />
 
-      {/* Hero Content (Left Aligned matching reference image) */}
+      {/* Hero Content */}
       <div className="hero-content">
         <div className="hero-left-box">
           <span className="hero-eyebrow">
-            EL SOL A TU FAVOR
+            {badge || 'EL SOL A TU FAVOR'}
           </span>
 
           <h1 className="font-display-xl hero-title">
@@ -38,8 +51,8 @@ export default function HeroSection({ tagline, bio }: HeroSectionProps) {
           </p>
 
           <div className="hero-actions">
-            <Link href="/proyectos" className="btn-gold">
-              Explorar Soluciones
+            <Link href={ctaUrl || '/proyectos'} className="btn-gold">
+              {ctaText || 'Explorar Soluciones'}
             </Link>
 
             <Link href="/#services" className="btn-cyan-outline">

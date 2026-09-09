@@ -11,5 +11,7 @@
 export type * from './models/Project'
 export type * from './models/SocialLink'
 export type * from './models/SiteConfig'
+export type * from './models/Testimonial'
+export type * from './models/Partner'
 export type * from './models/Admin'
 export type * from './commonInputTypes'

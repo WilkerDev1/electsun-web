@@ -1,120 +1,192 @@
 'use client';
 
-import { useState } from 'react';
-import type { Project, SocialLink, SiteConfig } from '@/generated/prisma/client';
-import AdminHeader from './AdminHeader';
-import AdminTabs, { AdminTabType } from './AdminTabs';
-import ProjectsTab from './ProjectsTab';
-import ProjectUploadTab from './ProjectUploadTab';
+import React, { useState } from 'react';
+import type { Project, SocialLink, SiteConfig, Testimonial, Partner } from '@/generated/prisma/client';
+import AdminSidebar, { AdminTab } from './AdminSidebar';
+import AdminTopBar from './AdminTopBar';
+import OverviewDashboard from './OverviewDashboard';
+import BannerMultimediaView from './BannerMultimediaView';
+import MilestonesView from './MilestonesView';
+import PartnersView from './PartnersView';
+import ContactSettingsView from './ContactSettingsView';
+import TestimonialsView from './TestimonialsView';
+import CommercialGalleryView from './CommercialGalleryView';
 import ProjectEditModal from './ProjectEditModal';
-import CompanyConfigTab from './CompanyConfigTab';
-import SocialLinksTab from './SocialLinksTab';
-import Toast from './Toast';
+import AdminToast from './AdminToast';
 
 interface AdminDashboardProps {
   initialProjects: Project[];
   initialSocialLinks: SocialLink[];
   initialSiteConfig: SiteConfig;
+  initialTestimonials: Testimonial[];
+  initialPartners: Partner[];
 }
 
 export default function AdminDashboard({
   initialProjects,
   initialSocialLinks,
   initialSiteConfig,
+  initialTestimonials,
+  initialPartners,
 }: AdminDashboardProps) {
-  const [activeTab, setActiveTab] = useState<AdminTabType>('projects');
+  const [activeTab, setActiveTab] = useState<AdminTab>('overview');
   const [projects, setProjects] = useState<Project[]>(initialProjects);
   const [socialLinks, setSocialLinks] = useState<SocialLink[]>(initialSocialLinks);
   const [siteConfig, setSiteConfig] = useState<SiteConfig>(initialSiteConfig);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(initialTestimonials);
+  const [partners, setPartners] = useState<Partner[]>(initialPartners);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
 
-  // Toast state
-  const [toast, setToast] = useState<{ show: boolean; message: string; type: 'success' | 'error' }>({
-    show: false,
-    message: '',
-    type: 'success',
-  });
+  const showToast = (message: string, type: 'success' | 'error' = 'success') => setToast({ message, type });
 
-  const showToast = (message: string, type: 'success' | 'error' = 'success') => {
-    setToast({ show: true, message, type });
-    setTimeout(() => {
-      setToast((prev) => ({ ...prev, show: false }));
-    }, 3500);
+  const handleSaveConfig = async (partialConfig: Partial<SiteConfig>) => {
+    setIsSaving(true);
+    try {
+      const merged = { ...siteConfig, ...partialConfig };
+      const res = await fetch('/api/config', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(merged),
+      });
+      if (!res.ok) throw new Error();
+      const updated = await res.json();
+      setSiteConfig(updated);
+      showToast('Configuration updated successfully');
+    } catch {
+      showToast('Error saving site configuration', 'error');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
-  const handleProjectCreated = (newProject: Project) => {
-    setProjects((prev) => [...prev, newProject].sort((a, b) => a.order - b.order));
-    setActiveTab('projects');
+  const handleToggleFeatured = async (project: Project) => {
+    try {
+      const res = await fetch(`/api/projects/${project.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ featured: !project.featured }),
+      });
+      if (!res.ok) throw new Error();
+      const updated = await res.json();
+      setProjects((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
+      showToast(updated.featured ? 'Featured on homepage' : 'Removed from featured');
+    } catch {
+      showToast('Error toggling featured status', 'error');
+    }
   };
 
-  const handleProjectUpdated = (updated: Project) => {
-    setProjects((prev) =>
-      prev.map((p) => (p.id === updated.id ? updated : p)).sort((a, b) => a.order - b.order)
-    );
+  const handleDeleteProject = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this installation?')) return;
+    try {
+      const res = await fetch(`/api/projects/${id}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error();
+      setProjects((prev) => prev.filter((p) => p.id !== id));
+      showToast('Project deleted successfully');
+    } catch {
+      showToast('Error deleting project', 'error');
+    }
+  };
+
+  const handleUploadProjectImageSuccess = async (imageUrl: string) => {
+    try {
+      const res = await fetch('/api/projects', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: 'Nueva Instalación Solar',
+          description: 'Descripción del sistema y paneles solares.',
+          systemType: 'Industrial',
+          imageUrl,
+          powerKw: '1.2 MWp',
+          order: projects.length + 1,
+          featured: true,
+        }),
+      });
+      if (!res.ok) throw new Error();
+      const newProj = await res.json();
+      setProjects((prev) => [newProj, ...prev]);
+      setEditingProject(newProj);
+      showToast('Image uploaded! Adjust project details.');
+    } catch {
+      showToast('Error creating project with image', 'error');
+    }
+  };
+
+  const handleRefreshPartners = async () => {
+    const res = await fetch('/api/partners');
+    if (res.ok) setPartners(await res.json());
+  };
+
+  const handleRefreshTestimonials = async () => {
+    const res = await fetch('/api/testimonials');
+    if (res.ok) setTestimonials(await res.json());
   };
 
   return (
-    <div className="admin-layout">
-      {/* Top Header */}
-      <AdminHeader companyName={siteConfig.companyName || 'Electsun'} />
-
-      {/* Main Admin Content Container */}
-      <div className="admin-container">
-        {/* Tab Navigation */}
-        <AdminTabs
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          projectCount={projects.length}
-        />
-
-        {/* Tab Views */}
-        <main className="admin-main">
-          {activeTab === 'projects' && (
-            <ProjectsTab
-              projects={projects}
-              setProjects={setProjects}
-              onEdit={(proj) => setEditingProject(proj)}
-              showToast={showToast}
+    <div className="adm-layout">
+      <AdminSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <div className="adm-main">
+        <AdminTopBar activeTab={activeTab} setActiveTab={setActiveTab} onPublishAll={() => handleSaveConfig({})} isSaving={isSaving} />
+        <main style={{ flex: 1, minWidth: 0 }}>
+          {activeTab === 'overview' && (
+            <OverviewDashboard
+              projectsCount={projects.length}
+              testimonialsCount={testimonials.length}
+              partnersCount={partners.length}
+              setActiveTab={setActiveTab}
+              onOpenNewProject={() => setActiveTab('commercial')}
             />
           )}
-
-          {activeTab === 'upload' && (
-            <ProjectUploadTab
-              onSuccess={handleProjectCreated}
-              showToast={showToast}
-            />
-          )}
-
-          {activeTab === 'config' && (
-            <CompanyConfigTab
+          {activeTab === 'banner' && (
+            <BannerMultimediaView
               config={siteConfig}
-              setConfig={setSiteConfig}
+              onChange={(upd) => setSiteConfig((prev) => ({ ...prev, ...upd }))}
+              onSave={() => handleSaveConfig({})}
+              isSaving={isSaving}
+            />
+          )}
+          {activeTab === 'milestones' && <MilestonesView config={siteConfig} onUpdateConfig={handleSaveConfig} isSaving={isSaving} />}
+          {activeTab === 'partners' && <PartnersView partners={partners} onRefresh={handleRefreshPartners} showToast={showToast} />}
+          {activeTab === 'contact' && (
+            <ContactSettingsView
+              config={siteConfig}
+              socialLinks={socialLinks}
+              onSaveConfig={handleSaveConfig}
+              onSocialLinksChange={setSocialLinks}
               showToast={showToast}
             />
           )}
-
-          {activeTab === 'social' && (
-            <SocialLinksTab
-              socialLinks={socialLinks}
-              setSocialLinks={setSocialLinks}
-              showToast={showToast}
+          {activeTab === 'testimonials' && (
+            <TestimonialsView testimonials={testimonials} onRefresh={handleRefreshTestimonials} showToast={showToast} />
+          )}
+          {activeTab === 'commercial' && (
+            <CommercialGalleryView
+              projects={projects}
+              config={siteConfig}
+              onEditProject={(p) => setEditingProject(p)}
+              onDeleteProject={handleDeleteProject}
+              onToggleFeatured={handleToggleFeatured}
+              onUploadImageSuccess={handleUploadProjectImageSuccess}
+              onUpdateConfig={handleSaveConfig}
+              isSaving={isSaving}
             />
           )}
         </main>
       </div>
 
-      {/* Project Edit Modal */}
       {editingProject && (
         <ProjectEditModal
+          key={editingProject.id}
           project={editingProject}
           onClose={() => setEditingProject(null)}
-          onSuccess={handleProjectUpdated}
+          onSuccess={(upd) => setProjects((prev) => prev.map((p) => (p.id === upd.id ? upd : p)))}
           showToast={showToast}
         />
       )}
 
-      {/* Reusable Toast */}
-      <Toast show={toast.show} message={toast.message} type={toast.type} />
+      {toast && <AdminToast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
     </div>
   );
 }

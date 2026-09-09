@@ -43,6 +43,17 @@ export type SiteConfigMinAggregateOutputType = {
   stat4Label: string | null
   heroImageUrl: string | null
   logoUrl: string | null
+  heroTitle: string | null
+  heroSubtitle: string | null
+  heroCtaText: string | null
+  heroCtaUrl: string | null
+  heroBadge: string | null
+  commercialEmail: string | null
+  commercialPhone: string | null
+  commercialAddress: string | null
+  commercialDirector: string | null
+  commercialReceiptMsg: string | null
+  commercialMapUrl: string | null
 }
 
 export type SiteConfigMaxAggregateOutputType = {
@@ -64,6 +75,17 @@ export type SiteConfigMaxAggregateOutputType = {
   stat4Label: string | null
   heroImageUrl: string | null
   logoUrl: string | null
+  heroTitle: string | null
+  heroSubtitle: string | null
+  heroCtaText: string | null
+  heroCtaUrl: string | null
+  heroBadge: string | null
+  commercialEmail: string | null
+  commercialPhone: string | null
+  commercialAddress: string | null
+  commercialDirector: string | null
+  commercialReceiptMsg: string | null
+  commercialMapUrl: string | null
 }
 
 export type SiteConfigCountAggregateOutputType = {
@@ -85,6 +107,17 @@ export type SiteConfigCountAggregateOutputType = {
   stat4Label: number
   heroImageUrl: number
   logoUrl: number
+  heroTitle: number
+  heroSubtitle: number
+  heroCtaText: number
+  heroCtaUrl: number
+  heroBadge: number
+  commercialEmail: number
+  commercialPhone: number
+  commercialAddress: number
+  commercialDirector: number
+  commercialReceiptMsg: number
+  commercialMapUrl: number
   _all: number
 }
 
@@ -108,6 +141,17 @@ export type SiteConfigMinAggregateInputType = {
   stat4Label?: true
   heroImageUrl?: true
   logoUrl?: true
+  heroTitle?: true
+  heroSubtitle?: true
+  heroCtaText?: true
+  heroCtaUrl?: true
+  heroBadge?: true
+  commercialEmail?: true
+  commercialPhone?: true
+  commercialAddress?: true
+  commercialDirector?: true
+  commercialReceiptMsg?: true
+  commercialMapUrl?: true
 }
 
 export type SiteConfigMaxAggregateInputType = {
@@ -129,6 +173,17 @@ export type SiteConfigMaxAggregateInputType = {
   stat4Label?: true
   heroImageUrl?: true
   logoUrl?: true
+  heroTitle?: true
+  heroSubtitle?: true
+  heroCtaText?: true
+  heroCtaUrl?: true
+  heroBadge?: true
+  commercialEmail?: true
+  commercialPhone?: true
+  commercialAddress?: true
+  commercialDirector?: true
+  commercialReceiptMsg?: true
+  commercialMapUrl?: true
 }
 
 export type SiteConfigCountAggregateInputType = {
@@ -150,6 +205,17 @@ export type SiteConfigCountAggregateInputType = {
   stat4Label?: true
   heroImageUrl?: true
   logoUrl?: true
+  heroTitle?: true
+  heroSubtitle?: true
+  heroCtaText?: true
+  heroCtaUrl?: true
+  heroBadge?: true
+  commercialEmail?: true
+  commercialPhone?: true
+  commercialAddress?: true
+  commercialDirector?: true
+  commercialReceiptMsg?: true
+  commercialMapUrl?: true
   _all?: true
 }
 
@@ -244,6 +310,17 @@ export type SiteConfigGroupByOutputType = {
   stat4Label: string | null
   heroImageUrl: string | null
   logoUrl: string | null
+  heroTitle: string | null
+  heroSubtitle: string | null
+  heroCtaText: string | null
+  heroCtaUrl: string | null
+  heroBadge: string | null
+  commercialEmail: string | null
+  commercialPhone: string | null
+  commercialAddress: string | null
+  commercialDirector: string | null
+  commercialReceiptMsg: string | null
+  commercialMapUrl: string | null
   _count: SiteConfigCountAggregateOutputType | null
   _min: SiteConfigMinAggregateOutputType | null
   _max: SiteConfigMaxAggregateOutputType | null
@@ -286,6 +363,17 @@ export type SiteConfigWhereInput = {
   stat4Label?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   heroImageUrl?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   logoUrl?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  heroTitle?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  heroSubtitle?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  heroCtaText?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  heroCtaUrl?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  heroBadge?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  commercialEmail?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  commercialPhone?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  commercialAddress?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  commercialDirector?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  commercialReceiptMsg?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  commercialMapUrl?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
 }
 
 export type SiteConfigOrderByWithRelationInput = {
@@ -307,6 +395,17 @@ export type SiteConfigOrderByWithRelationInput = {
   stat4Label?: Prisma.SortOrderInput | Prisma.SortOrder
   heroImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  heroTitle?: Prisma.SortOrderInput | Prisma.SortOrder
+  heroSubtitle?: Prisma.SortOrderInput | Prisma.SortOrder
+  heroCtaText?: Prisma.SortOrderInput | Prisma.SortOrder
+  heroCtaUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  heroBadge?: Prisma.SortOrderInput | Prisma.SortOrder
+  commercialEmail?: Prisma.SortOrderInput | Prisma.SortOrder
+  commercialPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  commercialAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  commercialDirector?: Prisma.SortOrderInput | Prisma.SortOrder
+  commercialReceiptMsg?: Prisma.SortOrderInput | Prisma.SortOrder
+  commercialMapUrl?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
 export type SiteConfigWhereUniqueInput = Prisma.AtLeast<{
@@ -331,6 +430,17 @@ export type SiteConfigWhereUniqueInput = Prisma.AtLeast<{
   stat4Label?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   heroImageUrl?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   logoUrl?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  heroTitle?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  heroSubtitle?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  heroCtaText?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  heroCtaUrl?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  heroBadge?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  commercialEmail?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  commercialPhone?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  commercialAddress?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  commercialDirector?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  commercialReceiptMsg?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  commercialMapUrl?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
 }, "id">
 
 export type SiteConfigOrderByWithAggregationInput = {
@@ -352,6 +462,17 @@ export type SiteConfigOrderByWithAggregationInput = {
   stat4Label?: Prisma.SortOrderInput | Prisma.SortOrder
   heroImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  heroTitle?: Prisma.SortOrderInput | Prisma.SortOrder
+  heroSubtitle?: Prisma.SortOrderInput | Prisma.SortOrder
+  heroCtaText?: Prisma.SortOrderInput | Prisma.SortOrder
+  heroCtaUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  heroBadge?: Prisma.SortOrderInput | Prisma.SortOrder
+  commercialEmail?: Prisma.SortOrderInput | Prisma.SortOrder
+  commercialPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  commercialAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  commercialDirector?: Prisma.SortOrderInput | Prisma.SortOrder
+  commercialReceiptMsg?: Prisma.SortOrderInput | Prisma.SortOrder
+  commercialMapUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SiteConfigCountOrderByAggregateInput
   _max?: Prisma.SiteConfigMaxOrderByAggregateInput
   _min?: Prisma.SiteConfigMinOrderByAggregateInput
@@ -379,6 +500,17 @@ export type SiteConfigScalarWhereWithAggregatesInput = {
   stat4Label?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
   heroImageUrl?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
   logoUrl?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
+  heroTitle?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
+  heroSubtitle?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
+  heroCtaText?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
+  heroCtaUrl?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
+  heroBadge?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
+  commercialEmail?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
+  commercialPhone?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
+  commercialAddress?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
+  commercialDirector?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
+  commercialReceiptMsg?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
+  commercialMapUrl?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
 }
 
 export type SiteConfigCreateInput = {
@@ -400,6 +532,17 @@ export type SiteConfigCreateInput = {
   stat4Label?: string | null
   heroImageUrl?: string | null
   logoUrl?: string | null
+  heroTitle?: string | null
+  heroSubtitle?: string | null
+  heroCtaText?: string | null
+  heroCtaUrl?: string | null
+  heroBadge?: string | null
+  commercialEmail?: string | null
+  commercialPhone?: string | null
+  commercialAddress?: string | null
+  commercialDirector?: string | null
+  commercialReceiptMsg?: string | null
+  commercialMapUrl?: string | null
 }
 
 export type SiteConfigUncheckedCreateInput = {
@@ -421,6 +564,17 @@ export type SiteConfigUncheckedCreateInput = {
   stat4Label?: string | null
   heroImageUrl?: string | null
   logoUrl?: string | null
+  heroTitle?: string | null
+  heroSubtitle?: string | null
+  heroCtaText?: string | null
+  heroCtaUrl?: string | null
+  heroBadge?: string | null
+  commercialEmail?: string | null
+  commercialPhone?: string | null
+  commercialAddress?: string | null
+  commercialDirector?: string | null
+  commercialReceiptMsg?: string | null
+  commercialMapUrl?: string | null
 }
 
 export type SiteConfigUpdateInput = {
@@ -442,6 +596,17 @@ export type SiteConfigUpdateInput = {
   stat4Label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heroImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroSubtitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroCtaText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroCtaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroBadge?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialDirector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialReceiptMsg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialMapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SiteConfigUncheckedUpdateInput = {
@@ -463,6 +628,17 @@ export type SiteConfigUncheckedUpdateInput = {
   stat4Label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heroImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroSubtitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroCtaText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroCtaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroBadge?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialDirector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialReceiptMsg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialMapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SiteConfigCreateManyInput = {
@@ -484,6 +660,17 @@ export type SiteConfigCreateManyInput = {
   stat4Label?: string | null
   heroImageUrl?: string | null
   logoUrl?: string | null
+  heroTitle?: string | null
+  heroSubtitle?: string | null
+  heroCtaText?: string | null
+  heroCtaUrl?: string | null
+  heroBadge?: string | null
+  commercialEmail?: string | null
+  commercialPhone?: string | null
+  commercialAddress?: string | null
+  commercialDirector?: string | null
+  commercialReceiptMsg?: string | null
+  commercialMapUrl?: string | null
 }
 
 export type SiteConfigUpdateManyMutationInput = {
@@ -505,6 +692,17 @@ export type SiteConfigUpdateManyMutationInput = {
   stat4Label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heroImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroSubtitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroCtaText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroCtaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroBadge?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialDirector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialReceiptMsg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialMapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SiteConfigUncheckedUpdateManyInput = {
@@ -526,6 +724,17 @@ export type SiteConfigUncheckedUpdateManyInput = {
   stat4Label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   heroImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroSubtitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroCtaText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroCtaUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroBadge?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialDirector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialReceiptMsg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialMapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SiteConfigCountOrderByAggregateInput = {
@@ -547,6 +756,17 @@ export type SiteConfigCountOrderByAggregateInput = {
   stat4Label?: Prisma.SortOrder
   heroImageUrl?: Prisma.SortOrder
   logoUrl?: Prisma.SortOrder
+  heroTitle?: Prisma.SortOrder
+  heroSubtitle?: Prisma.SortOrder
+  heroCtaText?: Prisma.SortOrder
+  heroCtaUrl?: Prisma.SortOrder
+  heroBadge?: Prisma.SortOrder
+  commercialEmail?: Prisma.SortOrder
+  commercialPhone?: Prisma.SortOrder
+  commercialAddress?: Prisma.SortOrder
+  commercialDirector?: Prisma.SortOrder
+  commercialReceiptMsg?: Prisma.SortOrder
+  commercialMapUrl?: Prisma.SortOrder
 }
 
 export type SiteConfigMaxOrderByAggregateInput = {
@@ -568,6 +788,17 @@ export type SiteConfigMaxOrderByAggregateInput = {
   stat4Label?: Prisma.SortOrder
   heroImageUrl?: Prisma.SortOrder
   logoUrl?: Prisma.SortOrder
+  heroTitle?: Prisma.SortOrder
+  heroSubtitle?: Prisma.SortOrder
+  heroCtaText?: Prisma.SortOrder
+  heroCtaUrl?: Prisma.SortOrder
+  heroBadge?: Prisma.SortOrder
+  commercialEmail?: Prisma.SortOrder
+  commercialPhone?: Prisma.SortOrder
+  commercialAddress?: Prisma.SortOrder
+  commercialDirector?: Prisma.SortOrder
+  commercialReceiptMsg?: Prisma.SortOrder
+  commercialMapUrl?: Prisma.SortOrder
 }
 
 export type SiteConfigMinOrderByAggregateInput = {
@@ -589,6 +820,17 @@ export type SiteConfigMinOrderByAggregateInput = {
   stat4Label?: Prisma.SortOrder
   heroImageUrl?: Prisma.SortOrder
   logoUrl?: Prisma.SortOrder
+  heroTitle?: Prisma.SortOrder
+  heroSubtitle?: Prisma.SortOrder
+  heroCtaText?: Prisma.SortOrder
+  heroCtaUrl?: Prisma.SortOrder
+  heroBadge?: Prisma.SortOrder
+  commercialEmail?: Prisma.SortOrder
+  commercialPhone?: Prisma.SortOrder
+  commercialAddress?: Prisma.SortOrder
+  commercialDirector?: Prisma.SortOrder
+  commercialReceiptMsg?: Prisma.SortOrder
+  commercialMapUrl?: Prisma.SortOrder
 }
 
 
@@ -612,6 +854,17 @@ export type SiteConfigSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   stat4Label?: boolean
   heroImageUrl?: boolean
   logoUrl?: boolean
+  heroTitle?: boolean
+  heroSubtitle?: boolean
+  heroCtaText?: boolean
+  heroCtaUrl?: boolean
+  heroBadge?: boolean
+  commercialEmail?: boolean
+  commercialPhone?: boolean
+  commercialAddress?: boolean
+  commercialDirector?: boolean
+  commercialReceiptMsg?: boolean
+  commercialMapUrl?: boolean
 }, ExtArgs["result"]["siteConfig"]>
 
 export type SiteConfigSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -633,6 +886,17 @@ export type SiteConfigSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   stat4Label?: boolean
   heroImageUrl?: boolean
   logoUrl?: boolean
+  heroTitle?: boolean
+  heroSubtitle?: boolean
+  heroCtaText?: boolean
+  heroCtaUrl?: boolean
+  heroBadge?: boolean
+  commercialEmail?: boolean
+  commercialPhone?: boolean
+  commercialAddress?: boolean
+  commercialDirector?: boolean
+  commercialReceiptMsg?: boolean
+  commercialMapUrl?: boolean
 }, ExtArgs["result"]["siteConfig"]>
 
 export type SiteConfigSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -654,6 +918,17 @@ export type SiteConfigSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   stat4Label?: boolean
   heroImageUrl?: boolean
   logoUrl?: boolean
+  heroTitle?: boolean
+  heroSubtitle?: boolean
+  heroCtaText?: boolean
+  heroCtaUrl?: boolean
+  heroBadge?: boolean
+  commercialEmail?: boolean
+  commercialPhone?: boolean
+  commercialAddress?: boolean
+  commercialDirector?: boolean
+  commercialReceiptMsg?: boolean
+  commercialMapUrl?: boolean
 }, ExtArgs["result"]["siteConfig"]>
 
 export type SiteConfigSelectScalar = {
@@ -675,9 +950,20 @@ export type SiteConfigSelectScalar = {
   stat4Label?: boolean
   heroImageUrl?: boolean
   logoUrl?: boolean
+  heroTitle?: boolean
+  heroSubtitle?: boolean
+  heroCtaText?: boolean
+  heroCtaUrl?: boolean
+  heroBadge?: boolean
+  commercialEmail?: boolean
+  commercialPhone?: boolean
+  commercialAddress?: boolean
+  commercialDirector?: boolean
+  commercialReceiptMsg?: boolean
+  commercialMapUrl?: boolean
 }
 
-export type SiteConfigOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "companyName" | "tagline" | "email" | "phone" | "address" | "bio" | "aboutText" | "stat1Value" | "stat1Label" | "stat2Value" | "stat2Label" | "stat3Value" | "stat3Label" | "stat4Value" | "stat4Label" | "heroImageUrl" | "logoUrl", ExtArgs["result"]["siteConfig"]>
+export type SiteConfigOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "companyName" | "tagline" | "email" | "phone" | "address" | "bio" | "aboutText" | "stat1Value" | "stat1Label" | "stat2Value" | "stat2Label" | "stat3Value" | "stat3Label" | "stat4Value" | "stat4Label" | "heroImageUrl" | "logoUrl" | "heroTitle" | "heroSubtitle" | "heroCtaText" | "heroCtaUrl" | "heroBadge" | "commercialEmail" | "commercialPhone" | "commercialAddress" | "commercialDirector" | "commercialReceiptMsg" | "commercialMapUrl", ExtArgs["result"]["siteConfig"]>
 
 export type $SiteConfigPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SiteConfig"
@@ -701,6 +987,17 @@ export type $SiteConfigPayload<ExtArgs extends runtime.Types.Extensions.Internal
     stat4Label: string | null
     heroImageUrl: string | null
     logoUrl: string | null
+    heroTitle: string | null
+    heroSubtitle: string | null
+    heroCtaText: string | null
+    heroCtaUrl: string | null
+    heroBadge: string | null
+    commercialEmail: string | null
+    commercialPhone: string | null
+    commercialAddress: string | null
+    commercialDirector: string | null
+    commercialReceiptMsg: string | null
+    commercialMapUrl: string | null
   }, ExtArgs["result"]["siteConfig"]>
   composites: {}
 }
@@ -1142,6 +1439,17 @@ export interface SiteConfigFieldRefs {
   readonly stat4Label: Prisma.FieldRef<"SiteConfig", 'String'>
   readonly heroImageUrl: Prisma.FieldRef<"SiteConfig", 'String'>
   readonly logoUrl: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly heroTitle: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly heroSubtitle: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly heroCtaText: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly heroCtaUrl: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly heroBadge: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly commercialEmail: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly commercialPhone: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly commercialAddress: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly commercialDirector: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly commercialReceiptMsg: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly commercialMapUrl: Prisma.FieldRef<"SiteConfig", 'String'>
 }
     
 

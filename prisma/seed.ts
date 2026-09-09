@@ -46,6 +46,17 @@ async function main() {
       stat3Label: 'Ahorro Medio en Factura',
       stat4Value: '15',
       stat4Label: 'Años de Experiencia',
+      heroTitle: 'Future of Energy',
+      heroSubtitle: 'Sustainable solutions designed for modern infrastructure.',
+      heroCtaText: 'EXPLORE SOLUTIONS',
+      heroCtaUrl: '/comercial',
+      heroBadge: 'Tecnología Tier 1 Certificada',
+      commercialEmail: 'commercial.contracts@electsun.net',
+      commercialPhone: '+1 (809) 378-6590',
+      commercialAddress: 'Electsun Center, Suite 1400, Santo Domingo, RD',
+      commercialDirector: 'Dr. Elena Vance, PE',
+      commercialReceiptMsg: 'Thank you for submitting your commercial facility parameters. Our senior grid engineer will analyze local feeder capacities and provide preliminary feasibility analysis within 48 business hours.',
+      commercialMapUrl: 'Santo Domingo, República Dominicana',
     },
     create: {
       id: 'main',
@@ -64,6 +75,17 @@ async function main() {
       stat3Label: 'Ahorro Medio en Factura',
       stat4Value: '15',
       stat4Label: 'Años de Experiencia',
+      heroTitle: 'Future of Energy',
+      heroSubtitle: 'Sustainable solutions designed for modern infrastructure.',
+      heroCtaText: 'EXPLORE SOLUTIONS',
+      heroCtaUrl: '/comercial',
+      heroBadge: 'Tecnología Tier 1 Certificada',
+      commercialEmail: 'commercial.contracts@electsun.net',
+      commercialPhone: '+1 (809) 378-6590',
+      commercialAddress: 'Electsun Center, Suite 1400, Santo Domingo, RD',
+      commercialDirector: 'Dr. Elena Vance, PE',
+      commercialReceiptMsg: 'Thank you for submitting your commercial facility parameters. Our senior grid engineer will analyze local feeder capacities and provide preliminary feasibility analysis within 48 business hours.',
+      commercialMapUrl: 'Santo Domingo, República Dominicana',
     },
   });
   console.log('✅ Site config created');
@@ -136,7 +158,56 @@ async function main() {
   }
   console.log('✅ Sample Electsun projects created');
 
-  console.log('🎉 SQLite Seeding complete for Electsun!');
+  // Seed sample Testimonials
+  await prisma.testimonial.deleteMany({});
+  const sampleTestimonials = [
+    {
+      clientName: 'EcoTech Solutions',
+      role: 'Director de Operaciones',
+      company: 'EcoTech Caribbean',
+      content: 'La instalación fotovoltaica de 250 kWp redujo nuestros costes operativos en un 70% desde el primer mes. La ingeniería y soporte de Electsun fueron impecables.',
+      rating: 5,
+      approved: true,
+      order: 1,
+    },
+    {
+      clientName: 'Sarah Jenkins',
+      role: 'Gerente General',
+      company: 'Residencial Cacicazgos',
+      content: 'Instalamos el sistema híbrido con baterías inteligentes. Excelente monitoreo en tiempo real y cero interrupciones durante las tormentas.',
+      rating: 5,
+      approved: true,
+      order: 2,
+    },
+    {
+      clientName: 'Ing. Marcos Valerio',
+      role: 'Jefe de Infraestructura',
+      company: 'Parque Logístico San Cristóbal',
+      content: 'La simulación con SolarSim coincidió en un 98.5% con la producción real auditada durante todo el año. Altamente recomendados.',
+      rating: 5,
+      approved: true,
+      order: 3,
+    },
+  ];
+  for (const item of sampleTestimonials) {
+    await prisma.testimonial.create({ data: item });
+  }
+  console.log('✅ Sample Testimonials created');
+
+  // Seed sample Partners
+  await prisma.partner.deleteMany({});
+  const samplePartners = [
+    { name: 'Huawei FusionSolar', logoUrl: '/images/tech-hero.jpg', category: 'Inversores Inteligentes', visible: true, order: 1 },
+    { name: 'Canadian Solar', logoUrl: '/images/tech-hero.jpg', category: 'Módulos Tier 1', visible: true, order: 2 },
+    { name: 'SMA Solar Technology', logoUrl: '/images/tech-hero.jpg', category: 'Inversores Industriales', visible: true, order: 3 },
+    { name: 'SolarEdge', logoUrl: '/images/tech-hero.jpg', category: 'Optimizadores de Potencia', visible: true, order: 4 },
+  ];
+  for (const partner of samplePartners) {
+    await prisma.partner.create({ data: partner });
+  }
+  console.log('✅ Sample Partners created');
+
+  console.log('🎉 Database Seeding complete for Electsun!');
 }
 
 main()

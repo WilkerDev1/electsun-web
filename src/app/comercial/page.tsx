@@ -11,24 +11,25 @@ export const metadata: Metadata = {
 
 export const dynamic = 'force-dynamic';
 
-async function getFeaturedProjects() {
+async function getCommercialData() {
   try {
-    const projects = await prisma.project.findMany({
-      orderBy: { order: 'asc' },
-    });
-    return projects;
+    const [projects, config] = await Promise.all([
+      prisma.project.findMany({ orderBy: { order: 'asc' } }),
+      prisma.siteConfig.findUnique({ where: { id: 'main' } }),
+    ]);
+    return { projects, config };
   } catch (error) {
-    console.error('Error loading projects:', error);
-    return [];
+    console.error('Error loading commercial data:', error);
+    return { projects: [], config: null };
   }
 }
 
 export default async function CommercialPage() {
-  const projects = await getFeaturedProjects();
+  const { projects, config } = await getCommercialData();
 
   return (
     <>
-      <CommercialClient projects={projects} />
+      <CommercialClient projects={projects} config={config} />
       <Footer />
     </>
   );
