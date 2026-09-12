@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "pack": "repomix",
-    "repomix": "repomix",
+    "pack": "npx repomix",
+    "repomix": "npx repomix",
     "db:dev": "docker start electsun-dev-db 2>/dev/null || docker compose -f docker-compose.dev.yml up -d",
     "db:seed": "prisma db push && tsx prisma/seed.ts"
   },
