@@ -1,7 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import Image from 'next/image';
 import type { SiteConfig, SocialLink } from '@/generated/prisma/client';
+import SocialNetworksManager from './SocialNetworksManager';
 
 interface ContactSettingsViewProps {
   config: SiteConfig;
@@ -25,18 +27,38 @@ export default function ContactSettingsView({
     phone: config.phone || '',
     address: config.address || '',
     bio: config.bio || '',
+    logoUrl: config.logoUrl || '',
   });
 
   const [isSaving, setIsSaving] = useState(false);
-  const [newLink, setNewLink] = useState({ platform: 'whatsapp', label: '', url: '' });
-  const [isAddingLink, setIsAddingLink] = useState(false);
+  const [isUploadingLogo, setIsUploadingLogo] = useState(false);
+  const logoInputRef = useRef<HTMLInputElement>(null);
+
+  const handleUploadLogo = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setIsUploadingLogo(true);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      const res = await fetch('/api/upload', { method: 'POST', body: fd });
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      setFormData((prev) => ({ ...prev, logoUrl: data.url }));
+      showToast('Logotipo institucional cargado');
+    } catch {
+      showToast('Error al subir logotipo', 'error');
+    } finally {
+      setIsUploadingLogo(false);
+    }
+  };
 
   const handleSaveIdentity = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
     try {
       await onSaveConfig(formData);
-      showToast('Información de contacto corporativa guardada');
+      showToast('Información corporativa guardada');
     } catch {
       showToast('Error al guardar datos de contacto', 'error');
     } finally {
@@ -44,127 +66,121 @@ export default function ContactSettingsView({
     }
   };
 
-  const handleAddSocial = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newLink.label || !newLink.url) {
-      showToast('Etiqueta y URL son requeridas', 'error');
-      return;
-    }
-    try {
-      const res = await fetch('/api/social-links', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...newLink, handle: newLink.label, order: socialLinks.length + 1, visible: true }),
-      });
-      if (!res.ok) throw new Error();
-      const created = await res.json();
-      onSocialLinksChange((prev) => [...prev, created]);
-      setNewLink({ platform: 'whatsapp', label: '', url: '' });
-      setIsAddingLink(false);
-      showToast('Canal añadido');
-    } catch {
-      showToast('Error al añadir canal', 'error');
-    }
-  };
-
-  const handleDeleteSocial = async (id: string) => {
-    if (!confirm('¿Eliminar este canal?')) return;
-    try {
-      const res = await fetch(`/api/social-links/${id}`, { method: 'DELETE' });
-      if (!res.ok) throw new Error();
-      onSocialLinksChange((prev) => prev.filter((l) => l.id !== id));
-      showToast('Canal eliminado');
-    } catch {
-      showToast('Error al eliminar', 'error');
-    }
-  };
-
   return (
     <div className="adm-content-container">
       <div className="adm-page-header">
-        <h1 className="adm-page-title">Global Contact & Social Settings</h1>
-        <p className="adm-page-subtitle">Configure institutional identity, customer support channels, and official social media.</p>
+        <h1 className="adm-page-title">Global Contact & Brand Settings</h1>
+        <p className="adm-page-subtitle">Configura la identidad institucional, logotipo oficial y redes de contacto.</p>
       </div>
 
       <div className="adm-two-col-grid">
-        {/* Contact Info Form */}
+        {/* Contact & Brand Info Form */}
         <form onSubmit={handleSaveIdentity} className="adm-card">
-          <h2 className="adm-card-title">Institutional Channels</h2>
+          <h2 className="adm-card-title">Canales Institucionales y Marca</h2>
           <div className="adm-form-group">
-            <label className="adm-label">Company Name</label>
-            <input type="text" value={formData.companyName} onChange={(e) => setFormData({ ...formData, companyName: e.target.value })} className="adm-input" required />
+            <label className="adm-label">Nombre de la Empresa <span style={{ fontSize: '0.75rem', color: '#94A3B8', fontWeight: 400 }}>(Opcional si usas logotipo)</span></label>
+            <input
+              type="text"
+              value={formData.companyName}
+              onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
+              className="adm-input"
+              placeholder="Electsun (o dejar vacío si el logo es suficiente)"
+            />
           </div>
           <div className="adm-form-group">
-            <label className="adm-label">Tagline / Slogan</label>
-            <input type="text" value={formData.tagline} onChange={(e) => setFormData({ ...formData, tagline: e.target.value })} className="adm-input" />
+            <label className="adm-label">Eslogan / Tagline <span style={{ fontSize: '0.75rem', color: '#94A3B8', fontWeight: 400 }}>(Opcional)</span></label>
+            <input
+              type="text"
+              value={formData.tagline}
+              onChange={(e) => setFormData({ ...formData, tagline: e.target.value })}
+              className="adm-input"
+              placeholder="Ej: Energía Solar y Soluciones Renovables (o dejar vacío)"
+            />
+          </div>
+
+          <div className="adm-form-group">
+            <label className="adm-label">Logotipo Oficial (Cabecera y Marca)</label>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.4rem' }}>
+              <div style={{ position: 'relative', width: '70px', height: '36px', background: '#0F172A', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                {formData.logoUrl ? (
+                  <Image
+                    src={formData.logoUrl}
+                    alt="Logo"
+                    width={64}
+                    height={30}
+                    unoptimized
+                    style={{ maxHeight: '30px', maxWidth: '64px', objectFit: 'contain' }}
+                  />
+                ) : (
+                  <span style={{ fontSize: '0.65rem', color: '#94A3B8' }}>Default</span>
+                )}
+              </div>
+              <input ref={logoInputRef} type="file" accept="image/*" onChange={handleUploadLogo} style={{ display: 'none' }} />
+              <button
+                type="button"
+                onClick={() => logoInputRef.current?.click()}
+                className="adm-btn adm-btn-outline"
+                style={{ fontSize: '0.75rem', padding: '0.35rem 0.65rem' }}
+              >
+                {isUploadingLogo ? 'Subiendo...' : 'Subir Logotipo'}
+              </button>
+            </div>
+            <input
+              type="text"
+              value={formData.logoUrl}
+              onChange={(e) => setFormData({ ...formData, logoUrl: e.target.value })}
+              className="adm-input"
+              placeholder="URL o subir archivo..."
+            />
+          </div>
+
+          <div className="adm-form-group">
+            <label className="adm-label">Email Oficial</label>
+            <input
+              type="email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className="adm-input"
+            />
           </div>
           <div className="adm-form-group">
-            <label className="adm-label">Official Email</label>
-            <input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="adm-input" />
+            <label className="adm-label">Teléfono Directo</label>
+            <input
+              type="text"
+              value={formData.phone}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              className="adm-input"
+            />
           </div>
           <div className="adm-form-group">
-            <label className="adm-label">Direct Phone</label>
-            <input type="text" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="adm-input" />
+            <label className="adm-label">Dirección Física</label>
+            <input
+              type="text"
+              value={formData.address}
+              onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+              className="adm-input"
+            />
           </div>
           <div className="adm-form-group">
-            <label className="adm-label">Physical Address</label>
-            <input type="text" value={formData.address} onChange={(e) => setFormData({ ...formData, address: e.target.value })} className="adm-input" />
-          </div>
-          <div className="adm-form-group">
-            <label className="adm-label">Company Bio (Footer)</label>
-            <textarea rows={2} value={formData.bio} onChange={(e) => setFormData({ ...formData, bio: e.target.value })} className="adm-textarea" />
+            <label className="adm-label">Bio Institucional (Footer)</label>
+            <textarea
+              rows={2}
+              value={formData.bio}
+              onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
+              className="adm-textarea"
+            />
           </div>
           <button type="submit" disabled={isSaving} className="adm-btn adm-btn-primary" style={{ marginTop: '0.5rem' }}>
-            {isSaving ? 'Saving...' : 'Save Institutional Data'}
+            {isSaving ? 'Guardando...' : 'Guardar Información'}
           </button>
         </form>
 
-        {/* Social Networks */}
-        <div className="adm-card">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-            <h2 className="adm-card-title" style={{ margin: 0 }}>Social & Direct Networks</h2>
-            <button type="button" onClick={() => setIsAddingLink(!isAddingLink)} className="adm-btn adm-btn-outline" style={{ padding: '0.35rem 0.75rem', fontSize: '0.75rem' }}>
-              {isAddingLink ? 'Cancel' : '+ Add Channel'}
-            </button>
-          </div>
-
-          {isAddingLink && (
-            <form onSubmit={handleAddSocial} style={{ background: '#f8fafc', padding: '0.85rem', borderRadius: '8px', marginBottom: '1rem', border: '1px solid #e2e8f0' }}>
-              <div className="adm-form-group">
-                <label className="adm-label">Platform</label>
-                <select value={newLink.platform} onChange={(e) => setNewLink({ ...newLink, platform: e.target.value })} className="adm-input">
-                  <option value="whatsapp">WhatsApp</option>
-                  <option value="linkedin">LinkedIn</option>
-                  <option value="instagram">Instagram</option>
-                  <option value="facebook">Facebook</option>
-                  <option value="x">X / Twitter</option>
-                </select>
-              </div>
-              <div className="adm-form-group">
-                <label className="adm-label">Label</label>
-                <input type="text" placeholder="Ej: WhatsApp Atención" value={newLink.label} onChange={(e) => setNewLink({ ...newLink, label: e.target.value })} className="adm-input" required />
-              </div>
-              <div className="adm-form-group">
-                <label className="adm-label">Link URL</label>
-                <input type="url" placeholder="https://..." value={newLink.url} onChange={(e) => setNewLink({ ...newLink, url: e.target.value })} className="adm-input" required />
-              </div>
-              <button type="submit" className="adm-btn adm-btn-primary" style={{ width: '100%' }}>Create Channel</button>
-            </form>
-          )}
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-            {socialLinks.map((link) => (
-              <div key={link.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.65rem 0.85rem', background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '8px' }}>
-                <div>
-                  <strong style={{ fontSize: '0.85rem', color: '#0f172a' }}>{link.label}</strong>
-                  <span style={{ display: 'block', fontSize: '0.75rem', color: '#64748b' }}>{link.platform} • {link.url}</span>
-                </div>
-                <button type="button" onClick={() => handleDeleteSocial(link.id)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: '0.85rem' }}>✕</button>
-              </div>
-            ))}
-            {socialLinks.length === 0 && <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>No channels configured.</p>}
-          </div>
-        </div>
+        {/* Social Networks Modular Component */}
+        <SocialNetworksManager
+          socialLinks={socialLinks}
+          onSocialLinksChange={onSocialLinksChange}
+          showToast={showToast}
+        />
       </div>
     </div>
   );

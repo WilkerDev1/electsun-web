@@ -18,33 +18,42 @@ export async function POST(request: NextRequest) {
 
     const formData = await request.formData();
     const file = formData.get('file') as File | null;
-    // type: 'project' | 'hero' | 'logo'
     const uploadType = (formData.get('type') as string | null) ?? 'project';
 
     if (!file) {
       return NextResponse.json({ error: 'No se ha proporcionado ningún archivo' }, { status: 400 });
     }
 
-    // Validate file type (image or svg)
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/avif', 'image/svg+xml'];
-    if (!allowedTypes.includes(file.type)) {
+    const allowedTypes = [
+      'image/jpeg',
+      'image/png',
+      'image/gif',
+      'image/webp',
+      'image/avif',
+      'image/svg+xml',
+      'video/mp4',
+      'video/webm',
+      'video/ogg',
+      'video/quicktime',
+    ];
+
+    const ext = file.name.split('.').pop()?.toLowerCase() || 'png';
+    const isVideo = file.type.startsWith('video/') || ['mp4', 'webm', 'ogg', 'mov'].includes(ext);
+
+    if (!allowedTypes.includes(file.type) && !isVideo) {
       return NextResponse.json(
-        { error: 'Tipo de archivo no válido. Permitidos: JPEG, PNG, WebP, AVIF, SVG' },
+        { error: 'Tipo de archivo no válido. Permitidos: JPEG, PNG, GIF, WebP, SVG, MP4, WebM, OGG' },
         { status: 400 }
       );
     }
 
-    // Generate unique base filename
-    const ext = file.name.split('.').pop()?.toLowerCase() || 'png';
     const timestamp = Date.now();
     const randomStr = Math.random().toString(36).substring(2, 8);
     const filename = `${timestamp}-${randomStr}.${ext}`;
 
-    // Ensure uploads directory exists
     const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
     await mkdir(uploadsDir, { recursive: true });
 
-    // Save original file
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
     const filepath = path.join(uploadsDir, filename);
@@ -52,12 +61,16 @@ export async function POST(request: NextRequest) {
 
     const originalUrl = `/uploads/${filename}`;
 
-    // If SVG, return as-is
-    if (file.type === 'image/svg+xml') {
-      return NextResponse.json({ url: originalUrl, thumbnailUrl: originalUrl }, { status: 201 });
+    // Videos and animated GIFs / SVGs return directly without Sharp raster conversion
+    if (isVideo) {
+      return NextResponse.json({ url: originalUrl, thumbnailUrl: originalUrl, mediaType: 'video' }, { status: 201 });
     }
 
-    // Generate thumbnail for project photos
+    if (file.type === 'image/svg+xml' || file.type === 'image/gif') {
+      return NextResponse.json({ url: originalUrl, thumbnailUrl: originalUrl, mediaType: 'image' }, { status: 201 });
+    }
+
+    // Generate thumbnail for project raster photos
     if (uploadType === 'project') {
       try {
         const thumbFilename = `thumb-${timestamp}-${randomStr}.webp`;
@@ -72,14 +85,14 @@ export async function POST(request: NextRequest) {
           .toFile(thumbFilepath);
 
         const thumbnailUrl = `/uploads/${thumbFilename}`;
-        return NextResponse.json({ url: originalUrl, thumbnailUrl }, { status: 201 });
+        return NextResponse.json({ url: originalUrl, thumbnailUrl, mediaType: 'image' }, { status: 201 });
       } catch (thumbError) {
         console.error('Error al generar miniatura, usando original:', thumbError);
-        return NextResponse.json({ url: originalUrl, thumbnailUrl: originalUrl }, { status: 201 });
+        return NextResponse.json({ url: originalUrl, thumbnailUrl: originalUrl, mediaType: 'image' }, { status: 201 });
       }
     }
 
-    return NextResponse.json({ url: originalUrl }, { status: 201 });
+    return NextResponse.json({ url: originalUrl, mediaType: 'image' }, { status: 201 });
   } catch (error) {
     console.error('Error al subir archivo:', error);
     return NextResponse.json({ error: 'Error al procesar la subida' }, { status: 500 });

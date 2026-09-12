@@ -9,7 +9,7 @@
     "lint": "eslint",
     "pack": "repomix",
     "repomix": "repomix",
-    "db:dev": "docker compose -f docker-compose.dev.yml up -d",
+    "db:dev": "docker start electsun-dev-db 2>/dev/null || docker compose -f docker-compose.dev.yml up -d",
     "db:seed": "prisma db push && tsx prisma/seed.ts"
   },
   "dependencies": {

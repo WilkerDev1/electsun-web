@@ -143,7 +143,10 @@ export const SiteConfigScalarFieldEnum = {
   commercialAddress: 'commercialAddress',
   commercialDirector: 'commercialDirector',
   commercialReceiptMsg: 'commercialReceiptMsg',
-  commercialMapUrl: 'commercialMapUrl'
+  commercialMapUrl: 'commercialMapUrl',
+  heroOverlayOpacity: 'heroOverlayOpacity',
+  heroTitleColor: 'heroTitleColor',
+  heroMediaType: 'heroMediaType'
 } as const
 
 export type SiteConfigScalarFieldEnum = (typeof SiteConfigScalarFieldEnum)[keyof typeof SiteConfigScalarFieldEnum]

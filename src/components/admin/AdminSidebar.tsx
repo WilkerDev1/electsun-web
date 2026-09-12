@@ -15,9 +15,16 @@ export type AdminTab =
 interface AdminSidebarProps {
   activeTab: AdminTab;
   setActiveTab: (tab: AdminTab) => void;
+  onPublishAll?: () => Promise<void>;
+  isSaving?: boolean;
 }
 
-export default function AdminSidebar({ activeTab, setActiveTab }: AdminSidebarProps) {
+export default function AdminSidebar({
+  activeTab,
+  setActiveTab,
+  onPublishAll,
+  isSaving = false,
+}: AdminSidebarProps) {
   const navItems: { id: AdminTab; label: string; icon: React.ReactNode }[] = [
     {
       id: 'overview',
@@ -118,6 +125,32 @@ export default function AdminSidebar({ activeTab, setActiveTab }: AdminSidebarPr
       </nav>
 
       <div className="adm-sidebar-footer">
+        {onPublishAll && (
+          <button
+            type="button"
+            className="adm-publish-btn"
+            style={{ width: '100%', marginBottom: '0.65rem' }}
+            onClick={onPublishAll}
+            disabled={isSaving}
+          >
+            {isSaving ? 'PUBLISHING...' : 'PUBLISH CHANGES'}
+          </button>
+        )}
+
+        <a
+          href="/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="adm-live-btn"
+        >
+          <span>View Live Page</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            <polyline points="15 3 21 3 21 9" />
+            <line x1="10" y1="14" x2="21" y2="3" />
+          </svg>
+        </a>
+
         <button
           type="button"
           className="adm-signout-btn"

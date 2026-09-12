@@ -65,6 +65,9 @@ export default async function AdminPage() {
           commercialDirector: 'Dr. Elena Vance, PE',
           commercialReceiptMsg: 'Thank you for submitting your commercial facility parameters. Our senior grid engineer will analyze local feeder capacities and provide preliminary feasibility analysis within 48 business hours.',
           commercialMapUrl: null,
+          heroOverlayOpacity: 60,
+          heroTitleColor: '#FFFFFF',
+          heroMediaType: 'image',
         }
       }
     />

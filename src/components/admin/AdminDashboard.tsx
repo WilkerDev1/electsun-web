@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import type { Project, SocialLink, SiteConfig, Testimonial, Partner } from '@/generated/prisma/client';
 import AdminSidebar, { AdminTab } from './AdminSidebar';
-import AdminTopBar from './AdminTopBar';
 import OverviewDashboard from './OverviewDashboard';
 import BannerMultimediaView from './BannerMultimediaView';
 import MilestonesView from './MilestonesView';
@@ -38,10 +37,9 @@ export default function AdminDashboard({
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
-
   const showToast = (message: string, type: 'success' | 'error' = 'success') => setToast({ message, type });
 
-  const handleSaveConfig = async (partialConfig: Partial<SiteConfig>) => {
+  const handleSaveConfig = async (partialConfig: Partial<SiteConfig> = {}) => {
     setIsSaving(true);
     try {
       const merged = { ...siteConfig, ...partialConfig };
@@ -50,12 +48,16 @@ export default function AdminDashboard({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(merged),
       });
-      if (!res.ok) throw new Error();
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.details || errData.error || 'Error al guardar la configuración');
+      }
       const updated = await res.json();
       setSiteConfig(updated);
-      showToast('Configuration updated successfully');
-    } catch {
-      showToast('Error saving site configuration', 'error');
+      showToast('Configuración actualizada con éxito');
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Error al guardar la configuración';
+      showToast(msg, 'error');
     } finally {
       setIsSaving(false);
     }
@@ -126,9 +128,13 @@ export default function AdminDashboard({
 
   return (
     <div className="adm-layout">
-      <AdminSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <AdminSidebar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        onPublishAll={() => handleSaveConfig({})}
+        isSaving={isSaving}
+      />
       <div className="adm-main">
-        <AdminTopBar activeTab={activeTab} setActiveTab={setActiveTab} onPublishAll={() => handleSaveConfig({})} isSaving={isSaving} />
         <main style={{ flex: 1, minWidth: 0 }}>
           {activeTab === 'overview' && (
             <OverviewDashboard
@@ -143,7 +149,7 @@ export default function AdminDashboard({
             <BannerMultimediaView
               config={siteConfig}
               onChange={(upd) => setSiteConfig((prev) => ({ ...prev, ...upd }))}
-              onSave={() => handleSaveConfig({})}
+              onSave={(bannerData) => handleSaveConfig(bannerData)}
               isSaving={isSaving}
             />
           )}

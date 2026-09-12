@@ -26,15 +26,15 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { name, logoUrl, category, visible, order } = body;
 
-    if (!name || !logoUrl) {
-      return NextResponse.json({ error: 'Nombre y URL del logo son obligatorios' }, { status: 400 });
+    if (!logoUrl && !name) {
+      return NextResponse.json({ error: 'Debes proporcionar al menos un logotipo o nombre' }, { status: 400 });
     }
 
     const partner = await prisma.partner.create({
       data: {
-        name,
-        logoUrl,
-        category: category || 'Tier 1 Manufacturer',
+        name: name !== undefined ? name.trim() : '',
+        logoUrl: logoUrl ? logoUrl.trim() : '',
+        category: category !== undefined ? category.trim() : '',
         visible: visible !== undefined ? Boolean(visible) : true,
         order: order !== undefined ? Number(order) : 0,
       },

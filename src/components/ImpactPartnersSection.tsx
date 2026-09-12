@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import type { SiteConfig, Partner } from '@/generated/prisma/client';
 
 interface AnimatedCounterProps {
@@ -75,8 +76,10 @@ export default function ImpactPartnersSection({ config, partners: initialPartner
   ];
 
   const partnersList = (initialPartners && initialPartners.length > 0)
-    ? initialPartners.map((p) => ({ name: p.name, category: p.category || 'Tier 1 Partner' }))
-    : defaultPartners;
+    ? initialPartners
+        .filter((p) => p.visible !== false)
+        .map((p) => ({ name: p.name || '', category: p.category || '', logoUrl: p.logoUrl }))
+    : defaultPartners.map((p) => ({ ...p, logoUrl: null as string | null }));
 
   return (
     <section id="impact" className="impact-partners-section">
@@ -164,20 +167,80 @@ export default function ImpactPartnersSection({ config, partners: initialPartner
 
         <div className="marquee-wrapper">
           <div className="marquee-track">
-            {partnersList.map((partner, idx) => (
-              <div key={`partner-1-${idx}`} className="partner-logo-pill">
-                <span className="partner-name">{partner.name}</span>
-                <span className="partner-dot">•</span>
-                <span className="partner-tag">{partner.category}</span>
-              </div>
-            ))}
-            {partnersList.map((partner, idx) => (
-              <div key={`partner-2-${idx}`} className="partner-logo-pill">
-                <span className="partner-name">{partner.name}</span>
-                <span className="partner-dot">•</span>
-                <span className="partner-tag">{partner.category}</span>
-              </div>
-            ))}
+            {partnersList.map((partner, idx) => {
+              const hasName = Boolean(partner.name && partner.name.trim());
+              const hasCategory = Boolean(partner.category && partner.category.trim());
+              const isLogoOnly = Boolean(partner.logoUrl && !hasName && !hasCategory);
+
+              return (
+                <div
+                  key={`partner-1-${idx}`}
+                  className="partner-logo-pill"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: isLogoOnly ? '0' : '0.6rem',
+                    padding: isLogoOnly ? '10px 22px' : '12px 24px',
+                  }}
+                >
+                  {partner.logoUrl && (
+                    <Image
+                      src={partner.logoUrl}
+                      alt={partner.name || 'Partner logo'}
+                      width={isLogoOnly ? 80 : 46}
+                      height={isLogoOnly ? 28 : 20}
+                      unoptimized
+                      style={{
+                        maxHeight: isLogoOnly ? '30px' : '20px',
+                        maxWidth: isLogoOnly ? '90px' : '46px',
+                        objectFit: 'contain',
+                        opacity: 0.95,
+                      }}
+                    />
+                  )}
+                  {hasName && <span className="partner-name">{partner.name}</span>}
+                  {hasName && hasCategory && <span className="partner-dot">•</span>}
+                  {hasCategory && <span className="partner-tag">{partner.category}</span>}
+                </div>
+              );
+            })}
+            {partnersList.map((partner, idx) => {
+              const hasName = Boolean(partner.name && partner.name.trim());
+              const hasCategory = Boolean(partner.category && partner.category.trim());
+              const isLogoOnly = Boolean(partner.logoUrl && !hasName && !hasCategory);
+
+              return (
+                <div
+                  key={`partner-2-${idx}`}
+                  className="partner-logo-pill"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: isLogoOnly ? '0' : '0.6rem',
+                    padding: isLogoOnly ? '10px 22px' : '12px 24px',
+                  }}
+                >
+                  {partner.logoUrl && (
+                    <Image
+                      src={partner.logoUrl}
+                      alt={partner.name || 'Partner logo'}
+                      width={isLogoOnly ? 80 : 46}
+                      height={isLogoOnly ? 28 : 20}
+                      unoptimized
+                      style={{
+                        maxHeight: isLogoOnly ? '30px' : '20px',
+                        maxWidth: isLogoOnly ? '90px' : '46px',
+                        objectFit: 'contain',
+                        opacity: 0.95,
+                      }}
+                    />
+                  )}
+                  {hasName && <span className="partner-name">{partner.name}</span>}
+                  {hasName && hasCategory && <span className="partner-dot">•</span>}
+                  {hasCategory && <span className="partner-tag">{partner.category}</span>}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

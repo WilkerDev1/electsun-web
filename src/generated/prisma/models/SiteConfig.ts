@@ -20,8 +20,18 @@ export type SiteConfigModel = runtime.Types.Result.DefaultSelection<Prisma.$Site
 
 export type AggregateSiteConfig = {
   _count: SiteConfigCountAggregateOutputType | null
+  _avg: SiteConfigAvgAggregateOutputType | null
+  _sum: SiteConfigSumAggregateOutputType | null
   _min: SiteConfigMinAggregateOutputType | null
   _max: SiteConfigMaxAggregateOutputType | null
+}
+
+export type SiteConfigAvgAggregateOutputType = {
+  heroOverlayOpacity: number | null
+}
+
+export type SiteConfigSumAggregateOutputType = {
+  heroOverlayOpacity: number | null
 }
 
 export type SiteConfigMinAggregateOutputType = {
@@ -54,6 +64,9 @@ export type SiteConfigMinAggregateOutputType = {
   commercialDirector: string | null
   commercialReceiptMsg: string | null
   commercialMapUrl: string | null
+  heroOverlayOpacity: number | null
+  heroTitleColor: string | null
+  heroMediaType: string | null
 }
 
 export type SiteConfigMaxAggregateOutputType = {
@@ -86,6 +99,9 @@ export type SiteConfigMaxAggregateOutputType = {
   commercialDirector: string | null
   commercialReceiptMsg: string | null
   commercialMapUrl: string | null
+  heroOverlayOpacity: number | null
+  heroTitleColor: string | null
+  heroMediaType: string | null
 }
 
 export type SiteConfigCountAggregateOutputType = {
@@ -118,9 +134,20 @@ export type SiteConfigCountAggregateOutputType = {
   commercialDirector: number
   commercialReceiptMsg: number
   commercialMapUrl: number
+  heroOverlayOpacity: number
+  heroTitleColor: number
+  heroMediaType: number
   _all: number
 }
 
+
+export type SiteConfigAvgAggregateInputType = {
+  heroOverlayOpacity?: true
+}
+
+export type SiteConfigSumAggregateInputType = {
+  heroOverlayOpacity?: true
+}
 
 export type SiteConfigMinAggregateInputType = {
   id?: true
@@ -152,6 +179,9 @@ export type SiteConfigMinAggregateInputType = {
   commercialDirector?: true
   commercialReceiptMsg?: true
   commercialMapUrl?: true
+  heroOverlayOpacity?: true
+  heroTitleColor?: true
+  heroMediaType?: true
 }
 
 export type SiteConfigMaxAggregateInputType = {
@@ -184,6 +214,9 @@ export type SiteConfigMaxAggregateInputType = {
   commercialDirector?: true
   commercialReceiptMsg?: true
   commercialMapUrl?: true
+  heroOverlayOpacity?: true
+  heroTitleColor?: true
+  heroMediaType?: true
 }
 
 export type SiteConfigCountAggregateInputType = {
@@ -216,6 +249,9 @@ export type SiteConfigCountAggregateInputType = {
   commercialDirector?: true
   commercialReceiptMsg?: true
   commercialMapUrl?: true
+  heroOverlayOpacity?: true
+  heroTitleColor?: true
+  heroMediaType?: true
   _all?: true
 }
 
@@ -257,6 +293,18 @@ export type SiteConfigAggregateArgs<ExtArgs extends runtime.Types.Extensions.Int
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: SiteConfigAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: SiteConfigSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: SiteConfigMinAggregateInputType
@@ -287,6 +335,8 @@ export type SiteConfigGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   _count?: SiteConfigCountAggregateInputType | true
+  _avg?: SiteConfigAvgAggregateInputType
+  _sum?: SiteConfigSumAggregateInputType
   _min?: SiteConfigMinAggregateInputType
   _max?: SiteConfigMaxAggregateInputType
 }
@@ -321,7 +371,12 @@ export type SiteConfigGroupByOutputType = {
   commercialDirector: string | null
   commercialReceiptMsg: string | null
   commercialMapUrl: string | null
+  heroOverlayOpacity: number | null
+  heroTitleColor: string | null
+  heroMediaType: string | null
   _count: SiteConfigCountAggregateOutputType | null
+  _avg: SiteConfigAvgAggregateOutputType | null
+  _sum: SiteConfigSumAggregateOutputType | null
   _min: SiteConfigMinAggregateOutputType | null
   _max: SiteConfigMaxAggregateOutputType | null
 }
@@ -374,6 +429,9 @@ export type SiteConfigWhereInput = {
   commercialDirector?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   commercialReceiptMsg?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   commercialMapUrl?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  heroOverlayOpacity?: Prisma.IntNullableFilter<"SiteConfig"> | number | null
+  heroTitleColor?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  heroMediaType?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
 }
 
 export type SiteConfigOrderByWithRelationInput = {
@@ -406,6 +464,9 @@ export type SiteConfigOrderByWithRelationInput = {
   commercialDirector?: Prisma.SortOrderInput | Prisma.SortOrder
   commercialReceiptMsg?: Prisma.SortOrderInput | Prisma.SortOrder
   commercialMapUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  heroOverlayOpacity?: Prisma.SortOrderInput | Prisma.SortOrder
+  heroTitleColor?: Prisma.SortOrderInput | Prisma.SortOrder
+  heroMediaType?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
 export type SiteConfigWhereUniqueInput = Prisma.AtLeast<{
@@ -441,6 +502,9 @@ export type SiteConfigWhereUniqueInput = Prisma.AtLeast<{
   commercialDirector?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   commercialReceiptMsg?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
   commercialMapUrl?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  heroOverlayOpacity?: Prisma.IntNullableFilter<"SiteConfig"> | number | null
+  heroTitleColor?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
+  heroMediaType?: Prisma.StringNullableFilter<"SiteConfig"> | string | null
 }, "id">
 
 export type SiteConfigOrderByWithAggregationInput = {
@@ -473,9 +537,14 @@ export type SiteConfigOrderByWithAggregationInput = {
   commercialDirector?: Prisma.SortOrderInput | Prisma.SortOrder
   commercialReceiptMsg?: Prisma.SortOrderInput | Prisma.SortOrder
   commercialMapUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  heroOverlayOpacity?: Prisma.SortOrderInput | Prisma.SortOrder
+  heroTitleColor?: Prisma.SortOrderInput | Prisma.SortOrder
+  heroMediaType?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SiteConfigCountOrderByAggregateInput
+  _avg?: Prisma.SiteConfigAvgOrderByAggregateInput
   _max?: Prisma.SiteConfigMaxOrderByAggregateInput
   _min?: Prisma.SiteConfigMinOrderByAggregateInput
+  _sum?: Prisma.SiteConfigSumOrderByAggregateInput
 }
 
 export type SiteConfigScalarWhereWithAggregatesInput = {
@@ -511,6 +580,9 @@ export type SiteConfigScalarWhereWithAggregatesInput = {
   commercialDirector?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
   commercialReceiptMsg?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
   commercialMapUrl?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
+  heroOverlayOpacity?: Prisma.IntNullableWithAggregatesFilter<"SiteConfig"> | number | null
+  heroTitleColor?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
+  heroMediaType?: Prisma.StringNullableWithAggregatesFilter<"SiteConfig"> | string | null
 }
 
 export type SiteConfigCreateInput = {
@@ -543,6 +615,9 @@ export type SiteConfigCreateInput = {
   commercialDirector?: string | null
   commercialReceiptMsg?: string | null
   commercialMapUrl?: string | null
+  heroOverlayOpacity?: number | null
+  heroTitleColor?: string | null
+  heroMediaType?: string | null
 }
 
 export type SiteConfigUncheckedCreateInput = {
@@ -575,6 +650,9 @@ export type SiteConfigUncheckedCreateInput = {
   commercialDirector?: string | null
   commercialReceiptMsg?: string | null
   commercialMapUrl?: string | null
+  heroOverlayOpacity?: number | null
+  heroTitleColor?: string | null
+  heroMediaType?: string | null
 }
 
 export type SiteConfigUpdateInput = {
@@ -607,6 +685,9 @@ export type SiteConfigUpdateInput = {
   commercialDirector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commercialReceiptMsg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commercialMapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroOverlayOpacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  heroTitleColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroMediaType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SiteConfigUncheckedUpdateInput = {
@@ -639,6 +720,9 @@ export type SiteConfigUncheckedUpdateInput = {
   commercialDirector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commercialReceiptMsg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commercialMapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroOverlayOpacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  heroTitleColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroMediaType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SiteConfigCreateManyInput = {
@@ -671,6 +755,9 @@ export type SiteConfigCreateManyInput = {
   commercialDirector?: string | null
   commercialReceiptMsg?: string | null
   commercialMapUrl?: string | null
+  heroOverlayOpacity?: number | null
+  heroTitleColor?: string | null
+  heroMediaType?: string | null
 }
 
 export type SiteConfigUpdateManyMutationInput = {
@@ -703,6 +790,9 @@ export type SiteConfigUpdateManyMutationInput = {
   commercialDirector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commercialReceiptMsg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commercialMapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroOverlayOpacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  heroTitleColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroMediaType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SiteConfigUncheckedUpdateManyInput = {
@@ -735,6 +825,9 @@ export type SiteConfigUncheckedUpdateManyInput = {
   commercialDirector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commercialReceiptMsg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commercialMapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroOverlayOpacity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  heroTitleColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heroMediaType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SiteConfigCountOrderByAggregateInput = {
@@ -767,6 +860,13 @@ export type SiteConfigCountOrderByAggregateInput = {
   commercialDirector?: Prisma.SortOrder
   commercialReceiptMsg?: Prisma.SortOrder
   commercialMapUrl?: Prisma.SortOrder
+  heroOverlayOpacity?: Prisma.SortOrder
+  heroTitleColor?: Prisma.SortOrder
+  heroMediaType?: Prisma.SortOrder
+}
+
+export type SiteConfigAvgOrderByAggregateInput = {
+  heroOverlayOpacity?: Prisma.SortOrder
 }
 
 export type SiteConfigMaxOrderByAggregateInput = {
@@ -799,6 +899,9 @@ export type SiteConfigMaxOrderByAggregateInput = {
   commercialDirector?: Prisma.SortOrder
   commercialReceiptMsg?: Prisma.SortOrder
   commercialMapUrl?: Prisma.SortOrder
+  heroOverlayOpacity?: Prisma.SortOrder
+  heroTitleColor?: Prisma.SortOrder
+  heroMediaType?: Prisma.SortOrder
 }
 
 export type SiteConfigMinOrderByAggregateInput = {
@@ -831,6 +934,13 @@ export type SiteConfigMinOrderByAggregateInput = {
   commercialDirector?: Prisma.SortOrder
   commercialReceiptMsg?: Prisma.SortOrder
   commercialMapUrl?: Prisma.SortOrder
+  heroOverlayOpacity?: Prisma.SortOrder
+  heroTitleColor?: Prisma.SortOrder
+  heroMediaType?: Prisma.SortOrder
+}
+
+export type SiteConfigSumOrderByAggregateInput = {
+  heroOverlayOpacity?: Prisma.SortOrder
 }
 
 
@@ -865,6 +975,9 @@ export type SiteConfigSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   commercialDirector?: boolean
   commercialReceiptMsg?: boolean
   commercialMapUrl?: boolean
+  heroOverlayOpacity?: boolean
+  heroTitleColor?: boolean
+  heroMediaType?: boolean
 }, ExtArgs["result"]["siteConfig"]>
 
 export type SiteConfigSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -897,6 +1010,9 @@ export type SiteConfigSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   commercialDirector?: boolean
   commercialReceiptMsg?: boolean
   commercialMapUrl?: boolean
+  heroOverlayOpacity?: boolean
+  heroTitleColor?: boolean
+  heroMediaType?: boolean
 }, ExtArgs["result"]["siteConfig"]>
 
 export type SiteConfigSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -929,6 +1045,9 @@ export type SiteConfigSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   commercialDirector?: boolean
   commercialReceiptMsg?: boolean
   commercialMapUrl?: boolean
+  heroOverlayOpacity?: boolean
+  heroTitleColor?: boolean
+  heroMediaType?: boolean
 }, ExtArgs["result"]["siteConfig"]>
 
 export type SiteConfigSelectScalar = {
@@ -961,9 +1080,12 @@ export type SiteConfigSelectScalar = {
   commercialDirector?: boolean
   commercialReceiptMsg?: boolean
   commercialMapUrl?: boolean
+  heroOverlayOpacity?: boolean
+  heroTitleColor?: boolean
+  heroMediaType?: boolean
 }
 
-export type SiteConfigOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "companyName" | "tagline" | "email" | "phone" | "address" | "bio" | "aboutText" | "stat1Value" | "stat1Label" | "stat2Value" | "stat2Label" | "stat3Value" | "stat3Label" | "stat4Value" | "stat4Label" | "heroImageUrl" | "logoUrl" | "heroTitle" | "heroSubtitle" | "heroCtaText" | "heroCtaUrl" | "heroBadge" | "commercialEmail" | "commercialPhone" | "commercialAddress" | "commercialDirector" | "commercialReceiptMsg" | "commercialMapUrl", ExtArgs["result"]["siteConfig"]>
+export type SiteConfigOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "companyName" | "tagline" | "email" | "phone" | "address" | "bio" | "aboutText" | "stat1Value" | "stat1Label" | "stat2Value" | "stat2Label" | "stat3Value" | "stat3Label" | "stat4Value" | "stat4Label" | "heroImageUrl" | "logoUrl" | "heroTitle" | "heroSubtitle" | "heroCtaText" | "heroCtaUrl" | "heroBadge" | "commercialEmail" | "commercialPhone" | "commercialAddress" | "commercialDirector" | "commercialReceiptMsg" | "commercialMapUrl" | "heroOverlayOpacity" | "heroTitleColor" | "heroMediaType", ExtArgs["result"]["siteConfig"]>
 
 export type $SiteConfigPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SiteConfig"
@@ -998,6 +1120,9 @@ export type $SiteConfigPayload<ExtArgs extends runtime.Types.Extensions.Internal
     commercialDirector: string | null
     commercialReceiptMsg: string | null
     commercialMapUrl: string | null
+    heroOverlayOpacity: number | null
+    heroTitleColor: string | null
+    heroMediaType: string | null
   }, ExtArgs["result"]["siteConfig"]>
   composites: {}
 }
@@ -1450,6 +1575,9 @@ export interface SiteConfigFieldRefs {
   readonly commercialDirector: Prisma.FieldRef<"SiteConfig", 'String'>
   readonly commercialReceiptMsg: Prisma.FieldRef<"SiteConfig", 'String'>
   readonly commercialMapUrl: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly heroOverlayOpacity: Prisma.FieldRef<"SiteConfig", 'Int'>
+  readonly heroTitleColor: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly heroMediaType: Prisma.FieldRef<"SiteConfig", 'String'>
 }
     
 

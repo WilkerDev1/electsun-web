@@ -27,16 +27,19 @@ export default async function HomePage() {
     <>
       {/* 1. Hero Section (100vh) */}
       <HeroSection
-        tagline={config?.heroTitle || config?.tagline || 'Energía Solar para tu Futuro'}
+        tagline={config?.heroTitle !== undefined ? config.heroTitle : (config?.tagline || 'Energía Solar para tu Futuro')}
         bio={
-          config?.heroSubtitle ||
-          config?.bio ||
-          'Diseñamos la infraestructura del mañana con soluciones fotovoltaicas de alta eficiencia, adaptadas a empresas visionarias y hogares modernos.'
+          config?.heroSubtitle !== undefined
+            ? config.heroSubtitle
+            : (config?.bio || 'Diseñamos la infraestructura del mañana con soluciones fotovoltaicas de alta eficiencia, adaptadas a empresas visionarias y hogares modernos.')
         }
-        badge={config?.heroBadge || 'EL SOL A TU FAVOR'}
-        ctaText={config?.heroCtaText || 'Explorar Soluciones'}
-        ctaUrl={config?.heroCtaUrl || '/proyectos'}
+        badge={config?.heroBadge !== undefined ? config.heroBadge : 'EL SOL A TU FAVOR'}
+        ctaText={config?.heroCtaText !== undefined ? config.heroCtaText : 'Explorar Soluciones'}
+        ctaUrl={config?.heroCtaUrl || '/comercial'}
         bgImage={config?.heroImageUrl || '/images/hero-solar.jpg'}
+        overlayOpacity={config?.heroOverlayOpacity ?? 60}
+        titleColor={config?.heroTitleColor ?? '#FFFFFF'}
+        mediaType={config?.heroMediaType ?? 'image'}
       />
 
       {/* 2. Asymmetric Why Choose Solar Panels (100vh) */}

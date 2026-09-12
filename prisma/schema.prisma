@@ -71,6 +71,9 @@ model SiteConfig {
   commercialDirector  String? @default("Dr. Elena Vance, PE")
   commercialReceiptMsg String? @default("Thank you for submitting your commercial facility parameters. Our senior grid engineer will analyze local feeder capacities and provide preliminary feasibility analysis within 48 business hours.")
   commercialMapUrl    String? @default("Santo Domingo, República Dominicana")
+  heroOverlayOpacity  Int?    @default(60)
+  heroTitleColor      String? @default("#FFFFFF")
+  heroMediaType       String? @default("image")
 }
 
 model Testimonial {

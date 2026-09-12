@@ -72,12 +72,64 @@ export default function HeroMediaAssets({
           type="file"
           ref={fileInputRef}
           onChange={handleFileChange}
-          accept="image/png,image/jpeg,image/webp"
+          accept="image/png,image/jpeg,image/webp,image/gif,video/mp4,video/webm,video/ogg,video/quicktime"
           style={{ display: 'none' }}
         />
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.85rem' }}>
+        {/* If current hero URL is custom and not in defaults, show it */}
+        {currentHeroUrl && !DEFAULT_HERO_ASSETS.some((a) => a.url === currentHeroUrl) && (
+          <div
+            onClick={() => onSelectHero(currentHeroUrl)}
+            style={{
+              position: 'relative',
+              height: '90px',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              cursor: 'pointer',
+              border: '2px solid #F59E0B',
+              boxShadow: '0 0 0 2px rgba(245, 158, 11, 0.2)',
+              background: '#0F172A',
+            }}
+          >
+            {/\.(mp4|webm|ogg|mov)$/i.test(currentHeroUrl) ? (
+              <video
+                src={currentHeroUrl}
+                muted
+                autoPlay
+                loop
+                playsInline
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            ) : (
+              <Image
+                src={currentHeroUrl}
+                alt="Custom Upload"
+                fill
+                sizes="(max-width: 768px) 50vw, 20vw"
+                style={{ objectFit: 'cover' }}
+              />
+            )}
+            <span
+              style={{
+                position: 'absolute',
+                top: '6px',
+                right: '6px',
+                background: '#F59E0B',
+                color: '#0F172A',
+                fontWeight: 800,
+                fontSize: '0.625rem',
+                padding: '0.15rem 0.4rem',
+                borderRadius: '4px',
+                letterSpacing: '0.04em',
+              }}
+            >
+              ACTIVE
+            </span>
+          </div>
+        )}
+
         {DEFAULT_HERO_ASSETS.map((asset) => {
           const isActive = (currentHeroUrl || DEFAULT_HERO_ASSETS[0].url) === asset.url;
           return (

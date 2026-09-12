@@ -143,6 +143,27 @@
   color: #DC2626;
 }
 
+.adm-live-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  color: #475569;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: #F1F5F9;
+  border-radius: var(--adm-radius-sm);
+  margin-bottom: 0.5rem;
+  transition: all 0.15s;
+}
+
+.adm-live-btn:hover {
+  background: #E2E8F0;
+  color: #0F172A;
+}
+
 /* Main Area */
 .adm-main {
   margin-left: var(--adm-sidebar-w);

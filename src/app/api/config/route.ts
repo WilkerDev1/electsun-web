@@ -60,7 +60,20 @@ export async function PUT(request: NextRequest) {
       commercialDirector,
       commercialReceiptMsg,
       commercialMapUrl,
+      heroOverlayOpacity,
+      heroTitleColor,
+      heroMediaType,
     } = body;
+
+    let parsedOpacity: number | null | undefined = undefined;
+    if (heroOverlayOpacity !== undefined) {
+      if (heroOverlayOpacity === null || heroOverlayOpacity === '') {
+        parsedOpacity = null;
+      } else {
+        const num = Number(heroOverlayOpacity);
+        parsedOpacity = isNaN(num) ? 60 : Math.min(100, Math.max(0, Math.round(num)));
+      }
+    }
 
     const config = await prisma.siteConfig.upsert({
       where: { id: 'main' },
@@ -93,6 +106,9 @@ export async function PUT(request: NextRequest) {
         ...(commercialDirector !== undefined && { commercialDirector }),
         ...(commercialReceiptMsg !== undefined && { commercialReceiptMsg }),
         ...(commercialMapUrl !== undefined && { commercialMapUrl }),
+        ...(parsedOpacity !== undefined && { heroOverlayOpacity: parsedOpacity }),
+        ...(heroTitleColor !== undefined && { heroTitleColor }),
+        ...(heroMediaType !== undefined && { heroMediaType }),
       },
       create: {
         id: 'main',
@@ -124,12 +140,16 @@ export async function PUT(request: NextRequest) {
         commercialDirector: commercialDirector || 'Dr. Elena Vance, PE',
         commercialReceiptMsg: commercialReceiptMsg || 'Thank you for submitting your commercial facility parameters.',
         commercialMapUrl: commercialMapUrl || 'Santo Domingo, República Dominicana',
+        heroOverlayOpacity: parsedOpacity !== undefined && parsedOpacity !== null ? parsedOpacity : 60,
+        heroTitleColor: heroTitleColor || '#FFFFFF',
+        heroMediaType: heroMediaType || 'image',
       },
     });
 
     return NextResponse.json(config);
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Failed to update config:', error);
-    return NextResponse.json({ error: 'Error al actualizar la configuración' }, { status: 500 });
+    const message = error instanceof Error ? error.message : String(error);
+    return NextResponse.json({ error: 'Error al actualizar la configuración', details: message }, { status: 500 });
   }
 }

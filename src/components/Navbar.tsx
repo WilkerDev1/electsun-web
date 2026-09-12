@@ -8,16 +8,24 @@ import { usePathname } from 'next/navigation';
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [brandLogo, setBrandLogo] = useState<string | null>(null);
+  const [companyName, setCompanyName] = useState('Electsun');
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 30) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 30);
     };
+
+    fetch('/api/config')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && !data.error) {
+          if (data.logoUrl) setBrandLogo(data.logoUrl);
+          if (data.companyName) setCompanyName(data.companyName);
+        }
+      })
+      .catch(() => {});
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -35,7 +43,6 @@ export default function Navbar() {
 
   const navLinks = [
     { label: 'Proyectos', href: '/comercial' },
-    { label: 'Tecnología', href: '/tecnologia' },
     { label: 'Impacto', href: '/#impact' },
     { label: 'Nosotros', href: '/#why-solar' },
   ];
@@ -46,16 +53,28 @@ export default function Navbar() {
       className={`main-nav ${isScrolled ? 'nav-scrolled' : ''} ${isLightNav ? 'nav-light' : 'nav-dark'}`}
     >
       <div className="nav-container">
-        {/* Dynamic Logo (Color on light banner, White on dark banner / scrolled) */}
-        <Link href="/" className="nav-logo" aria-label="Electsun Inicio">
-          <Image
-            src={isLightNav ? '/images/electsun-logo-color.svg' : '/images/electsun-logo-white.svg'}
-            alt="Electsun - El sol a tu favor"
-            width={180}
-            height={46}
-            style={{ width: 'auto', height: '40px', objectFit: 'contain' }}
-            priority
-          />
+        {/* Dynamic Logo (Custom uploaded logo or Default SVG) */}
+        <Link href="/" className="nav-logo" aria-label={`${companyName} Inicio`}>
+          {brandLogo ? (
+            <Image
+              src={brandLogo}
+              alt={companyName}
+              width={180}
+              height={40}
+              unoptimized
+              style={{ width: 'auto', height: '40px', maxHeight: '40px', objectFit: 'contain' }}
+              priority
+            />
+          ) : (
+            <Image
+              src={isLightNav ? '/images/electsun-logo-color.svg' : '/images/electsun-logo-white.svg'}
+              alt={`${companyName} - El sol a tu favor`}
+              width={180}
+              height={46}
+              style={{ width: 'auto', height: '40px', objectFit: 'contain' }}
+              priority
+            />
+          )}
         </Link>
 
         {/* Desktop Navigation Links */}
@@ -76,7 +95,7 @@ export default function Navbar() {
 
         {/* Action Button & Admin Access */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          <Link href="/proyectos#lead-form" className="btn-gold">
+          <Link href="/proyectos#lead-form" className="btn-gold nav-cta-desktop">
             Solicitar Cotización
           </Link>
 

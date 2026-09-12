@@ -3,6 +3,7 @@
 import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import type { Partner } from '@/generated/prisma/client';
+import EditPartnerModal from './EditPartnerModal';
 
 interface PartnersViewProps {
   partners: Partner[];
@@ -11,6 +12,7 @@ interface PartnersViewProps {
 }
 
 export default function PartnersView({ partners, onRefresh, showToast }: PartnersViewProps) {
+  const [editingPartner, setEditingPartner] = useState<Partner | null>(null);
   const [isAdding, setIsAdding] = useState(false);
   const [name, setName] = useState('');
   const [logoUrl, setLogoUrl] = useState('');
@@ -40,8 +42,8 @@ export default function PartnersView({ partners, onRefresh, showToast }: Partner
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !logoUrl.trim()) {
-      showToast('Nombre y logotipo son obligatorios', 'error');
+    if (!logoUrl.trim() && !name.trim()) {
+      showToast('Debes ingresar al menos el logotipo o el nombre', 'error');
       return;
     }
     setIsSubmitting(true);
@@ -49,7 +51,12 @@ export default function PartnersView({ partners, onRefresh, showToast }: Partner
       const res = await fetch('/api/partners', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, logoUrl, category, visible: true }),
+        body: JSON.stringify({
+          name: name.trim(),
+          logoUrl: logoUrl.trim(),
+          category: category.trim(),
+          visible: true,
+        }),
       });
       if (!res.ok) throw new Error();
       showToast('Partner añadido exitosamente');
@@ -106,12 +113,12 @@ export default function PartnersView({ partners, onRefresh, showToast }: Partner
           <h3 className="adm-card-title" style={{ fontSize: '1.05rem', marginBottom: '1.25rem' }}>Nuevo Fabricante / Partner</h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
             <div className="adm-form-group">
-              <label className="adm-label">Nombre Comercial *</label>
-              <input type="text" className="adm-input" required value={name} onChange={(e) => setName(e.target.value)} placeholder="Ej: Huawei FusionSolar" />
+              <label className="adm-label">Nombre Comercial <span style={{ fontSize: '0.75rem', color: '#94A3B8', fontWeight: 400 }}>(Opcional)</span></label>
+              <input type="text" className="adm-input" value={name} onChange={(e) => setName(e.target.value)} placeholder="Ej: Huawei (o vacío si solo es logo)" />
             </div>
             <div className="adm-form-group">
-              <label className="adm-label">Especialidad / Categoría</label>
-              <input type="text" className="adm-input" value={category} onChange={(e) => setCategory(e.target.value)} placeholder="Ej: Inversores Industriales" />
+              <label className="adm-label">Especialidad / Categoría <span style={{ fontSize: '0.75rem', color: '#94A3B8', fontWeight: 400 }}>(Opcional)</span></label>
+              <input type="text" className="adm-input" value={category} onChange={(e) => setCategory(e.target.value)} placeholder="Ej: Inversores Industriales (o vacío)" />
             </div>
             <div className="adm-form-group">
               <label className="adm-label">Subir Logotipo (PNG / SVG / JPG / WebP) *</label>
@@ -139,19 +146,31 @@ export default function PartnersView({ partners, onRefresh, showToast }: Partner
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.25rem' }}>
         {partners.map((p) => (
-          <div key={p.id} className="adm-card" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div style={{ position: 'relative', width: '60px', height: '48px', background: '#F8FAFC', borderRadius: '6px', border: '1px solid #E2E8F0', overflow: 'hidden', flexShrink: 0 }}>
-              <Image src={p.logoUrl} alt={p.name} fill sizes="60px" style={{ objectFit: 'contain', padding: '4px' }} />
+          <div key={p.id} className="adm-card" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', padding: '1rem' }}>
+            <div style={{ position: 'relative', width: '64px', height: '48px', background: '#F8FAFC', borderRadius: '6px', border: '1px solid #E2E8F0', overflow: 'hidden', flexShrink: 0 }}>
+              <Image src={p.logoUrl} alt={p.name || 'Partner'} fill sizes="64px" style={{ objectFit: 'contain', padding: '4px' }} />
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#0F172A', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name}</div>
-              <div style={{ fontSize: '0.75rem', color: '#64748B' }}>{p.category}</div>
+              <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#0F172A', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {p.name || (p.category ? p.category : 'Solo Logotipo')}
+              </div>
+              <div style={{ fontSize: '0.75rem', color: '#64748B', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {p.name ? (p.category || 'Sin categoría') : (p.category ? 'Logotipo' : 'Sin texto')}
+              </div>
             </div>
             <div style={{ display: 'flex', gap: '0.35rem', flexShrink: 0 }}>
-              <button type="button" onClick={() => handleToggleVisible(p)} style={{ background: p.visible ? '#ECFDF5' : '#F1F5F9', color: p.visible ? '#059669' : '#64748B', border: 'none', padding: '0.35rem 0.6rem', borderRadius: '4px', fontSize: '0.7rem', fontWeight: 700, cursor: 'pointer' }}>
+              <button
+                type="button"
+                onClick={() => setEditingPartner(p)}
+                style={{ background: '#F1F5F9', color: '#0F172A', border: '1px solid #CBD5E1', padding: '0.35rem 0.55rem', borderRadius: '4px', fontSize: '0.72rem', fontWeight: 600, cursor: 'pointer' }}
+                title="Editar datos y logotipo"
+              >
+                ✏️
+              </button>
+              <button type="button" onClick={() => handleToggleVisible(p)} style={{ background: p.visible ? '#ECFDF5' : '#F1F5F9', color: p.visible ? '#059669' : '#64748B', border: 'none', padding: '0.35rem 0.55rem', borderRadius: '4px', fontSize: '0.72rem', fontWeight: 700, cursor: 'pointer' }}>
                 {p.visible ? 'Visible' : 'Oculto'}
               </button>
-              <button type="button" onClick={() => handleDelete(p.id)} style={{ background: '#FEE2E2', color: '#DC2626', border: 'none', padding: '0.35rem 0.6rem', borderRadius: '4px', fontSize: '0.7rem', fontWeight: 700, cursor: 'pointer' }}>
+              <button type="button" onClick={() => handleDelete(p.id)} style={{ background: '#FEE2E2', color: '#DC2626', border: 'none', padding: '0.35rem 0.55rem', borderRadius: '4px', fontSize: '0.72rem', fontWeight: 700, cursor: 'pointer' }}>
                 ✕
               </button>
             </div>
@@ -161,6 +180,15 @@ export default function PartnersView({ partners, onRefresh, showToast }: Partner
           <p style={{ color: '#94A3B8', fontSize: '0.875rem' }}>No hay partners registrados todavía.</p>
         )}
       </div>
+
+      {editingPartner && (
+        <EditPartnerModal
+          partner={editingPartner}
+          onClose={() => setEditingPartner(null)}
+          onSuccess={onRefresh}
+          showToast={showToast}
+        />
+      )}
     </div>
   );
 }

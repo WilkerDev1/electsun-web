@@ -8,6 +8,9 @@ interface HeroPreviewCardProps {
   ctaText: string;
   bgImageUrl?: string | null;
   badgeText?: string | null;
+  overlayOpacity?: number | null;
+  titleColor?: string | null;
+  mediaType?: string | null;
 }
 
 export default function HeroPreviewCard({
@@ -16,18 +19,44 @@ export default function HeroPreviewCard({
   ctaText,
   bgImageUrl,
   badgeText,
+  overlayOpacity = 60,
+  titleColor = '#FFFFFF',
+  mediaType = 'image',
 }: HeroPreviewCardProps) {
   const defaultBg = '/images/hero-solar-clean.jpg';
   const background = bgImageUrl || defaultBg;
+  const isVideo =
+    mediaType === 'video' ||
+    (background ? /\.(mp4|webm|ogg|mov)$/i.test(background) : false);
+
+  const opacityVal = typeof overlayOpacity === 'number' ? overlayOpacity / 100 : 0.6;
 
   return (
     <div
       className="adm-hero-preview-box"
-      style={{ backgroundImage: `url(${background})` }}
+      style={!isVideo ? { backgroundImage: `url(${background})` } : { position: 'relative' }}
     >
-      <div className="adm-hero-preview-overlay" />
+      {isVideo && (
+        <video
+          key={background}
+          src={background}
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+        />
+      )}
+      <div className="adm-hero-preview-overlay" style={{ opacity: opacityVal }} />
       <div className="adm-hero-preview-content">
-        {badgeText && (
+        {badgeText?.trim() && (
           <div
             style={{
               display: 'inline-block',
@@ -46,13 +75,21 @@ export default function HeroPreviewCard({
             {badgeText}
           </div>
         )}
-        <h2 className="adm-hero-preview-title">{headline || 'Future of Energy'}</h2>
-        <p className="adm-hero-preview-subtitle">
-          {subtitle || 'Sustainable solutions designed for modern infrastructure.'}
-        </p>
-        <button type="button" className="adm-hero-preview-btn">
-          {ctaText || 'EXPLORE SOLUTIONS'}
-        </button>
+        {headline?.trim() && (
+          <h2 className="adm-hero-preview-title" style={{ color: titleColor || '#FFFFFF' }}>
+            {headline}
+          </h2>
+        )}
+        {subtitle?.trim() && (
+          <p className="adm-hero-preview-subtitle">
+            {subtitle}
+          </p>
+        )}
+        {ctaText?.trim() && (
+          <button type="button" className="adm-hero-preview-btn">
+            {ctaText}
+          </button>
+        )}
       </div>
     </div>
   );
