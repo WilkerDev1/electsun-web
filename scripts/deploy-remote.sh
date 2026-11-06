@@ -8,6 +8,8 @@ SERVER="app-server"
 REMOTE_DIR="/home/agente/servicios/electsun-web"
 REMOTE_CADDY_DIR="/home/agente/servicios/caddy"
 
+: "${ELECTSUN_DB_PASSWORD:?Exporta ELECTSUN_DB_PASSWORD antes de desplegar}"
+
 echo ""
 echo "╔══════════════════════════════════════════════════════════════╗"
 echo "║   Electsun Web — Despliegue en Servidor CT 100 (PostgreSQL)  ║"
@@ -19,7 +21,7 @@ ssh $SERVER "docker exec solarsim-db psql -U solarsim_user -d postgres -c \"
 DO \\\$\$
 BEGIN
    IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'electsun_user') THEN
-      CREATE USER electsun_user WITH ENCRYPTED PASSWORD 'electsun_pg_secure_2026';
+      CREATE USER electsun_user WITH ENCRYPTED PASSWORD '$ELECTSUN_DB_PASSWORD';
    END IF;
    IF NOT EXISTS (SELECT FROM pg_database WHERE datname = 'electsun_prod') THEN
       CREATE DATABASE electsun_prod OWNER electsun_user;
@@ -37,9 +39,11 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO electsun_use
 
 echo "── 2. Preparando estructura de directorios en $SERVER..."
 ssh $SERVER "mkdir -p $REMOTE_DIR/uploads"
+ssh $SERVER "test -f $REMOTE_DIR/.env.production" || { echo "Falta $REMOTE_DIR/.env.production en el servidor (ver .env.example)"; exit 1; }
 
 echo "── 3. Sincronizando código fuente del proyecto hacia $SERVER..."
 tar --exclude='.git' \
+    --exclude='.env.production' \
     --exclude='node_modules' \
     --exclude='.next' \
     --exclude='.agents' \
