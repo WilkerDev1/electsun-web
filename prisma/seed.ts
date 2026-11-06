@@ -16,7 +16,9 @@ async function main() {
   await prisma.project.deleteMany({});
 
   // Create admin user
-  const hashedPassword = hashSync('admin123', 12);
+  const adminPassword = process.env.SEED_ADMIN_PASSWORD;
+  if (!adminPassword) throw new Error('Define SEED_ADMIN_PASSWORD para ejecutar el seed');
+  const hashedPassword = hashSync(adminPassword, 12);
   await prisma.admin.upsert({
     where: { username: 'admin' },
     update: { password: hashedPassword },
@@ -25,7 +27,7 @@ async function main() {
       password: hashedPassword,
     },
   });
-  console.log('✅ Admin user created (username: admin, password: admin123)');
+  console.log('✅ Admin user created (username: admin)');
 
   // Create site config for Electsun
   await prisma.siteConfig.upsert({
